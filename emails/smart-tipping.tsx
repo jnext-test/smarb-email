@@ -348,40 +348,55 @@ import {
               <Img
                 src={`${baseUrl}/static/smartb-footer-logo.png`}
                 width="120"
-                height="30"
+                
                 alt="SmartB"
                 style={footerLogo}
               />
               <Row style={footerBrands}>
                 <Column>
                   <Img
-                    src={`${baseUrl}/static/smartplay-logo.png`}
-                    width="80"
-                    height="20"
+                    src={`${baseUrl}/static/smart-play-footer-logo.png`}
+                    width="120"
+                    
                     alt="SmartPlay"
                   />
                 </Column>
                 <Column>
                   <Img
-                    src={`${baseUrl}/static/smarttipping-logo.png`}
-                    width="80"
-                    height="20"
+                    src={`${baseUrl}/static/smart-tipping-logo.png`}
+                    width="120"
+                    
                     alt="SmartTipping"
                   />
                 </Column>
                 <Column>
                   <Img
                     src={`${baseUrl}/static/smartodds-logo.png`}
-                    width="80"
-                    height="20"
+                    width="120"
+                    
                     alt="SmartOdds"
                   />
                 </Column>
               </Row>
               <Row style={socialLinks}>
-                {['Facebook', 'Instagram', 'Twitter', 'LinkedIn', 'YouTube', 'TikTok', 'Discord'].map((platform, i) => (
+                {[
+                  { name: 'Facebook', icon: 'fb.png' },
+                  { name: 'Instagram', icon: 'ig.png' },
+                  { name: 'Twitter', icon: 'twitter.png' },
+                  { name: 'LinkedIn', icon: 'linkedin.png' },
+                  { name: 'YouTube', icon: 'youtube.png' },
+                  { name: 'TikTok', icon: 'tiktok.png' },
+                  { name: 'Vemeo', icon: 'vemeo.png' }
+                ].map((platform, i) => (
                   <Column key={i} style={socialIconColumn}>
-                    <Link href="#" style={socialLink}>●</Link>
+                    <Link href="#" style={socialLink}>
+                      <Img
+                        src={`${baseUrl}/static/icons/${platform.icon}`}
+                        width="24"
+                        alt={platform.name}
+                        style={socialIcon}
+                      />
+                    </Link>
                   </Column>
                 ))}
               </Row>
@@ -404,17 +419,13 @@ import {
                     <Img
                       src={`${baseUrl}/static/app-store.png`}
                       width="120"
-                      height="40"
                       alt="Download on App Store"
                     />
                   </Link>
-                </Column>
-                <Column style={{ textAlign: 'center' as const }}>
                   <Link href="https://play.google.com" style={appStoreButton}>
                     <Img
                       src={`${baseUrl}/static/play-store.png`}
                       width="120"
-                      height="40"
                       alt="Get it on Google Play"
                     />
                   </Link>
@@ -644,16 +655,25 @@ import {
   
   const socialLinks = {
     margin: '15px 0',
+    textAlign: 'center' as const,
   };
   
   const socialIconColumn = {
     padding: '0 5px',
+    display: 'inline-block',
   };
   
   const socialLink = {
-    color: '#ffffff',
     textDecoration: 'none',
-    fontSize: '16px',
+    display: 'inline-block',
+    lineHeight: 0,
+  };
+  
+  const socialIcon = {
+    display: 'inline-block',
+    verticalAlign: 'middle',
+    width: '24px',
+    height: '24px',
   };
   
   const footerText = {
@@ -681,11 +701,14 @@ import {
   
   const appStoreSection = {
     margin: '15px 0 0',
+    textAlign: 'center' as const,
+    fontSize: 0,
   };
   
   const appStoreButton = {
     display: 'inline-block',
-    margin: '0 5px',
+    margin: '0 2px',
+    verticalAlign: 'middle',
   };
   
   const mainOddsValueStyle = {
