@@ -65,7 +65,7 @@ const SmartPlayLaunchEmail = ({name = "User"}) => {
               width="600"
               height="200"
               alt="Fantasy Sports Banner"
-              style={{ width: '100%', height: 'auto', borderRadius: '8px 8px 0 0' }}
+              style={{ width: '100%', height: 'auto' }}
             />
           </Section>
 
@@ -90,30 +90,32 @@ const SmartPlayLaunchEmail = ({name = "User"}) => {
 
             {/* Build Your Team */}
             <Section style={featureBlock}>
+            <Img
+                src={`${baseUrl}/static/build-team.png`}
+                width="300"
+                alt="Build team interface"
+                style={appScreenshot}
+              />
               <Heading style={h3}>Build Your Team</Heading>
               <Text style={featureText}>
                 Draft a balanced team of pro athletes players in various positions
               </Text>
-              <Img
-                src={`${baseUrl}/static/build-team.png`}
-                width="280"
-                alt="Build team interface"
-                style={appScreenshot}
-              />
+             
             </Section>
 
             {/* Compete and Win */}
             <Section style={featureBlock}>
-              <Heading style={h3}>Compete and win!</Heading>
-              <Text style={featureText}>
-                Watch your teams live and compete to be the real-world match winner
-              </Text>
-              <Img
+            <Img
                 src={`${baseUrl}/static/compete.png`}
                 width="280"
                 alt="Competition interface"
                 style={appScreenshot}
               />
+              <Heading style={h3}>Compete and win!</Heading>
+              <Text style={featureText}>
+                Watch your teams live and compete to be the real-world match winner
+              </Text>
+            
             </Section>
           </Section>
 
@@ -201,7 +203,7 @@ const container = {
 const heroBanner = {
   position: 'relative' as const,
   backgroundColor: '#1a2b4b',
-  borderRadius: '8px',
+//   borderRadius: '8px',
   overflow: 'hidden',
   marginBottom: '30px',
 };
