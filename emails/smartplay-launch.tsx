@@ -1,471 +1,348 @@
-import { Body, Container, Column, Head, Heading, Html, Img, Preview, Row, Section, Text } from "@react-email/components"
+import {
+  Body,
+  Button,
+  Container,
+  Column,
+  Head,
+  Heading,
+  Html,
+  Img,
+  Link,
+  Preview,
+  Row,
+  Section,
+  Text,
+} from '@react-email/components';
+import * as React from 'react';
 
-interface SmartPlayEmailProps {
-  userName?: string
-}
+const baseUrl = process.env.VERCEL_URL
+  ? `https://${process.env.VERCEL_URL}`
+  : '';
 
-export const SmartPlayEmail = ({ userName = "[User's First Name]" }: SmartPlayEmailProps) => {
-    const baseUrl = process.env.VERCEL_URL
-    ? `https://${process.env.VERCEL_URL}`
-    : '';
-
+const SmartPlayLaunchEmail = ({name = "User"}) => {
   return (
     <Html>
       <Head />
-      <Preview>Sneak Peek! SmartB's SmartPlay Fantasy Sports Platform is Coming Together.</Preview>
+      <Preview>Everything Fantasy Sports, All in One Place! Launch Update</Preview>
       <Body style={main}>
-        {/* Header with logo */}
         <Container style={container}>
-          <Section style={logoContainer}>
+          {/* Logo */}
+          <Section style={{ textAlign: 'center', marginBottom: '20px' }}>
             <Img
-               src={`${baseUrl}/static/smart-play-logo.svg`}
-               width="50%"
-               height="100%"
-               alt="Notion's Logo"
-               style={logo}
+              src={`${baseUrl}/static/smart-play-logo.svg`}
+              width="120"
+              height="35"
+              alt="SmartPlay"
+              style={{ margin: '20px auto' }}
             />
           </Section>
 
-          {/* Hero section */}
-          <Section style={heroSection}>
-            <Heading style={heroHeading}>
-              EVERYTHING <span style={highlightText}>FANTASY</span> SPORTS.
-              <br />
-              ALL IN ONE PLACE!
-            </Heading>
+          {/* Hero Banner */}
+          <Section style={heroBanner}>
+            <Img
+              src={`${baseUrl}/static/hero-banner.png`}
+              width="600"
+              height="200"
+              alt="Fantasy Sports Banner"
+              style={{ width: '100%', height: 'auto', borderRadius: '8px 8px 0 0' }}
+            />
           </Section>
 
-          {/* Greeting and intro */}
-          <Section style={section}>
-            <Text style={greeting}>Hi {userName},</Text>
+          {/* Welcome Message */}
+          <Section style={messageSection}>
             <Text style={paragraph}>
-              We're thrilled to share an update on the <strong style={brandText}>SmartB's</strong> fantasy sports
-              platform! Things are moving full steam ahead, and we're all set to launch later on{" "}
-              <strong>15th of Dec 2024</strong>.
+              Hi {name},
+            </Text>
+            <Text style={paragraph}>
+              We're thrilled to share an update on the SmartB's upcoming launch! Everything ready and final testing is moving fast ahead as we get closer to launch date of 15th of next month.
             </Text>
           </Section>
 
-          {/* Sports icons */}
-          <Section style={sportsIconsSection}>
+          {/* Sport Icons */}
+          <Section style={heroBanner}>
+            <Img
+              src={`${baseUrl}/static/sportsHeader.png`}
+              width="600"
+              height="200"
+              alt="Fantasy Sports Banner"
+              style={{ width: '100%', height: 'auto', borderRadius: '8px 8px 0 0' }}
+            />
+          </Section>
+
+          {/* App Preview Section */}
+          <Section style={previewSection}>
+            <Heading style={h2}>As promised, here's a first look at the app</Heading>
+            
+            {/* Pick a Game */}
+            <Section style={featureBlock}>
+            <Img
+                src={`${baseUrl}/static/pick-game.png`}
+                width="280"
+                alt="Pick a game interface"
+                style={appScreenshot}
+              />
+              <Heading style={h3}>Pick a game</Heading>
+              <Text style={featureText}>
+                Choose games from all major leagues including
+              </Text>
+            
+            </Section>
+
+            {/* Build Your Team */}
+            <Section style={featureBlock}>
+              <Heading style={h3}>Build Your Team</Heading>
+              <Text style={featureText}>
+                Draft a balanced team of pro athletes players in various positions
+              </Text>
+              <Img
+                src={`${baseUrl}/static/build-team.png`}
+                width="280"
+                alt="Build team interface"
+                style={appScreenshot}
+              />
+            </Section>
+
+            {/* Compete and Win */}
+            <Section style={featureBlock}>
+              <Heading style={h3}>Compete and win!</Heading>
+              <Text style={featureText}>
+                Watch your teams live and compete to be the real-world match winner
+              </Text>
+              <Img
+                src={`${baseUrl}/static/compete.png`}
+                width="280"
+                alt="Competition interface"
+                style={appScreenshot}
+              />
+            </Section>
+          </Section>
+
+          {/* Promotional Text */}
+          <Section style={promoSection}>
+            <Text style={paragraph}>
+              Imagine building your dream lineup from the world's top sports! With SmartB, you'll be able to pick your players, lock in your team, and compete with others to win big in the SmartB Fantasy Sports Platform!
+            </Text>
+            <Text style={paragraph}>
+              Plus, we're excited to announce that the platform will kick off with cricket too! How awesome is that?
+            </Text>
+          </Section>
+
+          {/* Credits Offer */}
+          <Section style={creditsSection}>
+            <Text style={paragraph}>
+              Thank you for being an early supporter. Your $50 free credits will be waiting in your account at launch, ready for you to jump in and experience SmartB's unique fantasy sports experience.
+            </Text>
+            <Text style={paragraph}>
+              We'll keep you posted as we approach the final stages. Until then, don't miss out on SmartB's news, fixtures, results, and expert tips with our 50K+ followers!
+            </Text>
+          </Section>
+
+          {/* App Store Buttons */}
+          <Section style={appStoreSection}>
             <Row>
-              {["CRICKET", "IPL", "NFL", "SOCCER", "NBA", "MLB", "NHL"].map((sport, index) => (
-                <Column key={index} style={iconColumn}>
-                  <div style={iconCircle}></div>
-                  <Text style={iconText}>{sport}</Text>
-                </Column>
-              ))}
-            </Row>
-          </Section>
-
-          {/* App preview section */}
-          <Section style={section}>
-            <Text style={sectionTitle}>
-              As promised, here's a first look at the app and how you'll create your fantasy teams:
-            </Text>
-          </Section>
-
-          {/* App screenshot */}
-          <Section style={appPreviewSection}>
-            <Img
-              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Subject%20Sneak%20Peek%21%20SmartB%E2%80%99s%20SmartPlay%20Fantasy%20Sports%20Platform%20is%20Coming%20Together-ci3JGQruNzkfbOAfdvEoxsNJLbsGZ0.png"
-              width="250"
-              height="auto"
-              alt="App Preview"
-              style={appScreenshot}
-            />
-          </Section>
-
-          {/* Feature sections */}
-          <Section style={featureSection}>
-            <Heading style={featureHeading}>Pick a game</Heading>
-            <Text style={featureText}>Choose games from all major sports leagues including:</Text>
-            <Row style={screenshotRow}>
-              <Column>
-                <Img
-                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Subject%20Sneak%20Peek%21%20SmartB%E2%80%99s%20SmartPlay%20Fantasy%20Sports%20Platform%20is%20Coming%20Together-ci3JGQruNzkfbOAfdvEoxsNJLbsGZ0.png"
-                  width="200"
-                  height="auto"
-                  alt="Pick a game screenshot"
-                  style={featureScreenshot}
-                />
+              <Column style={{ textAlign: 'center' as const }}>
+                <Link href="https://apps.apple.com" style={appStoreButton}>
+                  <Img
+                    src={`${baseUrl}/static/app-store.png`}
+                    width="160"
+                    height="48"
+                    alt="Download on App Store"
+                  />
+                </Link>
               </Column>
-              <Column>
-                <Img
-                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Subject%20Sneak%20Peek%21%20SmartB%E2%80%99s%20SmartPlay%20Fantasy%20Sports%20Platform%20is%20Coming%20Together-ci3JGQruNzkfbOAfdvEoxsNJLbsGZ0.png"
-                  width="200"
-                  height="auto"
-                  alt="Pick a game screenshot"
-                  style={featureScreenshot}
-                />
+              <Column style={{ textAlign: 'center' as const }}>
+                <Link href="https://play.google.com" style={appStoreButton}>
+                  <Img
+                    src={`${baseUrl}/static/play-store.png`}
+                    width="160"
+                    height="48"
+                    alt="Get it on Google Play"
+                  />
+                </Link>
               </Column>
             </Row>
-          </Section>
-
-          <Section style={dividerSection}>
-            <div style={divider}></div>
-          </Section>
-
-          <Section style={featureSection}>
-            <Heading style={featureHeading}>Build Your team</Heading>
-            <Text style={featureText}>Draft a balanced roster of your favorite players in various positions.</Text>
-            <Img
-              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Subject%20Sneak%20Peek%21%20SmartB%E2%80%99s%20SmartPlay%20Fantasy%20Sports%20Platform%20is%20Coming%20Together-ci3JGQruNzkfbOAfdvEoxsNJLbsGZ0.png"
-              width="250"
-              height="auto"
-              alt="Build team screenshot"
-              style={featureScreenshot}
-            />
-          </Section>
-
-          <Section style={dividerSection}>
-            <div style={divider}></div>
-          </Section>
-
-          <Section style={featureSection}>
-            <Heading style={featureHeading}>Compete and win!</Heading>
-            <Text style={featureText}>Watch your fantasy team compete as the real-world match unfolds.</Text>
-          </Section>
-
-          {/* Marketing copy */}
-          <Section style={section}>
-            <Text style={marketingCopy}>
-              Imagine building your dream lineup from the world's top cricket and football stars! You'll be able to pick
-              your players, lock in your team, and compete with friends to become the ultimate{" "}
-              <strong style={brandText}>SmartPlay</strong> Fantasy Sports Platform!
-            </Text>
-          </Section>
-
-          {/* Launch info */}
-          <Section style={launchSection}>
-            <Text style={launchText}>
-              Plus, we're excited to announce that the platform will kick off with cricket just in time for the upcoming
-              season!
-            </Text>
-            <Img
-              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Subject%20Sneak%20Peek%21%20SmartB%E2%80%99s%20SmartPlay%20Fantasy%20Sports%20Platform%20is%20Coming%20Together-ci3JGQruNzkfbOAfdvEoxsNJLbsGZ0.png"
-              width="300"
-              height="auto"
-              alt="Cricket player"
-              style={sportImage}
-            />
-          </Section>
-
-          {/* Free coins promo */}
-          <Section style={section}>
-            <Text style={paragraph}>
-              Thank you for being an early supporter. Your <strong>500 free coins</strong> will be waiting in your
-              account at launch, ready for you to jump in and experience SmartB's unique fantasy sport experience!
-            </Text>
-            <Text style={paragraph}>
-              We'll keep you posted as we approach the final stages. Until then, don't miss out on{" "}
-              <strong style={brandText}>SmartB's</strong> news, fixtures, results, and expert tips with our SOC tool and
-              stay ahead of the competition while enjoying <strong style={brandText}>SmartB's</strong> free member
-              benefits until we are ready to go live with <strong style={brandText}>SmartB's SmartPlay</strong>!
-            </Text>
-          </Section>
-
-          {/* Sign off */}
-          <Section style={section}>
-            <Text style={signOff}>
-              Catch you soon,
-              <br />
-              The <strong style={brandText}>SmartB's</strong> Team
-            </Text>
-          </Section>
-
-          {/* Banner */}
-          <Section style={bannerSection}>
-            <Img
-              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Subject%20Sneak%20Peek%21%20SmartB%E2%80%99s%20SmartPlay%20Fantasy%20Sports%20Platform%20is%20Coming%20Together-ci3JGQruNzkfbOAfdvEoxsNJLbsGZ0.png"
-              width="500"
-              height="auto"
-              alt="Get the odds"
-              style={banner}
-            />
           </Section>
 
           {/* Footer */}
           <Section style={footer}>
-            <Row style={socialRow}>
-              {["fb", "twitter", "instagram", "youtube", "tiktok", "linkedin", "whatsapp"].map((social, index) => (
-                <Column key={index} style={socialColumn}>
-                  <div style={socialIcon}></div>
+            <Text style={footerText}>
+              Catch you soon,
+              <br />
+              The SmartB Team
+            </Text>
+            <Row style={socialLinks}>
+              {['Twitter', 'Facebook', 'Instagram', 'LinkedIn', 'YouTube', 'TikTok', 'Discord'].map((platform, i) => (
+                <Column key={i} style={socialIconColumn}>
+                  <Link href="#" style={socialLink}>●</Link>
                 </Column>
               ))}
-            </Row>
-            <Text style={footerText}>
-              support@smartplay.com
-              <br />
-              www.smartplay.com
-              <br />© 2024 SmartPlay. All rights reserved.
-            </Text>
-            <Row style={appStoreRow}>
-              <Column>
-                <Img
-                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Subject%20Sneak%20Peek%21%20SmartB%E2%80%99s%20SmartPlay%20Fantasy%20Sports%20Platform%20is%20Coming%20Together-ci3JGQruNzkfbOAfdvEoxsNJLbsGZ0.png"
-                  width="120"
-                  height="auto"
-                  alt="App Store"
-                  style={appStoreButton}
-                />
-              </Column>
-              <Column>
-                <Img
-                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Subject%20Sneak%20Peek%21%20SmartB%E2%80%99s%20SmartPlay%20Fantasy%20Sports%20Platform%20is%20Coming%20Together-ci3JGQruNzkfbOAfdvEoxsNJLbsGZ0.png"
-                  width="120"
-                  height="auto"
-                  alt="Google Play"
-                  style={appStoreButton}
-                />
-              </Column>
             </Row>
           </Section>
         </Container>
       </Body>
     </Html>
-  )
-}
+  );
+};
 
-export default SmartPlayEmail
-
-// Styles
 const main = {
-  backgroundColor: "#FFFFFF",
-  fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif',
-  color: "#000000",
-}
+  backgroundColor: '#f5f8fa',
+  fontFamily: '-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif',
+};
 
 const container = {
-  margin: "0 auto",
-  padding: "20px 0",
-  width: "100%",
-  maxWidth: "600px",
-}
+  margin: '0 auto',
+  padding: '20px',
+  maxWidth: '600px',
+  backgroundColor: '#ffffff',
+  borderRadius: '8px',
+  boxShadow: '0 2px 8px rgba(0,0,0,0.05)',
+};
 
-const logoContainer = {
-  padding: "20px 0",
-  textAlign: "center" as const,
-}
+const heroBanner = {
+  position: 'relative' as const,
+  backgroundColor: '#1a2b4b',
+  borderRadius: '8px',
+  overflow: 'hidden',
+  marginBottom: '30px',
+};
 
-const logo = {
-  margin: "0 auto",
-}
+const heroContent = {
+  position: 'absolute' as const,
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  textAlign: 'center' as const,
+  width: '100%',
+};
 
-const heroSection = {
-  backgroundColor: "#0a2e5c",
-  backgroundImage:
-    "linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Subject%20Sneak%20Peek%21%20SmartB%E2%80%99s%20SmartPlay%20Fantasy%20Sports%20Platform%20is%20Coming%20Together-ci3JGQruNzkfbOAfdvEoxsNJLbsGZ0.png)",
-  backgroundSize: "cover",
-  backgroundPosition: "center",
-  padding: "40px 20px",
-  textAlign: "center" as const,
-}
+const h1 = {
+  color: '#ffffff',
+  fontSize: '36px',
+  fontWeight: '800',
+  lineHeight: '1.1',
+  margin: '0',
+  textAlign: 'center' as const,
+  textTransform: 'uppercase' as const,
+};
 
-const heroHeading = {
-  fontSize: "28px",
-  fontWeight: "bold",
-  lineHeight: "32px",
-  margin: "0",
-  color: "#ffffff",
-  textAlign: "center" as const,
-}
+const messageSection = {
+  padding: '0 20px',
+  margin: '30px 0',
+};
 
-const highlightText = {
-  color: "#ff5722",
-}
+const sportIconsSection = {
+  margin: '30px 0',
+  backgroundColor: '#f8fafc',
+  padding: '20px',
+  borderRadius: '8px',
+};
 
-const brandText = {
-  color: "#ff5722",
-}
+const sportIconColumn = {
+  textAlign: 'center' as const,
+  padding: '0 5px',
+};
 
-const section = {
-  padding: "20px",
-}
+const sportIcon = {
+  fontSize: '16px',
+  margin: '0',
+  color: '#1a2b4b',
+};
 
-const greeting = {
-  fontSize: "18px",
-  lineHeight: "24px",
-  margin: "0 0 10px 0",
-}
+const previewSection = {
+  padding: '30px 0',
+  backgroundColor: '#003764',
+  color: '#ffffff',
+};
 
-const paragraph = {
-  fontSize: "16px",
-  lineHeight: "24px",
-  margin: "0 0 20px 0",
-}
+const h2 = {
 
-const sportsIconsSection = {
-  backgroundColor: "#0a2e5c",
-  padding: "10px 20px",
-  textAlign: "center" as const,
-}
+  fontSize: '24px',
+  fontWeight: '600',
+  textAlign: 'center' as const,
+  margin: '0 0 30px',
+};
 
-const iconColumn = {
-  display: "inline-block",
-  width: "14%",
-  textAlign: "center" as const,
-}
+const h3 = {
 
-const iconCircle = {
-  width: "30px",
-  height: "30px",
-  borderRadius: "50%",
-  backgroundColor: "#ff5722",
-  margin: "0 auto 5px",
-}
+  fontSize: '20px',
+  fontWeight: '600',
+  margin: '0 0 10px',
+  textAlign: 'center' as const,
+};
 
-const iconText = {
-  fontSize: "10px",
-  margin: "0",
-  textAlign: "center" as const,
-}
-
-const sectionTitle = {
-  fontSize: "18px",
-  fontWeight: "bold",
-  margin: "0 0 20px 0",
-  textAlign: "center" as const,
-}
-
-const appPreviewSection = {
-  textAlign: "center" as const,
-  padding: "0 20px 20px",
-}
-
-const appScreenshot = {
-  margin: "0 auto",
-  borderRadius: "10px",
-  border: "1px solid #1a3f6d",
-}
-
-const featureSection = {
-  padding: "20px",
-  textAlign: "center" as const,
-}
-
-const featureHeading = {
-  fontSize: "22px",
-  fontWeight: "bold",
-  margin: "0 0 10px 0",
-  color: "#ffffff",
-  textAlign: "center" as const,
-}
+const featureBlock = {
+  margin: '40px 0',
+  textAlign: 'center' as const,
+};
 
 const featureText = {
-  fontSize: "16px",
-  lineHeight: "24px",
-  margin: "0 0 20px 0",
-  textAlign: "center" as const,
-}
+  fontSize: '16px',
+  lineHeight: '24px',
+  margin: '0 0 20px',
+};
 
-const screenshotRow = {
-  textAlign: "center" as const,
-}
+const appScreenshot = {
+  borderRadius: '12px',
+  margin: '0 auto',
+};
 
-const featureScreenshot = {
-  margin: "0 auto",
-  borderRadius: "10px",
-  border: "1px solid #1a3f6d",
-}
+const promoSection = {
+  backgroundColor: '#f8fafc',
+  padding: '30px 20px',
+  borderRadius: '8px',
+  margin: '30px 0',
+};
 
-const dividerSection = {
-  padding: "10px 0",
-  textAlign: "center" as const,
-}
+const creditsSection = {
+  padding: '30px 20px',
+  margin: '30px 0',
+  backgroundColor: '#1a2b4b',
+  borderRadius: '8px',
+  color: '#ffffff',
+};
 
-const divider = {
-  width: "50px",
-  height: "5px",
-  margin: "0 auto",
-  backgroundColor: "#ff5722",
-  borderRadius: "5px",
-}
+const paragraph = {
+  color: 'inherit',
+  fontSize: '16px',
+  lineHeight: '24px',
+  margin: '0 0 20px',
+};
 
-const marketingCopy = {
-  fontSize: "16px",
-  lineHeight: "24px",
-  margin: "0 0 20px 0",
-  textAlign: "center" as const,
-}
-
-const launchSection = {
-  backgroundColor: "#ff5722",
-  padding: "20px",
-  textAlign: "center" as const,
-  borderRadius: "10px",
-  margin: "0 20px 20px",
-}
-
-const launchText = {
-  fontSize: "18px",
-  fontWeight: "bold",
-  lineHeight: "24px",
-  margin: "0 0 20px 0",
-  color: "#ffffff",
-  textAlign: "center" as const,
-}
-
-const sportImage = {
-  margin: "0 auto",
-  borderRadius: "10px",
-}
-
-const signOff = {
-  fontSize: "16px",
-  lineHeight: "24px",
-  margin: "30px 0 20px 0",
-}
-
-const bannerSection = {
-  padding: "20px",
-  textAlign: "center" as const,
-  backgroundColor: "#0a2e5c",
-}
-
-const banner = {
-  margin: "0 auto",
-  borderRadius: "10px",
-}
-
-const footer = {
-  padding: "20px",
-  textAlign: "center" as const,
-  backgroundColor: "#072548",
-  borderRadius: "10px 10px 0 0",
-}
-
-const socialRow = {
-  textAlign: "center" as const,
-  margin: "0 0 20px 0",
-}
-
-const socialColumn = {
-  display: "inline-block",
-  width: "14%",
-  textAlign: "center" as const,
-}
-
-const socialIcon = {
-  width: "24px",
-  height: "24px",
-  borderRadius: "50%",
-  backgroundColor: "#ffffff",
-  margin: "0 auto",
-}
-
-const footerText = {
-  fontSize: "12px",
-  lineHeight: "18px",
-  margin: "0 0 20px 0",
-  color: "#cccccc",
-  textAlign: "center" as const,
-}
-
-const appStoreRow = {
-  textAlign: "center" as const,
-}
+const appStoreSection = {
+  margin: '40px 0',
+};
 
 const appStoreButton = {
-  margin: "0 5px",
-}
+  display: 'inline-block',
+  margin: '0 10px',
+};
+
+const footer = {
+  textAlign: 'center' as const,
+  padding: '30px 0',
+  borderTop: '1px solid #e2e8f0',
+};
+
+const footerText = {
+  color: '#4a5568',
+  fontSize: '16px',
+  margin: '0 0 20px',
+};
+
+const socialLinks = {
+  margin: '20px 0 0',
+};
+
+const socialIconColumn = {
+  textAlign: 'center' as const,
+  padding: '0 5px',
+};
+
+const socialLink = {
+  color: '#1a2b4b',
+  fontSize: '24px',
+  textDecoration: 'none',
+};
+
+export default SmartPlayLaunchEmail;
 
