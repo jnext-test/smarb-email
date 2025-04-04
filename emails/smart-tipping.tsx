@@ -113,17 +113,37 @@ import {
         <Text style={oddsRowLabel}>{teams.home} - Featured Bookmaker Odds</Text>
       </Row>
       <Row style={allOddsRow}>
-        <Column style={oddsItemBetfair}>
-          <Text style={oddsText}>{odds.home.betfair}</Text>
+        <Column style={{ width: '25%', padding: '0 4px' }}>
+          <div style={{ ...bookmakerBox, backgroundColor: '#ffb74d' }}>
+            <Text style={bookmakerName}>BETFAIR</Text>
+          </div>
+          <div style={oddsBox}>
+            <Text style={oddsValue}>{odds.home.betfair}</Text>
+          </div>
         </Column>
-        <Column style={oddsItemTab}>
-          <Text style={oddsText}>{odds.home.tab}</Text>
+        <Column style={{ width: '25%', padding: '0 4px' }}>
+          <div style={{ ...bookmakerBox, backgroundColor: '#4caf50' }}>
+            <Text style={bookmakerName}>TAB</Text>
+          </div>
+          <div style={oddsBox}>
+            <Text style={oddsValue}>{odds.home.tab}</Text>
+          </div>
         </Column>
-        <Column style={oddsItemBookmaker}>
-          <Text style={oddsText}>{odds.home.bookmaker}</Text>
+        <Column style={{ width: '25%', padding: '0 4px' }}>
+          <div style={{ ...bookmakerBox, backgroundColor: '#ff4d4d' }}>
+            <Text style={bookmakerName}>BOOKIE</Text>
+          </div>
+          <div style={oddsBox}>
+            <Text style={oddsValue}>{odds.home.bookmaker}</Text>
+          </div>
         </Column>
-        <Column style={oddsItemLadbrokes}>
-          <Text style={oddsText}>{odds.home.ladbrokes}</Text>
+        <Column style={{ width: '25%', padding: '0 4px' }}>
+          <div style={{ ...bookmakerBox, backgroundColor: '#2196f3' }}>
+            <Text style={bookmakerName}>LADBROKES</Text>
+          </div>
+          <div style={oddsBox}>
+            <Text style={oddsValue}>{odds.home.ladbrokes}</Text>
+          </div>
         </Column>
       </Row>
 
@@ -131,17 +151,37 @@ import {
         <Text style={oddsRowLabel}>{teams.away} - Featured Bookmaker Odds</Text>
       </Row>
       <Row style={allOddsRow}>
-        <Column style={oddsItemBetfair}>
-          <Text style={oddsText}>{odds.away.betfair}</Text>
+        <Column style={{ width: '25%', padding: '0 4px' }}>
+          <div style={{ ...bookmakerBox, backgroundColor: '#ffb74d' }}>
+            <Text style={bookmakerName}>BETFAIR</Text>
+          </div>
+          <div style={oddsBox}>
+            <Text style={oddsValue}>{odds.away.betfair}</Text>
+          </div>
         </Column>
-        <Column style={oddsItemTab}>
-          <Text style={oddsText}>{odds.away.tab}</Text>
+        <Column style={{ width: '25%', padding: '0 4px' }}>
+          <div style={{ ...bookmakerBox, backgroundColor: '#4caf50' }}>
+            <Text style={bookmakerName}>TAB</Text>
+          </div>
+          <div style={oddsBox}>
+            <Text style={oddsValue}>{odds.away.tab}</Text>
+          </div>
         </Column>
-        <Column style={oddsItemBookmaker}>
-          <Text style={oddsText}>{odds.away.bookmaker}</Text>
+        <Column style={{ width: '25%', padding: '0 4px' }}>
+          <div style={{ ...bookmakerBox, backgroundColor: '#ff4d4d' }}>
+            <Text style={bookmakerName}>BOOKIE</Text>
+          </div>
+          <div style={oddsBox}>
+            <Text style={oddsValue}>{odds.away.bookmaker}</Text>
+          </div>
         </Column>
-        <Column style={oddsItemLadbrokes}>
-          <Text style={oddsText}>{odds.away.ladbrokes}</Text>
+        <Column style={{ width: '25%', padding: '0 4px' }}>
+          <div style={{ ...bookmakerBox, backgroundColor: '#2196f3' }}>
+            <Text style={bookmakerName}>LADBROKES</Text>
+          </div>
+          <div style={oddsBox}>
+            <Text style={oddsValue}>{odds.away.ladbrokes}</Text>
+          </div>
         </Column>
       </Row>
     </>
@@ -499,42 +539,21 @@ import {
   };
   
   const allOddsRow = {
-    display: 'grid',
-    gridTemplateColumns: 'repeat(4, 1fr)',
-    gap: '8px',
-    marginBottom: '16px',
+    width: '100%',
     padding: '0 12px',
+    marginBottom: '16px',
   };
   
-  const oddsItemBase = {
-    padding: '6px 4px',
+  const oddsBox = {
+    backgroundColor: '#f5f5f5',
     borderRadius: '4px',
+    padding: '6px 4px',
     textAlign: 'center' as const,
     minWidth: '50px',
   };
   
-  const oddsItemBetfair = {
-    ...oddsItemBase,
-    backgroundColor: '#ffb74d',
-  };
-  
-  const oddsItemTab = {
-    ...oddsItemBase,
-    backgroundColor: '#4caf50',
-  };
-  
-  const oddsItemBookmaker = {
-    ...oddsItemBase,
-    backgroundColor: '#ff4d4d',
-  };
-  
-  const oddsItemLadbrokes = {
-    ...oddsItemBase,
-    backgroundColor: '#2196f3',
-  };
-  
-  const oddsText = {
-    color: '#ffffff',
+  const oddsValue = {
+    color: '#333',
     fontSize: '14px',
     fontWeight: '600',
     margin: '0',
@@ -674,6 +693,21 @@ import {
     fontWeight: '600',
     color: '#333',
     margin: '0',
+  };
+  
+  const bookmakerBox = {
+    borderRadius: '4px',
+    padding: '4px',
+    textAlign: 'center' as const,
+    marginBottom: '4px',
+  };
+  
+  const bookmakerName = {
+    color: '#ffffff',
+    fontSize: '12px',
+    fontWeight: '700',
+    margin: '0',
+    textTransform: 'uppercase' as const,
   };
   
   export default SmartTippingEmail;
