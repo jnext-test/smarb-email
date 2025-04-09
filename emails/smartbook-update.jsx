@@ -14,169 +14,168 @@ import {
   Text,
 } from "@react-email/components";
 import * as React from "react";
+import sportsData from "./static/data/smartbook-update.json";
 
 const baseUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
   : "http://localhost:3000";
 
-const FixtureRow = ({ teams, odds }) => (
-  <>
-    <Section style={fixtureRowContainer}>
-      {/* Home Team Row */}
-      <Row style={{ marginBottom: '10px' }}>
-        <Column style={{ width: '70%' }}>
-          <Row>
-            <Column style={{ width: '60px', verticalAlign: 'middle' }}>
+const FixtureRow = ({ match }) => {
+  const formatTime = (dateString) => {
+    const date = new Date(dateString);
+    return date.toLocaleTimeString('en-US', {
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: true
+    });
+  };
+
+  return (
+    <>
+      <Section style={fixtureRowContainer}>
+        {/* Home Team Row */}
+        <Row style={{ marginBottom: '10px' }}>
+          <Column style={{ width: '70%' }}>
+            <Row>
+              <Column style={{ width: '60px', verticalAlign: 'middle' }}>
+                <Img
+                  src={match.homeFlag}
+                  width="60"
+                  height="60"
+                  alt={match.homeTeamName}
+                  style={teamLogo}
+                />
+              </Column>
+              <Column style={{ verticalAlign: 'middle' }}>
+                <Text style={teamName}>{match.homeTeamName}</Text>
+              </Column>
+            </Row>
+          </Column>
+          <Column style={{ width: '30%', textAlign: 'right' }}>
+            <div style={{ width: '100px', marginLeft: 'auto' }}>
+              <div style={{ ...bookmakerLabelColumn, backgroundColor: '#00854D' }}>
+                <Img
+                  src={match.homeBookKeeperLogo}
+                  width="60"
+                  height="20"
+                  alt="Bookmaker"
+                  style={bookmakerLogo}
+                />
+              </div>
+              <div style={bookmakerOdds}>
+                <Text style={mainOddsValueStyle}>{match.homeCurrentBestOdd}</Text>
+              </div>
+            </div>
+          </Column>
+        </Row>
+
+        {/* Away Team Row */}
+        <Row>
+          <Column style={{ width: '70%' }}>
+            <Row>
+              <Column style={{ width: '60px', verticalAlign: 'middle' }}>
+                <Img
+                  src={match.awayFlag}
+                  width="60"
+                  height="60"
+                  alt={match.awayTeamName}
+                  style={teamLogo}
+                />
+              </Column>
+              <Column style={{ verticalAlign: 'middle' }}>
+                <Text style={teamName}>{match.awayTeamName}</Text>
+              </Column>
+            </Row>
+          </Column>
+          <Column style={{ width: '30%', textAlign: 'right' }}>
+            <div style={{ width: '100px', marginLeft: 'auto' }}>
+              <div style={{ ...bookmakerLabelColumn, backgroundColor: '#0066B2' }}>
+                <Img
+                  src={match.awayBookKeeperLogo}
+                  width="60"
+                  height="20"
+                  alt="Bookmaker"
+                  style={bookmakerLogo}
+                />
+              </div>
+              <div style={bookmakerOdds}>
+                <Text style={mainOddsValueStyle}>{match.awayCurrentBestOdd}</Text>
+              </div>
+            </div>
+          </Column>
+        </Row>
+      </Section>
+
+      {/* Featured Odds Sections */}
+      <Row style={oddsRowStyle}>
+        <Text style={oddsRowLabel}>{match.homeTeamName} - Featured Bookmaker Odds</Text>
+      </Row>
+      <Row style={allOddsRow}>
+        {match.homeOdds.map((odd, index) => (
+          <Column key={index} style={{ width: '25%', padding: '0 4px' }}>
+            <div style={{ ...bookmakerBox, backgroundColor: '#ffb74d' }}>
               <Img
-                src={`${baseUrl}/static/defaultTeam.png`}
+                src={odd.BookKeeperLogo}
                 width="60"
-                height="60"
-                alt={teams.home}
-                style={teamLogo}
+                height="20"
+                alt="Bookmaker"
+                style={bookmakerLogo}
               />
-            </Column>
-            <Column style={{ verticalAlign: 'middle' }}>
-              <Text style={teamName}>{teams.home}</Text>
-            </Column>
-          </Row>
-        </Column>
-        <Column style={{ width: '30%', textAlign: 'right' }}>
-          <div style={{ width: '100px', marginLeft: 'auto' }}>
-            <div style={{ ...bookmakerLabelColumn, backgroundColor: '#00854D' }}>
-              <Text style={bookmakerLabelText}>BET365</Text>
             </div>
-            <div style={bookmakerOdds}>
-              <Text style={mainOddsValueStyle}>{odds.home.bet365 || "6.00"}</Text>
+            <div style={oddsBox}>
+              <Text style={oddsValue}>{odd.odd}</Text>
             </div>
-          </div>
-        </Column>
+          </Column>
+        ))}
       </Row>
 
-      {/* Away Team Row */}
-      <Row>
-        <Column style={{ width: '70%' }}>
-          <Row>
-            <Column style={{ width: '60px', verticalAlign: 'middle' }}>
-              <Img
-                src={`${baseUrl}/static/defaultTeam.png`}
-                width="60"
-                height="60"
-                alt={teams.away}
-                style={teamLogo}
-              />
-            </Column>
-            <Column style={{ verticalAlign: 'middle' }}>
-              <Text style={teamName}>{teams.away}</Text>
-            </Column>
-          </Row>
-        </Column>
-        <Column style={{ width: '30%', textAlign: 'right' }}>
-          <div style={{ width: '100px', marginLeft: 'auto' }}>
-            <div style={{ ...bookmakerLabelColumn, backgroundColor: '#0066B2' }}>
-              <Text style={bookmakerLabelText}>SPORTSBET</Text>
-            </div>
-            <div style={bookmakerOdds}>
-              <Text style={mainOddsValueStyle}>{odds.away.sportsbet || "5.00"}</Text>
-            </div>
-          </div>
-        </Column>
+      <Row style={oddsRowStyle}>
+        <Text style={oddsRowLabel}>{match.awayTeamName} - Featured Bookmaker Odds</Text>
       </Row>
-    </Section>
+      <Row style={allOddsRow}>
+        {match.awayOdds.map((odd, index) => (
+          <Column key={index} style={{ width: '25%', padding: '0 4px' }}>
+            <div style={{ ...bookmakerBox, backgroundColor: '#ffb74d' }}>
+              <Img
+                src={odd.BookKeeperLogo}
+                width="60"
+                height="20"
+                alt="Bookmaker"
+                style={bookmakerLogo}
+              />
+            </div>
+            <div style={oddsBox}>
+              <Text style={oddsValue}>{odd.odd}</Text>
+            </div>
+          </Column>
+        ))}
+      </Row>
 
-    {/* Featured Odds Sections */}
-    <Row style={oddsRowStyle}>
-      <Text style={oddsRowLabel}>{teams.home} - Featured Bookmaker Odds</Text>
-    </Row>
-    <Row style={allOddsRow}>
-      <Column style={{ width: '25%', padding: '0 4px' }}>
-        <div style={{ ...bookmakerBox, backgroundColor: '#ffb74d' }}>
-          <Text style={bookmakerName}>BETFAIR</Text>
-        </div>
-        <div style={oddsBox}>
-          <Text style={oddsValue}>{odds.home.betfair || "2.00"}</Text>
-        </div>
-      </Column>
-      <Column style={{ width: '25%', padding: '0 4px' }}>
-        <div style={{ ...bookmakerBox, backgroundColor: '#4caf50' }}>
-          <Text style={bookmakerName}>TAB</Text>
-        </div>
-        <div style={oddsBox}>
-          <Text style={oddsValue}>{odds.home.tab || "4.50"}</Text>
-        </div>
-      </Column>
-      <Column style={{ width: '25%', padding: '0 4px' }}>
-        <div style={{ ...bookmakerBox, backgroundColor: '#ff4d4d' }}>
-          <Text style={bookmakerName}>BOOMBET</Text>
-        </div>
-        <div style={oddsBox}>
-          <Text style={oddsValue}>{odds.home.boombet || "6.90"}</Text>
-        </div>
-      </Column>
-      <Column style={{ width: '25%', padding: '0 4px' }}>
-        <div style={{ ...bookmakerBox, backgroundColor: '#E31B23' }}>
-          <Text style={bookmakerName}>LADBROKES</Text>
-        </div>
-        <div style={oddsBox}>
-          <Text style={oddsValue}>{odds.home.ladbrokes || "5.00"}</Text>
-        </div>
-      </Column>
-    </Row>
-
-    <Row style={oddsRowStyle}>
-      <Text style={oddsRowLabel}>{teams.away} - Featured Bookmaker Odds</Text>
-    </Row>
-    <Row style={allOddsRow}>
-      <Column style={{ width: '25%', padding: '0 4px' }}>
-        <div style={{ ...bookmakerBox, backgroundColor: '#ffb74d' }}>
-          <Text style={bookmakerName}>BETFAIR</Text>
-        </div>
-        <div style={oddsBox}>
-          <Text style={oddsValue}>{odds.away.betfair || "2.00"}</Text>
-        </div>
-      </Column>
-      <Column style={{ width: '25%', padding: '0 4px' }}>
-        <div style={{ ...bookmakerBox, backgroundColor: '#4caf50' }}>
-          <Text style={bookmakerName}>TAB</Text>
-        </div>
-        <div style={oddsBox}>
-          <Text style={oddsValue}>{odds.away.tab || "4.50"}</Text>
-        </div>
-      </Column>
-      <Column style={{ width: '25%', padding: '0 4px' }}>
-        <div style={{ ...bookmakerBox, backgroundColor: '#ff4d4d' }}>
-          <Text style={bookmakerName}>BOOMBET</Text>
-        </div>
-        <div style={oddsBox}>
-          <Text style={oddsValue}>{odds.away.boombet || "6.90"}</Text>
-        </div>
-      </Column>
-      <Column style={{ width: '25%', padding: '0 4px' }}>
-        <div style={{ ...bookmakerBox, backgroundColor: '#E31B23' }}>
-          <Text style={bookmakerName}>LADBROKES</Text>
-        </div>
-        <div style={oddsBox}>
-          <Text style={oddsValue}>{odds.away.ladbrokes || "5.00"}</Text>
-        </div>
-      </Column>
-    </Row>
-  </>
-);
+      {/* Comment Section */}
+      {match.comment && (
+        <Row style={commentRow}>
+          <Text style={commentText}>
+            <strong>Comment:</strong> {match.comment}
+          </Text>
+        </Row>
+      )}
+    </>
+  );
+};
 
 const SmartBookUpdateEmail = ({
-  name = "Name",
-  fixtureCount = "3",
-  fixtureDate = "Saturday, February 1, 2025",
+  sportData = sportsData.sportData
 }) => {
   return (
     <Html>
       <Head />
-      <Preview>You have {fixtureCount} fixtures for {fixtureDate}</Preview>
+      <Preview>Your SmartBook Update for {sportData.currentDate}</Preview>
       <Body style={main}>
         <Container style={container}>
           {/* Logo */}
           <Section style={{ textAlign: 'center', marginTop: '15px', marginBottom: '25px' }}>
             <Img
-              src={`${baseUrl}/static/smartb-logo.png`}
+              src={`${baseUrl}/static/smarttipping-logo.png`}
               width="120"
               alt="SmartB"
               style={logo}
@@ -186,10 +185,10 @@ const SmartBookUpdateEmail = ({
           {/* Greeting and Summary */}
           <Section style={section}>
             <Text style={paragraph}>
-              Hi {name},
+              Hi {sportData.name},
             </Text>
             <Text style={paragraph}>
-              You have {fixtureCount} fixtures for {fixtureDate}
+              You have {sportData.SmartBook.length} fixtures for {sportData.currentDate}
             </Text>
             <Text style={paragraph}>
               Head to your SmartBook to leave comments or view your upcoming fixtures.
@@ -198,50 +197,44 @@ const SmartBookUpdateEmail = ({
 
           {/* Action Button */}
           <Section style={buttonSection}>
-            <Button style={button} href="#">
+            <Button style={button} href={sportData.upcomingEventsLink}>
               Go to your Sports SmartBook
             </Button>
           </Section>
 
-          {/* AFL Section */}
-          <Section style={sportSection}>
-            <Row style={sportHeader}>
-              <Column style={{ width: '70%' }}>
-                <Text style={sportTitle}>AUSTRALIAN RULES</Text>
-              </Column>
-              <Column style={{ width: '30%', textAlign: 'right' }}>
-                <Text style={sportLabel}>AFL</Text>
-                <Link href="#" style={viewEventLink}>View event</Link>
-              </Column>
-            </Row>
-            <Text style={dateHeader}>Friday 01/02/2025 | 07:50PM</Text>
-            <FixtureRow
-              teams={{
-                home: "Brisbane Lions",
-                away: "Melbourne Demons"
-              }}
-              odds={{
-                home: {
-                  bet365: "6.00",
-                  betfair: "2.00",
-                  tab: "4.50",
-                  boombet: "6.90",
-                  ladbrokes: "5.00"
-                },
-                away: {
-                  sportsbet: "5.00",
-                  betfair: "2.00",
-                  tab: "4.50",
-                  boombet: "6.90",
-                  ladbrokes: "5.00"
-                }
-              }}
-            />
-          </Section>
+          {/* Match Sections */}
+          {sportData.SmartBook.map((match, index) => (
+            <Section key={index} style={sportSection}>
+              <Row style={sportHeader}>
+                <Column style={{ width: '70%' }}>
+                  <Text style={sportTitle}>{match.sportName.toUpperCase()}</Text>
+                </Column>
+                <Column style={{ width: '30%', textAlign: 'right' }}>
+                  <Text style={sportLabel}>{match.tournamentName}</Text>
+                  <Link href={`${sportData.baseUrl}${match.redirectName}`} >
+                    View event
+                  </Link>
+                </Column>
+              </Row>
+              <Text style={dateHeader}>
+                {new Date(match.startTime).toLocaleDateString('en-US', {
+                  weekday: 'long',
+                  day: 'numeric',
+                  month: 'long',
+                  year: 'numeric'
+                })} | {new Date(match.startTime).toLocaleTimeString('en-US', {
+                  hour: '2-digit',
+                  minute: '2-digit',
+                  hour12: true
+                })}
+              </Text>
+              <FixtureRow match={match} />
+            </Section>
+          ))}
 
           {/* View All Button */}
           <Section style={viewAllSection}>
-            <Button style={viewAllButton} href="#">
+            <Button style={viewAllButton} href={sportData.upcomingEventsLink}>
               View all upcoming events
             </Button>
           </Section>
@@ -260,7 +253,7 @@ const SmartBookUpdateEmail = ({
           {/* Footer */}
           <Section style={footer}>
             <Img
-              src={`${baseUrl}/static/smartb-footer-logo.png`}
+              src={`${sportData.baseUrl}static/smartb-footer-logo.png`}
               width="120"
               alt="SmartB"
               style={footerLogo}
@@ -268,21 +261,21 @@ const SmartBookUpdateEmail = ({
             <Row style={footerBrands}>
               <Column>
                 <Img
-                  src={`${baseUrl}/static/smart-play-footer-logo.png`}
+                  src={`${sportData.baseUrl}static/smart-play-footer-logo.png`}
                   width="120"
                   alt="SmartPlay"
                 />
               </Column>
               <Column>
                 <Img
-                  src={`${baseUrl}/static/smart-tipping-logo.png`}
+                  src={`${sportData.baseUrl}static/smart-tipping-logo.png`}
                   width="120"
                   alt="SmartTipping"
                 />
               </Column>
               <Column>
                 <Img
-                  src={`${baseUrl}/static/smartodds-logo.png`}
+                  src={`${sportData.baseUrl}static/smartodds-logo.png`}
                   width="120"
                   alt="SmartOdds"
                 />
@@ -301,7 +294,7 @@ const SmartBookUpdateEmail = ({
                 <Column key={i} style={socialIconColumn}>
                   <Link href="#" style={socialLink}>
                     <Img
-                      src={`${baseUrl}/static/icons/${platform.icon}`}
+                      src={`${sportData.baseUrl}static/icons/${platform.icon}`}
                       width="24"
                       alt={platform.name}
                       style={socialIcon}
@@ -327,14 +320,14 @@ const SmartBookUpdateEmail = ({
               <Column style={{ textAlign: 'center' }}>
                 <Link href="https://apps.apple.com" style={appStoreButton}>
                   <Img
-                    src={`${baseUrl}/static/app-store.png`}
+                    src={`${sportData.baseUrl}static/app-store.png`}
                     width="120"
                     alt="Download on App Store"
                   />
                 </Link>
                 <Link href="https://play.google.com" style={appStoreButton}>
                   <Img
-                    src={`${baseUrl}/static/play-store.png`}
+                    src={`${sportData.baseUrl}static/play-store.png`}
                     width="120"
                     alt="Get it on Google Play"
                   />
@@ -632,20 +625,23 @@ const bookmakerBox = {
   marginBottom: '4px',
 };
 
-const bookmakerName = {
-  color: '#ffffff',
-  fontSize: '12px',
-  fontWeight: '700',
-  margin: '0',
-  textTransform: 'uppercase',
+const bookmakerLogo = {
+  margin: '0 auto',
+  display: 'block',
 };
 
-const viewEventLink = {
-  color: '#0066B2',
-  fontSize: '12px',
-  textDecoration: 'none',
-  display: 'block',
-  marginTop: '4px',
+const commentRow = {
+  padding: '10px 12px',
+  backgroundColor: '#f5f5f5',
+  borderRadius: '4px',
+  marginTop: '10px',
+};
+
+const commentText = {
+  fontSize: '14px',
+  color: '#333',
+  margin: '0',
+  lineHeight: '1.4',
 };
 
 export default SmartBookUpdateEmail;

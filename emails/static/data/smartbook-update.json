@@ -1,0 +1,66 @@
+{
+  "sportData": {
+    "name": "Santosh",
+    "currentDate": "8th April 2025",
+    "upcomingEventsLink": "https://smartb.com.au/smartbook",
+    "SmartBook": [
+      {
+        "tableId": 46,
+        "type": "Team",
+        "SportId": 4,
+        "comment": "CSK will win the today match. ",
+        "FavoriteId": 27,
+        "dataId": 127,
+        "eventId": 12882,
+        "eventName": "Punjab Kings VS Chennai Super Kings",
+        "startTime": "2025-04-08T14:00:00.000Z",
+        "tournamentId": 24,
+        "awayTeamId": 127,
+        "homeTeamId": 128,
+        "status": "upcoming",
+        "winnerCode": null,
+        "updatedAt": "2024-03-26T07:02:30.000Z",
+        "tournamentName": "Indian Premier League",
+        "sportName": "Cricket",
+        "awayTeamName": "Chennai Super Kings",
+        "homeTeamName": "Punjab Kings",
+        "awayFlag": "https://media.smartb.com.au/uploads/1742337152355.png",
+        "homeFlag": "https://media.smartb.com.au/uploads/1742337217485.png",
+        "tournamentlogo": null,
+        "awayCurrentBestOdd": 2.22,
+        "awayCurrentBookKeeperId": 13,
+        "awayBookKeeperLogo": "https://media.smartb.com.au/uploads/1739933455966.png",
+        "homeCurrentBestOdd": 1.9,
+        "homeCurrentBookKeeperId": 25,
+        "homeBookKeeperLogo": "https://media.smartb.com.au/uploads/1739933545949.png",
+        "Odds": null,
+        "isSmartBookHomeTeam": 0,
+        "isSmartBookAwayTeam": 1,
+        "isSmartBookTournament": 0,
+        "marketLength": 1,
+        "sportUrl": "https://smartb.com.au/api/views/cricket_bl.png",
+        "redirectName": "cricket",
+        "awayOdds": [
+          {
+            "id": 6963,
+            "odd": 2.22,
+            "BookKeeperId": 13,
+            "BookKeeperLogo": "https://media.smartb.com.au/uploads/1739933455927.png",
+            "TeamId": 127
+          }
+        ],
+        "homeOdds": [
+          {
+            "id": 6962,
+            "odd": 1.8,
+            "BookKeeperId": 13,
+            "BookKeeperLogo": "https://media.smartb.com.au/uploads/1739933455927.png",
+            "TeamId": 128
+          }
+        ]
+      }
+    ],
+    "baseUrl": "https://smartb.com.au/",
+    "generateKey": "Xl6+YC0P0Or6RMt9g0X/KXTmOM68IjR/De4EFY/dV8s="
+  }
+}
