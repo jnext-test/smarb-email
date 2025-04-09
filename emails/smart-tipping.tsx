@@ -12,6 +12,7 @@ import {
   Row,
   Section,
   Text,
+  Font,
 } from "@react-email/components";
 import * as React from "react";
 
@@ -203,7 +204,18 @@ const SmartTippingEmail = ({
 }) => {
   return (
     <Html>
-      <Head />
+      <Head>
+        <Font
+          fontFamily="Roboto"
+          fallbackFontFamily="Verdana"
+          webFont={{
+            url: "https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap",
+            format: "woff2",
+          }}
+          fontWeight={400}
+          fontStyle="normal"
+        />
+      </Head>
       <Preview>
         Round {roundNumber} of the AFL starts at {startTime} AEST {startDate}
       </Preview>
@@ -421,9 +433,16 @@ const SmartTippingEmail = ({
               ))}
             </Row>
             <Text style={footerText}>
-              Suite 302, Level 3 | 55 Market Street, Sydney, NSW 2000
+              Suite 302, Level 3/2 Elizabeth Plaza, North Sydney, NSW 2060
               <br />
-              E: info@smartb.com.au
+            </Text>
+
+            <Text>
+              Send an Email To
+              <br />
+              <Link href="mailto:info@smartb.com.au" style={footerLink}>
+                info@smartb.com.au
+              </Link>
             </Text>
             <Text style={footerDisclaimer}>
               Don't want to get notifications?{" "}
@@ -509,15 +528,19 @@ const h2 = {
 };
 
 const fixtureSection = {
-  padding: "0 15px",
+  padding: "10px 15px",
   margin: "15px 0",
+  border: "1px solid #E8EAEC",
+  borderRadius: "4px",
 };
 
 const dateHeader = {
-  fontSize: "14px",
-  color: "#666",
+  fontSize: "16px",
+  color: "#191919",
   margin: "0 0 12px",
   fontWeight: "500",
+  borderBottom: "1px solid #E8EAEC",
+  paddingBottom: "10px",
 };
 
 const fixtureRowContainer = {
@@ -603,7 +626,7 @@ const submitSection = {
 };
 
 const submitButton = {
-  backgroundColor: "#3665f9",
+  backgroundColor: "#4455C7",
   color: "#ffffff",
   padding: "10px 20px",
   borderRadius: "4px",
