@@ -12,12 +12,12 @@ import {
   Row,
   Section,
   Text,
-} from '@react-email/components';
-import * as React from 'react';
+} from "@react-email/components";
+import * as React from "react";
 
 const baseUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
-  : 'http://localhost:3000';
+  : "http://localhost:3000";
 
 interface RunnerProps {
   number: string;
@@ -36,31 +36,49 @@ interface RunnerProps {
   };
 }
 
-const RunnerRow: React.FC<RunnerProps> = ({ number, name, jockey, trainer, weight, venue, odds }) => (
+const RunnerRow: React.FC<RunnerProps> = ({
+  number,
+  name,
+  jockey,
+  trainer,
+  weight,
+  venue,
+  odds,
+}) => (
   <>
     <Section style={fixtureRowContainer}>
       {/* Runner Info Row */}
-      <Row style={{ marginBottom: '10px' }}>
-        <Column style={{ width: '70%' }}>
+      <Row style={{ marginBottom: "10px" }}>
+        <Column style={{ width: "70%" }}>
           <Row>
-            <Column style={{ width: '60px', verticalAlign: 'middle' }}>
+            <Column style={{ width: "60px", verticalAlign: "middle" }}>
               <Text style={runnerNumber}>{number}.</Text>
             </Column>
-            <Column style={{ verticalAlign: 'middle' }}>
+            <Column style={{ verticalAlign: "middle", textAlign: "left" }}>
               <Text style={runnerName}>{name}</Text>
-              <Text style={runnerDetails}>J: {jockey}</Text>
+              <Row style={{ verticalAlign: "baseline" }}>
+                <Column style={{ width: "50%", textAlign: "left" }}>
+                  <Text style={runnerDetails}>J: {jockey}</Text>
+                </Column>
+                <Column style={{ width: "50%", textAlign: "left" }}>
+                  <Text style={runnerDetails}>W: {weight}</Text>
+                </Column>
+              </Row>
               <Text style={runnerDetails}>T: {trainer}</Text>
-              <Text style={runnerDetails}>W: {weight}</Text>
             </Column>
           </Row>
         </Column>
-        <Column style={{ width: '30%', textAlign: 'right' }}>
-          <div style={{ width: '100px', marginLeft: 'auto' }}>
+        <Column style={{ width: "30%", textAlign: "right" }}>
+          <div style={{ width: "100px", marginLeft: "auto" }}>
             <div style={bookmakerLabelColumn}>
-              <Text style={bookmakerLabelText}>{odds.bookmakerLabel || "BOOKMAKER"}</Text>
+              <Text style={bookmakerLabelText}>
+                {odds.bookmakerLabel || "BOOKMAKER"}
+              </Text>
             </div>
             <div style={bookmakerOdds}>
-              <Text style={mainOddsValueStyle}>{odds.mainOddsValue || "5.00"}</Text>
+              <Text style={mainOddsValueStyle}>
+                {odds.mainOddsValue || "5.00"}
+              </Text>
             </div>
           </div>
         </Column>
@@ -69,7 +87,12 @@ const RunnerRow: React.FC<RunnerProps> = ({ number, name, jockey, trainer, weigh
 
     {/* Venue Info */}
     <Row style={venueStyle}>
-      <Text style={venueText}>{venue}</Text>
+      <Column style={{ width: "90%" }}>
+        <Text style={venueText}>{venue}</Text>
+      </Column>
+      <Column style={{ width: "10%", textAlign: "right" }}>
+        <Text style={arrowText}>→</Text>
+      </Column>
     </Row>
 
     {/* Featured Odds Section */}
@@ -77,32 +100,32 @@ const RunnerRow: React.FC<RunnerProps> = ({ number, name, jockey, trainer, weigh
       <Text style={oddsRowLabel}>{name} - Featured Bookmaker Odds</Text>
     </Row>
     <Row style={allOddsRow}>
-      <Column style={{ width: '25%', padding: '0 4px' }}>
-        <div style={{ ...bookmakerBox, backgroundColor: '#ffb74d' }}>
+      <Column style={{ width: "25%", padding: "0 4px" }}>
+        <div style={{ ...bookmakerBox, backgroundColor: "#ffb74d" }}>
           <Text style={bookmakerName}>BETFAIR</Text>
         </div>
         <div style={oddsBox}>
           <Text style={oddsValue}>{odds.betfair}</Text>
         </div>
       </Column>
-      <Column style={{ width: '25%', padding: '0 4px' }}>
-        <div style={{ ...bookmakerBox, backgroundColor: '#4caf50' }}>
+      <Column style={{ width: "25%", padding: "0 4px" }}>
+        <div style={{ ...bookmakerBox, backgroundColor: "#4caf50" }}>
           <Text style={bookmakerName}>TAB</Text>
         </div>
         <div style={oddsBox}>
           <Text style={oddsValue}>{odds.tab}</Text>
         </div>
       </Column>
-      <Column style={{ width: '25%', padding: '0 4px' }}>
-        <div style={{ ...bookmakerBox, backgroundColor: '#ff4d4d' }}>
+      <Column style={{ width: "25%", padding: "0 4px" }}>
+        <div style={{ ...bookmakerBox, backgroundColor: "#ff4d4d" }}>
           <Text style={bookmakerName}>BOOKIE</Text>
         </div>
         <div style={oddsBox}>
           <Text style={oddsValue}>{odds.bookmaker}</Text>
         </div>
       </Column>
-      <Column style={{ width: '25%', padding: '0 4px' }}>
-        <div style={{ ...bookmakerBox, backgroundColor: '#2196f3' }}>
+      <Column style={{ width: "25%", padding: "0 4px" }}>
+        <div style={{ ...bookmakerBox, backgroundColor: "#2196f3" }}>
           <Text style={bookmakerName}>LADBROKES</Text>
         </div>
         <div style={oddsBox}>
@@ -120,12 +143,25 @@ const RacingBlackbookEmail = ({
 }) => {
   return (
     <Html>
-      <Head />
-      <Preview>You have {runnersCount} runners for {raceDate}</Preview>
+      <Head>
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&display=swap"
+        />
+      </Head>
+      <Preview>
+        You have {runnersCount} runners for {raceDate}
+      </Preview>
       <Body style={main}>
         <Container style={container}>
           {/* Logo */}
-          <Section style={{ textAlign: 'center', marginTop: '15px', marginBottom: '25px' }}>
+          <Section
+            style={{
+              textAlign: "center",
+              marginTop: "15px",
+              marginBottom: "25px",
+            }}
+          >
             <Img
               src={`${baseUrl}/static/smarttipping-logo.png`}
               width="150"
@@ -137,12 +173,10 @@ const RacingBlackbookEmail = ({
 
           {/* Greeting */}
           <Section style={section}>
+            <Text style={paragraph}>Hi {name},</Text>
             <Text style={paragraph}>
-              Hi {name},
-            </Text>
-            <Text style={paragraph}>
-              You have {runnersCount} runners for {raceDate}.
-              Head to your BlackBook to leave comments, or view your upcoming runners.
+              You have {runnersCount} runners for {raceDate}. Head to your
+              BlackBook to leave comments, or view your upcoming runners.
             </Text>
           </Section>
 
@@ -155,39 +189,162 @@ const RacingBlackbookEmail = ({
 
           {/* Runners Section */}
           <Section style={runnersSection}>
-            <RunnerRow 
-              number="1"
-              name="Incredible Pinto"
-              jockey="Peta Edwards"
-              trainer="B P Newnham"
-              weight="58.00Kg"
-              venue="R4 Mornington"
-              odds={{
-                betfair: "2.00",
-                tab: "4.50",
-                bookmaker: "6.90",
-                ladbrokes: "5.00",
-                mainOddsValue: "6.00",
-                bookmakerLabel: "BET365"
+            <Section
+              style={{
+                backgroundColor: "#fff",
+                borderRadius: "8px",
+                border: "1px solid #E8EAEC",
+                padding: "17px 13px",
+                marginBottom: "20px",
               }}
-            />
+            >
+              <RunnerRow
+                number="1"
+                name="Incredible Pinto"
+                jockey="Peta Edwards"
+                trainer="B P Newnham"
+                weight="58.00Kg"
+                venue="R4 Mornington"
+                odds={{
+                  betfair: "2.00",
+                  tab: "4.50",
+                  bookmaker: "6.90",
+                  ladbrokes: "5.00",
+                  mainOddsValue: "6.00",
+                  bookmakerLabel: "BET365",
+                }}
+              />
+            </Section>
 
-            <RunnerRow 
-              number="6"
-              name="Our Kobison"
-              jockey="[Jockey_name]"
-              trainer="[Trainer_name]"
-              weight="58.00Kg"
-              venue="R4 Mornington"
-              odds={{
-                betfair: "2.10",
-                tab: "3.20",
-                bookmaker: "1.80",
-                ladbrokes: "1.58",
-                mainOddsValue: "5.00",
-                bookmakerLabel: "BOOKMAKER"
+            <Section
+              style={{
+                backgroundColor: "#fff",
+                borderRadius: "8px",
+                border: "1px solid #E8EAEC",
+                padding: "17px 13px",
               }}
-            />
+            >
+              <RunnerRow
+                number="6"
+                name="Our Kobison"
+                jockey="[Jockey_name]"
+                trainer="[Trainer_name]"
+                weight="58.00Kg"
+                venue="R4 Mornington"
+                odds={{
+                  betfair: "2.10",
+                  tab: "3.20",
+                  bookmaker: "1.80",
+                  ladbrokes: "1.58",
+                  mainOddsValue: "5.00",
+                  bookmakerLabel: "BOOKMAKER",
+                }}
+              />
+            </Section>
+
+            <Section
+              style={{
+                backgroundColor: "#fff",
+                borderRadius: "8px",
+                border: "1px solid #E8EAEC",
+                padding: "17px 13px",
+              }}
+            >
+              <RunnerRow
+                number="6"
+                name="Our Kobison"
+                jockey="[Jockey_name]"
+                trainer="[Trainer_name]"
+                weight="58.00Kg"
+                venue="R4 Mornington"
+                odds={{
+                  betfair: "2.10",
+                  tab: "3.20",
+                  bookmaker: "1.80",
+                  ladbrokes: "1.58",
+                  mainOddsValue: "5.00",
+                  bookmakerLabel: "BOOKMAKER",
+                }}
+              />
+            </Section>
+
+            <Section
+              style={{
+                backgroundColor: "#fff",
+                borderRadius: "8px",
+                border: "1px solid #E8EAEC",
+                padding: "17px 13px",
+              }}
+            >
+              <RunnerRow
+                number="6"
+                name="Our Kobison"
+                jockey="[Jockey_name]"
+                trainer="[Trainer_name]"
+                weight="58.00Kg"
+                venue="R4 Mornington"
+                odds={{
+                  betfair: "2.10",
+                  tab: "3.20",
+                  bookmaker: "1.80",
+                  ladbrokes: "1.58",
+                  mainOddsValue: "5.00",
+                  bookmakerLabel: "BOOKMAKER",
+                }}
+              />
+            </Section>
+
+            <Section
+              style={{
+                backgroundColor: "#fff",
+                borderRadius: "8px",
+                border: "1px solid #E8EAEC",
+                padding: "17px 13px",
+              }}
+            >
+              <RunnerRow
+                number="6"
+                name="Our Kobison"
+                jockey="[Jockey_name]"
+                trainer="[Trainer_name]"
+                weight="58.00Kg"
+                venue="R4 Mornington"
+                odds={{
+                  betfair: "2.10",
+                  tab: "3.20",
+                  bookmaker: "1.80",
+                  ladbrokes: "1.58",
+                  mainOddsValue: "5.00",
+                  bookmakerLabel: "BOOKMAKER",
+                }}
+              />
+            </Section>
+
+            <Section
+              style={{
+                backgroundColor: "#fff",
+                borderRadius: "8px",
+                border: "1px solid #E8EAEC",
+                padding: "17px 13px",
+              }}
+            >
+              <RunnerRow
+                number="6"
+                name="Our Kobison"
+                jockey="[Jockey_name]"
+                trainer="[Trainer_name]"
+                weight="58.00Kg"
+                venue="R4 Mornington"
+                odds={{
+                  betfair: "2.10",
+                  tab: "3.20",
+                  bookmaker: "1.80",
+                  ladbrokes: "1.58",
+                  mainOddsValue: "5.00",
+                  bookmakerLabel: "BOOKMAKER",
+                }}
+              />
+            </Section>
           </Section>
 
           {/* View All Button */}
@@ -199,9 +356,11 @@ const RacingBlackbookEmail = ({
 
           {/* Responsible Gambling Banner */}
           <Section style={gamblingBanner}>
-            <Heading style={gamblingHeader}>What are you really gambling with?</Heading>
+            <Heading style={gamblingHeader}>
+              What are you really gambling with?
+            </Heading>
             <Text style={gamblingText}>
-              For free and confidential support call 1800 858 858 or visit{' '}
+              For free and confidential support call 1800 858 858 or visit{" "}
               <Link href="https://gamblinghelp.online" style={gamblingLink}>
                 Gambling Help Online
               </Link>
@@ -222,6 +381,7 @@ const RacingBlackbookEmail = ({
                   src={`${baseUrl}/static/smart-play-footer-logo.png`}
                   width="120"
                   alt="SmartPlay"
+                  style={{ margin: "0 auto" }}
                 />
               </Column>
               <Column>
@@ -229,6 +389,7 @@ const RacingBlackbookEmail = ({
                   src={`${baseUrl}/static/smart-tipping-logo.png`}
                   width="120"
                   alt="SmartTipping"
+                  style={{ margin: "0 auto" }}
                 />
               </Column>
               <Column>
@@ -236,18 +397,19 @@ const RacingBlackbookEmail = ({
                   src={`${baseUrl}/static/smartodds-logo.png`}
                   width="120"
                   alt="SmartOdds"
+                  style={{ margin: "0 auto" }}
                 />
               </Column>
             </Row>
             <Row style={socialLinks}>
               {[
-                { name: 'Facebook', icon: 'fb.png' },
-                { name: 'Instagram', icon: 'ig.png' },
-                { name: 'Twitter', icon: 'twitter.png' },
-                { name: 'LinkedIn', icon: 'linkedin.png' },
-                { name: 'YouTube', icon: 'youtube.png' },
-                { name: 'TikTok', icon: 'tiktok.png' },
-                { name: 'Vemeo', icon: 'vemeo.png' }
+                { name: "Facebook", icon: "fb.png" },
+                { name: "Instagram", icon: "ig.png" },
+                { name: "Twitter", icon: "twitter.png" },
+                { name: "LinkedIn", icon: "linkedin.png" },
+                { name: "YouTube", icon: "youtube.png" },
+                { name: "TikTok", icon: "tiktok.png" },
+                { name: "Vemeo", icon: "vemeo.png" },
               ].map((platform, i) => (
                 <Column key={i} style={socialIconColumn}>
                   <Link href="#" style={socialLink}>
@@ -267,15 +429,19 @@ const RacingBlackbookEmail = ({
               E: info@smartb.com.au
             </Text>
             <Text style={footerDisclaimer}>
-              Don't want to get notifications? <Link href="#" style={footerLink}>Unsubscribe here</Link>
+              Don't want to get notifications?{" "}
+              <Link href="#" style={footerLink}>
+                Unsubscribe here
+              </Link>
               <br />
-              View our updated <Link href="#" style={footerLink}>Privacy Policy</Link>
+              View our updated{" "}
+              <Link href="#" style={footerLink}>
+                Privacy Policy
+              </Link>
             </Text>
-            <Text style={copyright}>
-              Copyright © SmartB Pty Ltd 2022
-            </Text>
+            <Text style={copyright}>Copyright © SmartB Pty Ltd 2022</Text>
             <Row style={appStoreSection}>
-              <Column style={{ textAlign: 'center' as const }}>
+              <Column style={{ textAlign: "center" as const }}>
                 <Link href="https://apps.apple.com" style={appStoreButton}>
                   <Img
                     src={`${baseUrl}/static/app-store.png`}
@@ -301,272 +467,286 @@ const RacingBlackbookEmail = ({
 
 // Styles
 const main = {
-  backgroundColor: '#f5f8fa',
-  fontFamily: '-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif',
+  backgroundColor: "#f5f8fa",
+  fontFamily: "Roboto, Arial, sans-serif",
 };
 
 const container = {
-  margin: '0 auto',
-  padding: '0',
-  maxWidth: '600px',
-  backgroundColor: '#ffffff',
+  margin: "0 auto",
+  padding: "0",
+  maxWidth: "600px",
+  // backgroundColor: "#ffffff",
 };
 
 const logo = {
-  margin: '0 auto',
+  margin: "0 auto",
 };
 
 const section = {
-  padding: '0 15px',
-  margin: '15px 0',
+  padding: "0 15px",
+  margin: "15px 0",
 };
 
 const paragraph = {
-  fontSize: '14px',
-  lineHeight: '20px',
-  margin: '0 0 15px',
-  color: '#333',
+  fontSize: "14px",
+  lineHeight: "20px",
+  margin: "0 0 15px",
+  color: "#333",
 };
 
 const runnersSection = {
-  padding: '0 15px',
-  margin: '15px 0',
+  padding: "0 15px",
+  margin: "15px 0",
 };
 
 const fixtureRowContainer = {
-  backgroundColor: '#ffffff',
-  padding: '8px 12px',
-  marginBottom: '5px',
+  backgroundColor: "#ffffff",
+  marginBottom: "5px",
 };
 
 const runnerNumber = {
-  fontSize: '24px',
-  fontWeight: '700',
-  color: '#333',
-  margin: '0',
+  fontSize: "24px",
+  fontWeight: "700",
+  color: "#333",
+  margin: "0",
 };
 
 const runnerName = {
-  fontSize: '16px',
-  fontWeight: '600',
-  color: '#333',
-  margin: '0 0 4px 0',
+  fontSize: "16px",
+  fontWeight: "600",
+  color: "#333",
+  margin: "0 0 4px 0",
+  textAlign: "left" as const,
 };
 
 const runnerDetails = {
-  fontSize: '14px',
-  color: '#666',
-  margin: '0 0 2px 0',
+  fontSize: "14px",
+  color: "#666",
+  margin: "0 0 2px 0",
+  textAlign: "left" as const,
 };
 
 const venueStyle = {
-  padding: '0 12px',
-  marginBottom: '4px',
+  padding: "8px 12px",
+  marginBottom: "4px",
+  backgroundColor: "#f5f5f5",
+  borderRadius: "8px",
+  cursor: "pointer",
+  border: "1px solid #e0e0e0",
 };
 
 const venueText = {
-  fontSize: '14px',
-  color: '#666',
-  margin: '0',
+  fontSize: "14px",
+  color: "#666",
+  margin: "0",
+  fontWeight: "500",
+};
+
+const arrowText = {
+  fontSize: "18px",
+  color: "#3665f9",
+  margin: "0",
+  fontWeight: "bold",
 };
 
 const bookmakerLabelColumn = {
-  backgroundColor: '#2f6e35',
-  borderRadius: '4px 4px 0 0',
-  padding: '2px 8px',
-  minWidth: '80px',
-  textAlign: 'center' as const,
+  backgroundColor: "#2f6e35",
+  borderRadius: "4px 4px 0 0",
+  padding: "2px 8px",
+  minWidth: "80px",
+  textAlign: "center" as const,
 };
 
 const bookmakerLabelText = {
-  color: '#ffffff',
-  fontSize: '10px',
-  fontWeight: '600',
-  margin: '0',
+  color: "#ffffff",
+  fontSize: "10px",
+  fontWeight: "600",
+  margin: "0",
 };
 
 const bookmakerOdds = {
-  backgroundColor: '#e6e6e6',
-  borderRadius: '0 0 4px 4px',
-  padding: '4px 8px',
-  minWidth: '80px',
-  textAlign: 'center' as const,
+  backgroundColor: "#e6e6e6",
+  borderRadius: "0 0 4px 4px",
+  padding: "4px 8px",
+  minWidth: "80px",
+  textAlign: "center" as const,
 };
 
 const mainOddsValueStyle = {
-  fontSize: '14px',
-  fontWeight: '600',
-  color: '#333',
-  margin: '0',
+  fontSize: "14px",
+  fontWeight: "600",
+  color: "#333",
+  margin: "0",
 };
 
 const oddsRowStyle = {
-  marginTop: '4px',
-  marginBottom: '6px',
-  padding: '0 12px',
+  marginTop: "4px",
+  marginBottom: "6px",
+  padding: "0 12px",
 };
 
 const oddsRowLabel = {
-  fontSize: '12px',
-  color: '#666',
-  margin: '0',
+  fontSize: "12px",
+  color: "#666",
+  margin: "0",
+  textAlign: "left" as const,
+  padding: "0 4px",
 };
 
 const allOddsRow = {
-  width: '100%',
-  padding: '0 12px',
-  marginBottom: '16px',
+  width: "100%",
+  marginBottom: "16px",
 };
 
 const bookmakerBox = {
-  borderRadius: '4px',
-  padding: '4px',
-  textAlign: 'center' as const,
-  marginBottom: '4px',
+  borderRadius: "4px",
+  padding: "4px",
+  textAlign: "center" as const,
+  marginBottom: "4px",
 };
 
 const bookmakerName = {
-  color: '#ffffff',
-  fontSize: '12px',
-  fontWeight: '700',
-  margin: '0',
-  textTransform: 'uppercase' as const,
+  color: "#ffffff",
+  fontSize: "12px",
+  fontWeight: "700",
+  margin: "0",
+  textTransform: "uppercase" as const,
 };
 
 const oddsBox = {
-  backgroundColor: '#f5f5f5',
-  borderRadius: '4px',
-  padding: '6px 4px',
-  textAlign: 'center' as const,
-  minWidth: '50px',
+  backgroundColor: "#f5f5f5",
+  borderRadius: "4px",
+  padding: "6px 4px",
+  textAlign: "center" as const,
+  minWidth: "50px",
 };
 
 const oddsValue = {
-  color: '#333',
-  fontSize: '14px',
-  fontWeight: '600',
-  margin: '0',
+  color: "#333",
+  fontSize: "14px",
+  fontWeight: "600",
+  margin: "0",
 };
 
 const submitSection = {
-  textAlign: 'center' as const,
-  margin: '25px 0',
+  textAlign: "center" as const,
+  margin: "25px 0",
 };
 
 const submitButton = {
-  backgroundColor: '#3665f9',
-  color: '#ffffff',
-  padding: '10px 20px',
-  borderRadius: '4px',
-  textDecoration: 'none',
-  fontWeight: '600',
-  fontSize: '14px',
+  backgroundColor: "#3665f9",
+  color: "#ffffff",
+  padding: "10px 20px",
+  borderRadius: "4px",
+  textDecoration: "none",
+  fontWeight: "600",
+  fontSize: "14px",
 };
 
 const viewAllButton = {
   ...submitButton,
-  backgroundColor: '#666',
+  backgroundColor: "#666",
 };
 
 const gamblingBanner = {
-  backgroundColor: '#f9f9f9',
-  padding: '15px',
-  margin: '20px 0',
-  borderRadius: '0',
-  color: '#333',
-  textAlign: 'center' as const,
-  borderTop: '1px solid #e0e0e0',
-  borderBottom: '1px solid #e0e0e0',
+  backgroundColor: "#f9f9f9",
+  padding: "15px",
+  margin: "20px 0",
+  borderRadius: "0",
+  color: "#333",
+  textAlign: "center" as const,
+  borderTop: "1px solid #e0e0e0",
+  borderBottom: "1px solid #e0e0e0",
 };
 
 const gamblingHeader = {
-  fontSize: '16px',
-  fontWeight: '600',
-  margin: '0 0 5px',
-  color: '#333',
+  fontSize: "16px",
+  fontWeight: "600",
+  margin: "0 0 5px",
+  color: "#333",
 };
 
 const gamblingText = {
-  fontSize: '14px',
-  margin: '0',
+  fontSize: "14px",
+  margin: "0",
 };
 
 const gamblingLink = {
-  color: '#2196f3',
-  textDecoration: 'underline',
+  color: "#2196f3",
+  textDecoration: "underline",
 };
 
 const footer = {
-  backgroundColor: '#003764',
-  padding: '20px 15px',
-  textAlign: 'center' as const,
-  color: '#ffffff',
-  marginTop: '20px',
+  backgroundColor: "#003764",
+  padding: "20px 15px",
+  textAlign: "center" as const,
+  color: "#ffffff",
+  marginTop: "20px",
 };
 
 const footerLogo = {
-  margin: '0 auto 15px',
+  margin: "0 auto 15px",
 };
 
 const footerBrands = {
-  marginBottom: '15px',
+  marginBottom: "15px",
 };
 
 const socialLinks = {
-  margin: '15px 0',
-  textAlign: 'center' as const,
+  margin: "15px 0",
+  textAlign: "center" as const,
 };
 
 const socialIconColumn = {
-  padding: '0 5px',
-  display: 'inline-block',
+  padding: "0 5px",
+  display: "inline-block",
 };
 
 const socialLink = {
-  textDecoration: 'none',
-  display: 'inline-block',
+  textDecoration: "none",
+  display: "inline-block",
 };
 
 const socialIcon = {
-  display: 'inline-block',
-  verticalAlign: 'middle',
-  width: '24px',
-  height: '24px',
+  display: "inline-block",
+  verticalAlign: "middle",
+  width: "24px",
+  height: "24px",
 };
 
 const footerText = {
-  fontSize: '12px',
-  margin: '10px 0',
-  color: '#ffffff',
+  fontSize: "12px",
+  margin: "10px 0",
+  color: "#ffffff",
 };
 
 const footerDisclaimer = {
-  fontSize: '11px',
-  color: '#cccccc',
-  margin: '10px 0',
+  fontSize: "11px",
+  color: "#cccccc",
+  margin: "10px 0",
 };
 
 const footerLink = {
-  color: '#cccccc',
-  textDecoration: 'underline',
+  color: "#cccccc",
+  textDecoration: "underline",
 };
 
 const copyright = {
-  fontSize: '11px',
-  color: '#cccccc',
-  margin: '15px 0',
+  fontSize: "11px",
+  color: "#cccccc",
+  margin: "15px 0",
 };
 
 const appStoreSection = {
-  margin: '15px 0 0',
-  textAlign: 'center' as const,
+  margin: "15px 0 0",
+  textAlign: "center" as const,
   fontSize: 0,
 };
 
 const appStoreButton = {
-  display: 'inline-block',
-  margin: '0 2px',
-  verticalAlign: 'middle',
+  display: "inline-block",
+  margin: "0 2px",
+  verticalAlign: "middle",
 };
 
-export default RacingBlackbookEmail; 
+export default RacingBlackbookEmail;
