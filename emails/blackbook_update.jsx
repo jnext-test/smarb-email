@@ -507,12 +507,13 @@ const oddsValue = {
 };
 
 const submitSection = {
-    textAlign: "center",
+    textAlign: "left",
     margin: "25px 0",
+    padding: "0 15px",
 };
 
 const submitButton = {
-    backgroundColor: "#3665f9",
+    backgroundColor: "#4455C7",
     color: "#ffffff",
     padding: "10px 20px",
     borderRadius: "4px",
