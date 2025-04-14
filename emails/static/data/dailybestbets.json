@@ -1,0 +1,183 @@
+{
+  "id": 5,
+  "firstName": "Santosh",
+  "lastName": "Patil",
+  "username": "santosh.jnext@gmail.com",
+  "NotificationPreference": {
+    "id": 5,
+    "UserId": 5,
+    "dailyBestBet": 1,
+    "tipOfTheDay": 1,
+    "blackBook": 1,
+    "smartBook": 1,
+    "weeklyNewsLetter": ["Wednesday", "Friday"],
+    "tippingCompetition": ["enterTip", "currentLadder", "endOfTournament"],
+    "sportsValue": [
+      { "news": true, "tips": true, "SportId": 15, "fixtures": true },
+      { "news": true, "tips": true, "SportId": 9, "fixtures": true },
+      { "news": true, "tips": true, "SportId": 11, "fixtures": true },
+      { "news": true, "tips": true, "SportId": 10, "fixtures": true },
+      { "news": true, "tips": true, "SportId": 6, "fixtures": true },
+      { "news": true, "tips": true, "SportId": 4, "fixtures": true },
+      { "news": true, "tips": true, "SportId": 16, "fixtures": true },
+      { "news": true, "tips": true, "SportId": 17, "fixtures": true },
+      { "news": true, "tips": true, "SportId": 5, "fixtures": true },
+      { "news": true, "tips": true, "SportId": 12, "fixtures": true },
+      { "news": true, "tips": true, "SportId": 13, "fixtures": true },
+      { "news": true, "tips": true, "SportId": 8, "fixtures": true },
+      { "news": true, "tips": true, "SportId": 7, "fixtures": true },
+      {
+        "news": true,
+        "tips": true,
+        "SportId": 1,
+        "fixtures": true,
+        "dailyBestBet": true,
+        "smartBNewsLetter": true,
+        "weeklyNewsLetter": true
+      },
+      {
+        "news": true,
+        "tips": true,
+        "SportId": 2,
+        "fixtures": true,
+        "dailyBestBet": true,
+        "smartBNewsLetter": true,
+        "weeklyNewsLetter": true
+      },
+      {
+        "news": true,
+        "tips": true,
+        "SportId": 3,
+        "fixtures": true,
+        "dailyBestBet": true,
+        "smartBNewsLetter": true,
+        "weeklyNewsLetter": true
+      }
+    ],
+    "smartBNewsLetter": 1,
+    "raceAlert": 0,
+    "pushNotification": null,
+    "createdAt": "2024-10-24T01:06:51.000Z",
+    "updatedAt": "2024-12-07T09:56:23.000Z"
+  },
+  "advertiseUrl": "https://smartb.com.au/api/views/smartb_ad.png",
+  "advertiseClick": "https://smartb.com.au/",
+  "subjectDate": "14th April 2025",
+  "baseUrl": "https://smartb.com.au/",
+  "betData": [
+    {
+      "id": 51,
+      "EventId": 10087,
+      "UserId": 5,
+      "SportId": 1,
+      "keyComment": "<p>This is for testing www</p>",
+      "betRaceId": 119549,
+      "betParticipantId": 907567,
+      "betComment": "<p>Test ww</p>",
+      "isTipOfTheDay": 0,
+      "User": {
+        "id": 5,
+        "firstName": "Santosh",
+        "lastName": "Patil"
+      },
+      "Event": {
+        "id": 10087,
+        "sportId": 1,
+        "eventName": "Benalla",
+        "eventDate": "2025-04-14T00:00:00.000Z",
+        "trackId": 252,
+        "trackName": "Benalla",
+        "countryId": 13
+      },
+      "betRace": {
+        "id": 119549,
+        "raceName": "Royal Hotel Benalla Mdn Plate",
+        "description": "Royal Hotel Benalla Mdn Plate",
+        "distance": 284,
+        "startDate": "2025-04-14T05:00:00.000Z",
+        "raceNumber": 3
+      },
+      "betParticipant": {
+        "id": 907567,
+        "particiantId": 112522,
+        "barrierNumber": 1,
+        "runnerNumber": 1,
+        "JockeyWeight": "59.50",
+        "TrainerId": 10517,
+        "JockeyId": 932,
+        "animal": {
+          "id": 112522,
+          "name": "American Russ"
+        },
+        "Jockey": {
+          "id": 932,
+          "name": "Tayla Childs"
+        },
+        "Trainer": {
+          "id": 10517,
+          "name": "Tony Waddell"
+        }
+      },
+      "sportIcon": "https://smartb.com.au/api/views/dark_horse.png",
+      "redirectUrl": "https://smartb.com.au/racing/horse/1/119549/252/10087?date=2025-04-14&intl=false",
+      "maxOdd": "5.80",
+      "BookKeeperId": 13,
+      "long_logo": "uploads/1713257527175.png",
+      "allOdds": [
+        {
+          "intValue": 5.8,
+          "keeperId": 13,
+          "longLogo": "uploads/1713257527175.png"
+        },
+        {
+          "intValue": 4.8,
+          "keeperId": 3,
+          "longLogo": "uploads/1713257837935.png"
+        }
+      ]
+    },
+    {
+      "id": 52,
+      "EventId": 10077,
+      "UserId": 5,
+      "SportId": 1,
+      "keyComment": "<p>This is HK tips key comment</p>",
+      "betRaceId": 119453,
+      "betParticipantId": 906616,
+      "betComment": "<p>This is HK comment</p>",
+      "isTipOfTheDay": 0,
+      "User": [],
+      "Event": [],
+      "betRace": [],
+      "betParticipant": [],
+      "sportIcon": "https://smartb.com.au/api/views/dark_horse.png",
+      "redirectUrl": "https://smartb.com.au/racing/horse/1/119453/116/10077?date=2025-04-14&intl=true",
+      "maxOdd": "5.80",
+      "BookKeeperId": 13,
+      "long_logo": "uploads/1713257527175.png",
+      "allOdds": []
+    },
+    {
+      "id": 54,
+      "EventId": 10016,
+      "UserId": 5,
+      "SportId": 1,
+      "keyComment": "<p>Test s</p>",
+      "betRaceId": 118866,
+      "betParticipantId": 901480,
+      "betComment": "<p>Test s</p>",
+      "isTipOfTheDay": 0,
+      "User": [],
+      "Event": [],
+      "betRace": [],
+      "betParticipant": [],
+      "sportIcon": "https://smartb.com.au/api/views/dark_horse.png",
+      "redirectUrl": "https://smartb.com.au/racing/horse/1/118866/279/10016?date=2025-04-14&intl=false",
+      "maxOdd": "13.00",
+      "BookKeeperId": 3,
+      "long_logo": "uploads/1713257837935.png",
+      "allOdds": []
+    }
+  ],
+  "generateKey": "gccXPj05cM4O0w9YlOqsP16MgaNmliEITmx96Jsq9Q0="
+}
