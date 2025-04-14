@@ -14,6 +14,7 @@ import {
     Text,
 } from "@react-email/components";
 import * as React from "react";
+import emailResponseData from "./static/data/blackbook_update.json";
 
 const baseUrl = process.env.VERCEL_URL
     ? `https://${process.env.VERCEL_URL}`
@@ -119,11 +120,14 @@ const RunnerRow = ({
     </>
 );
 
-const RacingBlackbookEmail = ({
-    name = "Name",
-    runnersCount = "3",
-    raceDate = "Saturday, February 1, 2025",
-}) => {
+const RacingBlackbookEmail = ({ emailResponse = {} }) => {
+    const {
+        name = "Name",
+        currentData = "Saturday, February 1, 2025",
+        BlackBook = [],
+        upcomingEventsLink = "#"
+    } = emailResponseData;
+
     return (
         <Html>
             <Head>
@@ -133,7 +137,7 @@ const RacingBlackbookEmail = ({
                 />
             </Head>
             <Preview>
-                You have {runnersCount} runners for {raceDate}
+                You have {BlackBook.length} runners for {currentData}
             </Preview>
             <Body style={main}>
                 <Container style={container}>
@@ -158,77 +162,54 @@ const RacingBlackbookEmail = ({
                     <Section style={section}>
                         <Text style={paragraph}>Hi {name},</Text>
                         <Text style={paragraph}>
-                            You have {runnersCount} runners for {raceDate}. Head to your
+                            You have {BlackBook.length} runners for {currentData}. Head to your
                             BlackBook to leave comments, or view your upcoming runners.
                         </Text>
                     </Section>
 
                     {/* Action Button */}
                     <Section style={submitSection}>
-                        <Button style={submitButton} href="#">
+                        <Button style={submitButton} href={upcomingEventsLink}>
                             Go to your Racing BlackBook
                         </Button>
                     </Section>
 
                     {/* Runners Section */}
                     <Section style={runnersSection}>
-                        <Section
-                            style={{
-                                backgroundColor: "#fff",
-                                borderRadius: "8px",
-                                border: "1px solid #E8EAEC",
-                                padding: "17px 13px",
-                                marginBottom: "20px",
-                            }}
-                        >
-                            <RunnerRow
-                                number="1"
-                                name="Incredible Pinto"
-                                jockey="Peta Edwards"
-                                trainer="B P Newnham"
-                                weight="58.00Kg"
-                                venue="R4 Mornington"
-                                odds={{
-                                    betfair: "2.00",
-                                    tab: "4.50",
-                                    bookmaker: "6.90",
-                                    ladbrokes: "5.00",
-                                    mainOddsValue: "6.00",
-                                    bookmakerLabel: "BET365",
+                        {BlackBook.map((runner = {}, index) => (
+                            <Section
+                                key={index}
+                                style={{
+                                    backgroundColor: "#fff",
+                                    borderRadius: "8px",
+                                    border: "1px solid #E8EAEC",
+                                    padding: "17px 13px",
+                                    marginBottom: "20px",
                                 }}
-                            />
-                        </Section>
-
-                        <Section
-                            style={{
-                                backgroundColor: "#fff",
-                                borderRadius: "8px",
-                                border: "1px solid #E8EAEC",
-                                padding: "17px 13px",
-                            }}
-                        >
-                            <RunnerRow
-                                number="6"
-                                name="Our Kobison"
-                                jockey="[Jockey_name]"
-                                trainer="[Trainer_name]"
-                                weight="58.00Kg"
-                                venue="R4 Mornington"
-                                odds={{
-                                    betfair: "2.10",
-                                    tab: "3.20",
-                                    bookmaker: "1.80",
-                                    ladbrokes: "1.58",
-                                    mainOddsValue: "5.00",
-                                    bookmakerLabel: "BOOKMAKER",
-                                }}
-                            />
-                        </Section>
+                            >
+                                <RunnerRow
+                                    number={runner.runnerNumber || "1"}
+                                    name={runner.runnerName || "Runner Name"}
+                                    jockey={runner.JockeyName || "Jockey Name"}
+                                    trainer={runner.TrainerName || "Trainer Name"}
+                                    weight={`${runner.jockeyWeight || "58"}Kg`}
+                                    venue={`R${runner.raceNumber || "1"} ${runner.TrackName || "Track Name"}`}
+                                    odds={{
+                                        betfair: runner.RaceOdds?.[0]?.betfair || "2.00",
+                                        tab: runner.RaceOdds?.[0]?.tab || "4.50",
+                                        bookmaker: runner.RaceOdds?.[0]?.bookmaker || "6.90",
+                                        ladbrokes: runner.RaceOdds?.[0]?.ladbrokes || "5.00",
+                                        mainOddsValue: runner.MaxIntValue?.value || "5.00",
+                                        bookmakerLabel: runner.MaxIntValue?.bookmaker || "BOOKMAKER",
+                                    }}
+                                />
+                            </Section>
+                        ))}
                     </Section>
 
                     {/* View All Button */}
                     <Section style={submitSection}>
-                        <Button style={viewAllButton} href="#">
+                        <Button style={viewAllButton} href={upcomingEventsLink}>
                             View all upcoming events
                         </Button>
                     </Section>

@@ -1,102 +1,91 @@
 {
-    name: 'Mayur',
-    currentData: '14th April 2025',
-    upcomingEventsLink: 'https: //smartb.com.au/blackbook',
-    BlackBook: [
+  "name": "Mayur",
+  "currentData": "14th April 2025",
+  "upcomingEventsLink": "https://smartb.com.au/blackbook",
+  "BlackBook": [
+    {
+      "id": 120314,
+      "raceName": "Tooheys Country Boosted Mdn Hcp",
+      "sportId": 1,
+      "logoUrl": "https://smartb.com.au/api/views/dark_horse.png",
+      "redirectUrl": "https://smartb.com.au/racing/horse/",
+      "barrierNumber": 1,
+      "runnerNumber": 2,
+      "raceNumber": 3,
+      "startDate": "2025-04-15T04:15:00.000Z",
+      "eventId": 10164,
+      "runnerId": 690778,
+      "runnerName": "Call Me Francis",
+      "JockeyId": 1879,
+      "JockeyName": "Kody Nestor",
+      "jockeyWeight": "58",
+      "TrainerId": 2096,
+      "TrainerName": "Holly Williams",
+      "TrackId": 188,
+      "CountryId": 13,
+      "TrackName": "Armidale",
+      "isBlackBookRunners": 0,
+      "isBlackBookJockeys": 0,
+      "isBlackBookTrainers": 1,
+      "isBlackBookTracks": 0,
+      "RaceOdds": [
         {
-        id: 120314,
-        raceName: 'Tooheys Country Boosted Mdn Hcp',
-        sportId: 1,
-        logoUrl: 'https: //smartb.com.au/api/views/dark_horse.png',
-        redirectUrl: 'https: //smartb.com.au/racing/horse/',
-        barrierNumber: 1,
-        runnerNumber: 2,
-        raceNumber: 3,
-        startDate: 2025-04-15T04: 15: 00.000Z,
-        eventId: 10164,
-        runnerId: 690778,
-        runnerName: 'Call Me Francis',
-        JockeyId: 1879,
-        JockeyName: 'Kody Nestor',
-        jockeyWeight: '58',
-        TrainerId: 2096,
-        TrainerName: 'Holly Williams',
-        TrackId: 188,
-        CountryId: 13,
-        TrackName: 'Armidale',
-        isBlackBookRunners: 0,
-        isBlackBookJockeys: 0,
-        isBlackBookTrainers: 1,
-        isBlackBookTracks: 0,
-        RaceOdds: [Array
-            ],
-        MaxIntValue: [Object
-            ],
-        comment: '123 Trainer Test'
+          "bookmaker": "BET365",
+          "value": "2.50"
         },
         {
-        id: 120314,
-        raceName: 'Tooheys Country Boosted Mdn Hcp',
-        sportId: 1,
-        logoUrl: 'https: //smartb.com.au/api/views/dark_horse.png',
-        redirectUrl: 'https: //smartb.com.au/racing/horse/',
-        barrierNumber: 1,
-        runnerNumber: 2,
-        raceNumber: 3,
-        startDate: 2025-04-15T04: 15: 00.000Z,
-        eventId: 10164,
-        runnerId: 690778,
-        runnerName: 'Call Me Francis',
-        JockeyId: 1879,
-        JockeyName: 'Kody Nestor',
-        jockeyWeight: '58',
-        TrainerId: 2096,
-        TrainerName: 'Holly Williams',
-        TrackId: 188,
-        CountryId: 13,
-        TrackName: 'Armidale',
-        isBlackBookRunners: 0,
-        isBlackBookJockeys: 0,
-        isBlackBookTrainers: 1,
-        isBlackBookTracks: 0,
-        RaceOdds: [Array
-            ],
-        MaxIntValue: [Object
-            ],
-        comment: '123 Trainer Test'
-        },
-        {
-        id: 120314,
-        raceName: 'Tooheys Country Boosted Mdn Hcp',
-        sportId: 1,
-        logoUrl: 'https: //smartb.com.au/api/views/dark_horse.png',
-        redirectUrl: 'https: //smartb.com.au/racing/horse/',
-        barrierNumber: 1,
-        runnerNumber: 2,
-        raceNumber: 3,
-        startDate: 2025-04-15T04: 15: 00.000Z,
-        eventId: 10164,
-        runnerId: 690778,
-        runnerName: 'Call Me Francis',
-        JockeyId: 1879,
-        JockeyName: 'Kody Nestor',
-        jockeyWeight: '58',
-        TrainerId: 2096,
-        TrainerName: 'Holly Williams',
-        TrackId: 188,
-        CountryId: 13,
-        TrackName: 'Armidale',
-        isBlackBookRunners: 0,
-        isBlackBookJockeys: 0,
-        isBlackBookTrainers: 1,
-        isBlackBookTracks: 0,
-        RaceOdds: [Array
-            ],
-        MaxIntValue: [Object
-            ],
-        comment: '123 Trainer Test'
+          "bookmaker": "SPORTSBET",
+          "value": "2.60"
         }
-    ],
-    baseUrl: 'https: //smartb.com.au/',
-    generateKey: 'vKSxhQR/M6jOeEPGMURDQd3V6tYHbJAuH18n5KlRi6k='
+      ],
+      "MaxIntValue": {
+        "bookmaker": "BET365",
+        "value": "2.50"
+      },
+      "comment": "123 Trainer Test"
+    },
+    {
+      "id": 120315,
+      "raceName": "Tooheys Country Boosted Mdn Hcp",
+      "sportId": 1,
+      "logoUrl": "https://smartb.com.au/api/views/dark_horse.png",
+      "redirectUrl": "https://smartb.com.au/racing/horse/",
+      "barrierNumber": 1,
+      "runnerNumber": 2,
+      "raceNumber": 3,
+      "startDate": "2025-04-15T04:15:00.000Z",
+      "eventId": 10164,
+      "runnerId": 690778,
+      "runnerName": "Call Me Francis",
+      "JockeyId": 1879,
+      "JockeyName": "Kody Nestor",
+      "jockeyWeight": "58",
+      "TrainerId": 2096,
+      "TrainerName": "Holly Williams",
+      "TrackId": 188,
+      "CountryId": 13,
+      "TrackName": "Armidale",
+      "isBlackBookRunners": 0,
+      "isBlackBookJockeys": 0,
+      "isBlackBookTrainers": 1,
+      "isBlackBookTracks": 0,
+      "RaceOdds": [
+        {
+          "bookmaker": "BET365",
+          "value": "2.50"
+        },
+        {
+          "bookmaker": "SPORTSBET",
+          "value": "2.60"
+        }
+      ],
+      "MaxIntValue": {
+        "bookmaker": "BET365",
+        "value": "2.50"
+      },
+      "comment": "123 Trainer Test"
+    }
+  ],
+  "baseUrl": "https://smartb.com.au/",
+  "generateKey": "vKSxhQR/M6jOeEPGMURDQd3V6tYHbJAuH18n5KlRi6k="
 }
