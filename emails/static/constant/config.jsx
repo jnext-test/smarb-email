@@ -1,0 +1,22 @@
+export const mediaConfig = {
+    logos: {
+        smartB: "http://media.staging.smartb.au.sydney.digiground.com.au/uploads/1744258755964.png",
+        smartBWhite: "http://media.staging.smartb.au.sydney.digiground.com.au/uploads/1744260369720.png",
+        smartTipping: "http://media.staging.smartb.au.sydney.digiground.com.au/uploads/1744258929068.png",
+        smartPlay: "http://media.staging.smartb.au.sydney.digiground.com.au/uploads/1744259003412.png",
+        smartOdds: "http://media.staging.smartb.au.sydney.digiground.com.au/uploads/1744259934206.png"
+    },
+    social: {
+        facebook: "https://media.staging.smartb.au.sydney.digiground.com.au/uploads/1744632299486.png",
+        instagram: "https://media.staging.smartb.au.sydney.digiground.com.au/uploads/1744632355835.png",
+        twitter: "https://media.staging.smartb.au.sydney.digiground.com.au/uploads/1744632380761.png",
+        youtube: "https://media.staging.smartb.au.sydney.digiground.com.au/uploads/1744632409724.png",
+        vemeo: "https://media.staging.smartb.au.sydney.digiground.com.au/uploads/1744632464991.png",
+        tiktok: "https://media.staging.smartb.au.sydney.digiground.com.au/uploads/1744632582149.png",
+        linkedin: "https://media.staging.smartb.au.sydney.digiground.com.au/uploads/1744632615636.png"
+    },
+    downloadLinks: {
+        appStore: "https://media.staging.smartb.au.sydney.digiground.com.au/uploads/1744632816512.png",
+        googlePlay: "https://media.staging.smartb.au.sydney.digiground.com.au/uploads/1744632770457.png"
+    }
+}

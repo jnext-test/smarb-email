@@ -14,6 +14,7 @@ import {
     Text,
 } from "@react-email/components";
 import * as React from "react";
+import { mediaConfig } from "./static/constant/config";
 import emailResponseData from "./static/data/blackbook_update.json";
 
 const baseUrl = process.env.VERCEL_URL
@@ -150,9 +151,9 @@ const RacingBlackbookEmail = ({ emailResponse = {} }) => {
                         }}
                     >
                         <Img
-                            src={`${baseUrl}/static/smarttipping-logo.png`}
+                            src={mediaConfig.logos.smartB}
                             width="150"
-                            height="30"
+                            height="100%"
                             alt="SmartTipping"
                             style={logo}
                         />
@@ -230,7 +231,7 @@ const RacingBlackbookEmail = ({ emailResponse = {} }) => {
                     {/* Footer */}
                     <Section style={footer}>
                         <Img
-                            src={`${baseUrl}/static/smartb-footer-logo.png`}
+                            src={mediaConfig.logos.smartBWhite}
                             width="120"
                             alt="SmartB"
                             style={footerLogo}
@@ -238,7 +239,7 @@ const RacingBlackbookEmail = ({ emailResponse = {} }) => {
                         <Row style={footerBrands}>
                             <Column>
                                 <Img
-                                    src={`${baseUrl}/static/smart-play-footer-logo.png`}
+                                    src={mediaConfig.logos.smartPlay}
                                     width="120"
                                     alt="SmartPlay"
                                     style={{ margin: "0 auto" }}
@@ -246,7 +247,7 @@ const RacingBlackbookEmail = ({ emailResponse = {} }) => {
                             </Column>
                             <Column>
                                 <Img
-                                    src={`${baseUrl}/static/smart-tipping-logo.png`}
+                                    src={mediaConfig.logos.smartTipping}
                                     width="120"
                                     alt="SmartTipping"
                                     style={{ margin: "0 auto" }}
@@ -254,7 +255,7 @@ const RacingBlackbookEmail = ({ emailResponse = {} }) => {
                             </Column>
                             <Column>
                                 <Img
-                                    src={`${baseUrl}/static/smartodds-logo.png`}
+                                    src={mediaConfig.logos.smartOdds}
                                     width="120"
                                     alt="SmartOdds"
                                     style={{ margin: "0 auto" }}
@@ -263,18 +264,18 @@ const RacingBlackbookEmail = ({ emailResponse = {} }) => {
                         </Row>
                         <Row style={socialLinks}>
                             {[
-                                { name: "Facebook", icon: "fb.png" },
-                                { name: "Instagram", icon: "ig.png" },
-                                { name: "Twitter", icon: "twitter.png" },
-                                { name: "LinkedIn", icon: "linkedin.png" },
-                                { name: "YouTube", icon: "youtube.png" },
-                                { name: "TikTok", icon: "tiktok.png" },
-                                { name: "Vemeo", icon: "vemeo.png" },
+                                { name: "Facebook", icon: "fb.png", url: mediaConfig.social.facebook },
+                                { name: "Instagram", icon: "ig.png", url: mediaConfig.social.instagram },
+                                { name: "Twitter", icon: "twitter.png", url: mediaConfig.social.twitter },
+                                { name: "LinkedIn", icon: "linkedin.png", url: mediaConfig.social.linkedin },
+                                { name: "YouTube", icon: "youtube.png", url: mediaConfig.social.youtube },
+                                { name: "TikTok", icon: "tiktok.png", url: mediaConfig.social.tiktok },
+                                { name: "Vemeo", icon: "vemeo.png", url: mediaConfig.social.vemeo },
                             ].map((platform, i) => (
                                 <Column key={i} style={socialIconColumn}>
-                                    <Link href="#" style={socialLink}>
+                                    <Link href={platform.url} style={socialLink}>
                                         <Img
-                                            src={`${baseUrl}/static/icons/${platform.icon}`}
+                                            src={platform.url}
                                             width="24"
                                             alt={platform.name}
                                             style={socialIcon}
@@ -304,14 +305,14 @@ const RacingBlackbookEmail = ({ emailResponse = {} }) => {
                             <Column style={{ textAlign: "center" }}>
                                 <Link href="https://apps.apple.com" style={appStoreButton}>
                                     <Img
-                                        src={`${baseUrl}/static/app-store.png`}
+                                        src={mediaConfig.downloadLinks.appStore}
                                         width="120"
                                         alt="Download on App Store"
                                     />
                                 </Link>
                                 <Link href="https://play.google.com" style={appStoreButton}>
                                     <Img
-                                        src={`${baseUrl}/static/play-store.png`}
+                                        src={mediaConfig.downloadLinks.googlePlay}
                                         width="120"
                                         alt="Get it on Google Play"
                                     />
