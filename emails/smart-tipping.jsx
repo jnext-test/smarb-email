@@ -15,6 +15,7 @@ import {
     Font,
 } from "@react-email/components";
 import * as React from "react";
+import { mediaConfig } from "./static/constant/config";
 
 const baseUrl = process.env.VERCEL_URL
     ? `https://${process.env.VERCEL_URL}`
@@ -205,7 +206,7 @@ const SmartTippingEmail = ({
                         }}
                     >
                         <Img
-                            src={`${baseUrl}/static/smarttipping-logo.png`}
+                            src={mediaConfig.logos.smartTipping}
                             width="150"
                             height="30"
                             alt="SmartTipping"
@@ -357,7 +358,7 @@ const SmartTippingEmail = ({
                     {/* Footer */}
                     <Section style={footer}>
                         <Img
-                            src={`${baseUrl}/static/smartb-footer-logo.png`}
+                            src={mediaConfig.logos.smartBWhite}
                             width="120"
                             alt="SmartB"
                             style={footerLogo}
@@ -365,40 +366,43 @@ const SmartTippingEmail = ({
                         <Row style={footerBrands}>
                             <Column>
                                 <Img
-                                    src={`${baseUrl}/static/smart-play-footer-logo.png`}
+                                    src={mediaConfig.logos.smartPlay}
                                     width="120"
                                     alt="SmartPlay"
+                                    style={{ margin: "0 auto" }}
                                 />
                             </Column>
                             <Column>
                                 <Img
-                                    src={`${baseUrl}/static/smart-tipping-logo.png`}
+                                    src={mediaConfig.logos.smartTipping}
                                     width="120"
                                     alt="SmartTipping"
+                                    style={{ margin: "0 auto" }}
                                 />
                             </Column>
                             <Column>
                                 <Img
-                                    src={`${baseUrl}/static/smartodds-logo.png`}
+                                    src={mediaConfig.logos.smartOdds}
                                     width="120"
                                     alt="SmartOdds"
+                                    style={{ margin: "0 auto" }}
                                 />
                             </Column>
                         </Row>
                         <Row style={socialLinks}>
                             {[
-                                { name: "Facebook", icon: "fb.png" },
-                                { name: "Instagram", icon: "ig.png" },
-                                { name: "Twitter", icon: "twitter.png" },
-                                { name: "LinkedIn", icon: "linkedin.png" },
-                                { name: "YouTube", icon: "youtube.png" },
-                                { name: "TikTok", icon: "tiktok.png" },
-                                { name: "Vemeo", icon: "vemeo.png" },
+                                { name: "Facebook", icon: mediaConfig.social.facebook },
+                                { name: "Instagram", icon: mediaConfig.social.instagram },
+                                { name: "Twitter", icon: mediaConfig.social.twitter },
+                                { name: "LinkedIn", icon: mediaConfig.social.linkedin },
+                                { name: "YouTube", icon: mediaConfig.social.youtube },
+                                { name: "TikTok", icon: mediaConfig.social.tiktok },
+                                { name: "Vemeo", icon: mediaConfig.social.vemeo },
                             ].map((platform, i) => (
                                 <Column key={i} style={socialIconColumn}>
                                     <Link href="#" style={socialLink}>
                                         <Img
-                                            src={`${baseUrl}/static/icons/${platform.icon}`}
+                                            src={platform.icon}
                                             width="24"
                                             alt={platform.name}
                                             style={socialIcon}
@@ -437,14 +441,14 @@ const SmartTippingEmail = ({
                             <Column style={{ textAlign: "center" }}>
                                 <Link href="https://apps.apple.com" style={appStoreButton}>
                                     <Img
-                                        src={`${baseUrl}/static/app-store.png`}
+                                        src={mediaConfig.downloadLinks.appStore}
                                         width="120"
                                         alt="Download on App Store"
                                     />
                                 </Link>
                                 <Link href="https://play.google.com" style={appStoreButton}>
                                     <Img
-                                        src={`${baseUrl}/static/play-store.png`}
+                                        src={mediaConfig.downloadLinks.googlePlay}
                                         width="120"
                                         alt="Get it on Google Play"
                                     />
