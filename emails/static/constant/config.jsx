@@ -5,7 +5,8 @@ export const mediaConfig = {
         smartTippingWhite: "http://media.staging.smartb.au.sydney.digiground.com.au/uploads/1744258929068.png",
         smartTippingBlack: "http://media.staging.smartb.au.sydney.digiground.com.au/uploads/1744700115264.png",
         smartPlay: "http://media.staging.smartb.au.sydney.digiground.com.au/uploads/1744259003412.png",
-        smartOdds: "http://media.staging.smartb.au.sydney.digiground.com.au/uploads/1744259934206.png"
+        smartOdds: "http://media.staging.smartb.au.sydney.digiground.com.au/uploads/1744259934206.png",
+        smartOddsBlack: "http://media.staging.smartb.au.sydney.digiground.com.au/uploads/1744717417298.png"
     },
     social: {
         facebook: "https://media.staging.smartb.au.sydney.digiground.com.au/uploads/1744632299486.png",
@@ -14,7 +15,8 @@ export const mediaConfig = {
         youtube: "https://media.staging.smartb.au.sydney.digiground.com.au/uploads/1744632409724.png",
         vemeo: "https://media.staging.smartb.au.sydney.digiground.com.au/uploads/1744632464991.png",
         tiktok: "https://media.staging.smartb.au.sydney.digiground.com.au/uploads/1744632582149.png",
-        linkedin: "https://media.staging.smartb.au.sydney.digiground.com.au/uploads/1744632615636.png"
+        linkedin: "https://media.staging.smartb.au.sydney.digiground.com.au/uploads/1744632615636.png",
+        snapchat: "https://media.staging.smartb.au.sydney.digiground.com.au/uploads/1744717548109.png"
     },
     banners: {
         smartOdds: "http://media.staging.smartb.au.sydney.digiground.com.au/uploads/1744712780990.png"
