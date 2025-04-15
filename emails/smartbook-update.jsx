@@ -14,6 +14,7 @@ import {
   Text,
 } from "@react-email/components";
 import * as React from "react";
+import { mediaConfig } from "./static/constant/config";
 import sportsData from "./static/data/smartbook-update.json";
 
 const baseUrl = process.env.VERCEL_URL
@@ -175,7 +176,7 @@ const SmartBookUpdateEmail = ({
           {/* Logo */}
           <Section style={{ textAlign: 'center', marginTop: '15px', marginBottom: '25px' }}>
             <Img
-              src={`${baseUrl}/static/smarttipping-logo.png`}
+              src={mediaConfig.logos.smartB}
               width="120"
               alt="SmartB"
               style={logo}
@@ -253,7 +254,7 @@ const SmartBookUpdateEmail = ({
           {/* Footer */}
           <Section style={footer}>
             <Img
-              src={`${sportData.baseUrl}static/smartb-footer-logo.png`}
+              src={mediaConfig.logos.smartBWhite}
               width="120"
               alt="SmartB"
               style={footerLogo}
@@ -261,40 +262,43 @@ const SmartBookUpdateEmail = ({
             <Row style={footerBrands}>
               <Column>
                 <Img
-                  src={`${sportData.baseUrl}static/smart-play-footer-logo.png`}
+                  src={mediaConfig.logos.smartPlay}
                   width="120"
                   alt="SmartPlay"
+                  style={{ margin: "0 auto" }}
                 />
               </Column>
               <Column>
                 <Img
-                  src={`${sportData.baseUrl}static/smart-tipping-logo.png`}
+                  src={mediaConfig.logos.smartTipping}
                   width="120"
                   alt="SmartTipping"
+                  style={{ margin: "0 auto" }}
                 />
               </Column>
               <Column>
                 <Img
-                  src={`${sportData.baseUrl}static/smartodds-logo.png`}
+                  src={mediaConfig.logos.smartOdds}
                   width="120"
                   alt="SmartOdds"
+                  style={{ margin: "0 auto" }}
                 />
               </Column>
             </Row>
             <Row style={socialLinks}>
               {[
-                { name: 'Facebook', icon: 'fb.png' },
-                { name: 'Instagram', icon: 'ig.png' },
-                { name: 'Twitter', icon: 'twitter.png' },
-                { name: 'LinkedIn', icon: 'linkedin.png' },
-                { name: 'YouTube', icon: 'youtube.png' },
-                { name: 'TikTok', icon: 'tiktok.png' },
-                { name: 'Vemeo', icon: 'vemeo.png' }
+                { name: 'Facebook', url: mediaConfig.social.facebook },
+                { name: 'Instagram', url: mediaConfig.social.instagram },
+                { name: 'Twitter', url: mediaConfig.social.twitter },
+                { name: 'LinkedIn', url: mediaConfig.social.linkedin },
+                { name: 'YouTube', url: mediaConfig.social.youtube },
+                { name: 'TikTok', url: mediaConfig.social.tiktok },
+                { name: 'Vemeo', url: mediaConfig.social.vemeo }
               ].map((platform, i) => (
                 <Column key={i} style={socialIconColumn}>
-                  <Link href="#" style={socialLink}>
+                  <Link href={platform.url} style={socialLink}>
                     <Img
-                      src={`${sportData.baseUrl}static/icons/${platform.icon}`}
+                      src={platform.url}
                       width="24"
                       alt={platform.name}
                       style={socialIcon}
@@ -318,16 +322,16 @@ const SmartBookUpdateEmail = ({
             </Text>
             <Row style={appStoreSection}>
               <Column style={{ textAlign: 'center' }}>
-                <Link href="https://apps.apple.com" style={appStoreButton}>
+                <Link href={mediaConfig.downloadLinks.appStore} style={appStoreButton}>
                   <Img
-                    src={`${sportData.baseUrl}static/app-store.png`}
+                    src={mediaConfig.downloadLinks.appStore}
                     width="120"
                     alt="Download on App Store"
                   />
                 </Link>
-                <Link href="https://play.google.com" style={appStoreButton}>
+                <Link href={mediaConfig.downloadLinks.googlePlay} style={appStoreButton}>
                   <Img
-                    src={`${sportData.baseUrl}static/play-store.png`}
+                    src={mediaConfig.downloadLinks.googlePlay}
                     width="120"
                     alt="Get it on Google Play"
                   />
@@ -426,7 +430,6 @@ const fixtureRowContainer = {
 
 const teamLogo = {
   borderRadius: "50%",
-  backgroundColor: "#444",
   width: "60px",
   height: "60px",
 };
