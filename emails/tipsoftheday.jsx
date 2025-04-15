@@ -26,6 +26,7 @@ const TipRow = ({
     runner,
     odds,
     venue,
+    redirectUrl,
 }) => (
     <>
         <Section style={tipRowContainer}>
@@ -54,14 +55,16 @@ const TipRow = ({
                 </Column>
             </Row>
 
-            <Row style={venueRow}>
-                <Column style={{ width: "90%" }}>
-                    <Text style={venueText}>{venue}</Text>
-                </Column>
-                <Column style={{ width: "10%", textAlign: "right" }}>
-                    <Text style={arrowText}>→</Text>
-                </Column>
-            </Row>
+            <Link href={redirectUrl} style={{ textDecoration: "none" }}>
+                <Row style={venueRow}>
+                    <Column style={{ width: "90%" }}>
+                        <Text style={venueText}>{venue}</Text>
+                    </Column>
+                    <Column style={{ width: "10%", textAlign: "right" }}>
+                        <Text style={arrowText}>→</Text>
+                    </Column>
+                </Row>
+            </Link>
 
             {/* Featured Bookmaker Odds */}
             <Section>
@@ -167,6 +170,7 @@ const TipsOfTheDayEmail = () => {
                                     ladbrokes: "5.00"
                                 }}
                                 venue={race.TrackName}
+                                redirectUrl={race.redirectUrl}
                             />
                         ))}
                     </Section>
@@ -195,6 +199,7 @@ const TipsOfTheDayEmail = () => {
                                     ladbrokes: "5.00"
                                 }}
                                 venue={race.TrackName}
+                                redirectUrl={race.redirectUrl}
                             />
                         ))}
                     </Section>
