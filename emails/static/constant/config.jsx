@@ -2,7 +2,8 @@ export const mediaConfig = {
     logos: {
         smartB: "http://media.staging.smartb.au.sydney.digiground.com.au/uploads/1744258755964.png",
         smartBWhite: "http://media.staging.smartb.au.sydney.digiground.com.au/uploads/1744260369720.png",
-        smartTipping: "http://media.staging.smartb.au.sydney.digiground.com.au/uploads/1744258929068.png",
+        smartTippingWhite: "http://media.staging.smartb.au.sydney.digiground.com.au/uploads/1744258929068.png",
+        smartTippingBlack: "http://media.staging.smartb.au.sydney.digiground.com.au/uploads/1744700115264.png",
         smartPlay: "http://media.staging.smartb.au.sydney.digiground.com.au/uploads/1744259003412.png",
         smartOdds: "http://media.staging.smartb.au.sydney.digiground.com.au/uploads/1744259934206.png"
     },

@@ -213,7 +213,7 @@ const DailyBestBetsEmail = () => {
                             </Column>
                             <Column>
                                 <Img
-                                    src={mediaConfig.logos.smartTipping}
+                                    src={mediaConfig.logos.smartTippingBlack}
                                     width="120"
                                     alt="SmartTipping"
                                     style={{ margin: "0 auto" }}

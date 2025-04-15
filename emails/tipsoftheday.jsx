@@ -138,7 +138,7 @@ const TipsOfTheDayEmail = () => {
                     <Section style={section}>
                         <Text style={paragraph}>Hi {firstName},</Text>
                         <Text style={paragraph}>
-                            Your SmartB Tip of the Day from the EXPERTS for {currentDate} is right here!
+                            Your <span style={{ fontWeight: "bold" }}>SmartB Tip of the Day</span> from the <span style={{ fontWeight: "bold" }}>EXPERTS</span> for <span style={{ fontWeight: "bold" }}>{new Date(currentDate).toLocaleDateString('en-AU', { weekday: 'long', day: 'numeric', month: 'short', year: 'numeric' }).replace(/,/g, '')}</span> is right here!
                         </Text>
                     </Section>
 
@@ -231,7 +231,7 @@ const TipsOfTheDayEmail = () => {
                             </Column>
                             <Column>
                                 <Img
-                                    src={mediaConfig.logos.smartTipping}
+                                    src={mediaConfig.logos.smartTippingBlack}
                                     width="120"
                                     alt="SmartTipping"
                                     style={{ margin: "0 auto" }}
