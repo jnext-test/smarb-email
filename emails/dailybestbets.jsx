@@ -32,7 +32,7 @@ const BetRow = ({
         <Section style={betRowContainer}>
             <Text style={raceTitle}>{raceName} (Race {raceNumber})</Text>
 
-            <Text style={commentStyle}>{raceComment}</Text>
+            <Text style={commentStyle}>{raceComment.replace(/<[^>]*>/g, '')}</Text>
 
             <Text style={analystStyle}>Analyst: {analyst}</Text>
 
@@ -160,9 +160,9 @@ const DailyBestBetsEmail = () => {
                                 raceNumber={bet.betRace?.raceNumber}
                                 raceComment={bet.keyComment}
                                 analyst={bet.User?.firstName + " " + bet.User?.lastName}
-                                date={new Date(bet.betRace?.startDate).toLocaleDateString()}
-                                time={new Date(bet.betRace?.startDate).toLocaleTimeString()}
-                                distance={bet.betRace?.distance + "m"}
+                                date={bet.betRace?.startDate ? new Date(bet.betRace.startDate).toLocaleDateString('en-AU', { weekday: 'long', day: 'numeric', month: 'numeric', year: 'numeric' }) : 'N/A'}
+                                time={bet.betRace?.startDate ? new Date(bet.betRace.startDate).toLocaleTimeString() : 'N/A'}
+                                distance={bet.betRace?.distance ? `${bet.betRace.distance}m` : 'N/A'}
                                 runner={{
                                     number: bet.betParticipant?.runnerNumber,
                                     name: bet.betParticipant?.animal?.name,

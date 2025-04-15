@@ -13,19 +13,84 @@
     "weeklyNewsLetter": ["Wednesday", "Friday"],
     "tippingCompetition": ["enterTip", "currentLadder", "endOfTournament"],
     "sportsValue": [
-      { "news": true, "tips": true, "SportId": 15, "fixtures": true },
-      { "news": true, "tips": true, "SportId": 9, "fixtures": true },
-      { "news": true, "tips": true, "SportId": 11, "fixtures": true },
-      { "news": true, "tips": true, "SportId": 10, "fixtures": true },
-      { "news": true, "tips": true, "SportId": 6, "fixtures": true },
-      { "news": true, "tips": true, "SportId": 4, "fixtures": true },
-      { "news": true, "tips": true, "SportId": 16, "fixtures": true },
-      { "news": true, "tips": true, "SportId": 17, "fixtures": true },
-      { "news": true, "tips": true, "SportId": 5, "fixtures": true },
-      { "news": true, "tips": true, "SportId": 12, "fixtures": true },
-      { "news": true, "tips": true, "SportId": 13, "fixtures": true },
-      { "news": true, "tips": true, "SportId": 8, "fixtures": true },
-      { "news": true, "tips": true, "SportId": 7, "fixtures": true },
+      {
+        "news": true,
+        "tips": true,
+        "SportId": 15,
+        "fixtures": true
+      },
+      {
+        "news": true,
+        "tips": true,
+        "SportId": 9,
+        "fixtures": true
+      },
+      {
+        "news": true,
+        "tips": true,
+        "SportId": 11,
+        "fixtures": true
+      },
+      {
+        "news": true,
+        "tips": true,
+        "SportId": 10,
+        "fixtures": true
+      },
+      {
+        "news": true,
+        "tips": true,
+        "SportId": 6,
+        "fixtures": true
+      },
+      {
+        "news": true,
+        "tips": true,
+        "SportId": 4,
+        "fixtures": true
+      },
+      {
+        "news": true,
+        "tips": true,
+        "SportId": 16,
+        "fixtures": true
+      },
+      {
+        "news": true,
+        "tips": true,
+        "SportId": 17,
+        "fixtures": true
+      },
+      {
+        "news": true,
+        "tips": true,
+        "SportId": 5,
+        "fixtures": true
+      },
+      {
+        "news": true,
+        "tips": true,
+        "SportId": 12,
+        "fixtures": true
+      },
+      {
+        "news": true,
+        "tips": true,
+        "SportId": 13,
+        "fixtures": true
+      },
+      {
+        "news": true,
+        "tips": true,
+        "SportId": 8,
+        "fixtures": true
+      },
+      {
+        "news": true,
+        "tips": true,
+        "SportId": 7,
+        "fixtures": true
+      },
       {
         "news": true,
         "tips": true,
@@ -62,9 +127,80 @@
   },
   "advertiseUrl": "https://smartb.com.au/api/views/smartb_ad.png",
   "advertiseClick": "https://smartb.com.au/",
-  "subjectDate": "14th April 2025",
+  "subjectDate": "15th April 2025",
   "baseUrl": "https://smartb.com.au/",
   "betData": [
+    {
+      "id": 50,
+      "EventId": 9910,
+      "UserId": 5,
+      "SportId": 1,
+      "keyComment": "<p>This is for testing fff</p>",
+      "betRaceId": 117810,
+      "betParticipantId": 891267,
+      "betComment": "<p>Test ffff</p>",
+      "isTipOfTheDay": 1,
+      "User": {
+        "id": 5,
+        "firstName": "Santosh",
+        "lastName": "Patil"
+      },
+      "Event": {
+        "id": 9910,
+        "sportId": 1,
+        "eventName": "Gold Coast",
+        "eventDate": "2025-04-11T00:00:00.000Z",
+        "trackId": 966,
+        "trackName": "Gold Coast",
+        "countryId": 13
+      },
+      "betRace": {
+        "id": 117810,
+        "raceName": "Kb Seafood Mdn Hcp",
+        "description": "Kb Seafood Mdn Hcp",
+        "distance": 101,
+        "startDate": "2025-04-11T07:21:00.000Z",
+        "raceNumber": 1
+      },
+      "betParticipant": {
+        "id": 891267,
+        "particiantId": 694727,
+        "barrierNumber": 2,
+        "runnerNumber": 1,
+        "JockeyWeight": "59.00",
+        "TrainerId": 2290,
+        "JockeyId": 907,
+        "animal": {
+          "id": 694727,
+          "name": "Honkytonkhillbilly"
+        },
+        "Jockey": {
+          "id": 907,
+          "name": "Adin Thompson"
+        },
+        "Trainer": {
+          "id": 2290,
+          "name": "Steven Hardy"
+        }
+      },
+      "sportIcon": "https://smartb.com.au/api/views/dark_horse.png",
+      "redirectUrl": "https://smartb.com.au/racing/horse/1/117810/966/9910?date=2025-04-15&intl=false",
+      "maxOdd": "151.00",
+      "BookKeeperId": 3,
+      "long_logo": "uploads/1713257837935.png",
+      "allOdds": [
+        {
+          "intValue": 151,
+          "keeperId": 3,
+          "longLogo": "uploads/1713257837935.png"
+        },
+        {
+          "intValue": 6.2,
+          "keeperId": 13,
+          "longLogo": "uploads/1713257527175.png"
+        }
+      ]
+    },
     {
       "id": 51,
       "EventId": 10087,
@@ -119,7 +255,7 @@
         }
       },
       "sportIcon": "https://smartb.com.au/api/views/dark_horse.png",
-      "redirectUrl": "https://smartb.com.au/racing/horse/1/119549/252/10087?date=2025-04-14&intl=false",
+      "redirectUrl": "https://smartb.com.au/racing/horse/1/119549/252/10087?date=2025-04-15&intl=false",
       "maxOdd": "5.80",
       "BookKeeperId": 13,
       "long_logo": "uploads/1713257527175.png",
@@ -146,16 +282,137 @@
       "betParticipantId": 906616,
       "betComment": "<p>This is HK comment</p>",
       "isTipOfTheDay": 0,
-      "User": [],
-      "Event": [],
-      "betRace": [],
-      "betParticipant": [],
+      "User": {
+        "id": 5,
+        "firstName": "Santosh",
+        "lastName": "Patil"
+      },
+      "Event": {
+        "id": 10077,
+        "sportId": 1,
+        "eventName": "Maronas",
+        "eventDate": "2025-04-14T00:00:00.000Z",
+        "trackId": 116,
+        "trackName": "Maronas",
+        "countryId": 98
+      },
+      "betRace": {
+        "id": 119453,
+        "raceName": "Financial Aid (2015)",
+        "description": "Financial Aid (2015)",
+        "distance": 54,
+        "startDate": "2025-04-13T17:18:00.000Z",
+        "raceNumber": 2
+      },
+      "betParticipant": {
+        "id": 906616,
+        "particiantId": 610500,
+        "barrierNumber": 2,
+        "runnerNumber": 2,
+        "JockeyWeight": "58.00",
+        "TrainerId": 25161,
+        "JockeyId": 12290,
+        "animal": {
+          "id": 610500,
+          "name": "Lunatico Ave"
+        },
+        "Jockey": {
+          "id": 12290,
+          "name": "Federico Fabian Piriz"
+        },
+        "Trainer": {
+          "id": 25161,
+          "name": "Domingo Stengone"
+        }
+      },
       "sportIcon": "https://smartb.com.au/api/views/dark_horse.png",
-      "redirectUrl": "https://smartb.com.au/racing/horse/1/119453/116/10077?date=2025-04-14&intl=true",
+      "redirectUrl": "https://smartb.com.au/racing/horse/1/119453/116/10077?date=2025-04-15&intl=true",
       "maxOdd": "5.80",
       "BookKeeperId": 13,
       "long_logo": "uploads/1713257527175.png",
-      "allOdds": []
+      "allOdds": [
+        {
+          "intValue": 5.8,
+          "keeperId": 13,
+          "longLogo": "uploads/1713257527175.png"
+        },
+        {
+          "intValue": 4.8,
+          "keeperId": 3,
+          "longLogo": "uploads/1713257837935.png"
+        }
+      ]
+    },
+    {
+      "id": 53,
+      "EventId": 10166,
+      "UserId": 5,
+      "SportId": 1,
+      "keyComment": "<p>This is for test w</p>",
+      "betRaceId": 120328,
+      "betParticipantId": 914252,
+      "betComment": "<p>Test w</p>",
+      "isTipOfTheDay": 0,
+      "User": {
+        "id": 5,
+        "firstName": "Santosh",
+        "lastName": "Patil"
+      },
+      "Event": {
+        "id": 10166,
+        "sportId": 1,
+        "eventName": "Townsville",
+        "eventDate": "2025-04-15T00:00:00.000Z",
+        "trackId": 187,
+        "trackName": "Townsville",
+        "countryId": 13
+      },
+      "betRace": {
+        "id": 120328,
+        "raceName": "Ladbrokes Blackbook Mdn Plate",
+        "description": "Ladbrokes Blackbook Mdn Plate",
+        "distance": 53,
+        "startDate": "2025-04-15T04:42:00.000Z",
+        "raceNumber": 3
+      },
+      "betParticipant": {
+        "id": 914252,
+        "particiantId": 686024,
+        "barrierNumber": 8,
+        "runnerNumber": 1,
+        "JockeyWeight": "58.00",
+        "TrainerId": 25472,
+        "JockeyId": 1054,
+        "animal": {
+          "id": 686024,
+          "name": "Carohvic"
+        },
+        "Jockey": {
+          "id": 1054,
+          "name": "Graham Kliese"
+        },
+        "Trainer": {
+          "id": 25472,
+          "name": "Peter Cullen"
+        }
+      },
+      "sportIcon": "https://smartb.com.au/api/views/dark_horse.png",
+      "redirectUrl": "https://smartb.com.au/racing/horse/1/120328/187/10166?date=2025-04-15&intl=false",
+      "maxOdd": "1.50",
+      "BookKeeperId": 13,
+      "long_logo": "uploads/1713257527175.png",
+      "allOdds": [
+        {
+          "intValue": 1.5,
+          "keeperId": 13,
+          "longLogo": "uploads/1713257527175.png"
+        },
+        {
+          "intValue": 1.4,
+          "keeperId": 3,
+          "longLogo": "uploads/1713257837935.png"
+        }
+      ]
     },
     {
       "id": 54,
@@ -167,16 +424,66 @@
       "betParticipantId": 901480,
       "betComment": "<p>Test s</p>",
       "isTipOfTheDay": 0,
-      "User": [],
-      "Event": [],
-      "betRace": [],
-      "betParticipant": [],
+      "User": {
+        "id": 5,
+        "firstName": "Santosh",
+        "lastName": "Patil"
+      },
+      "Event": {
+        "id": 10016,
+        "sportId": 1,
+        "eventName": "Grafton",
+        "eventDate": "2025-04-13T00:00:00.000Z",
+        "trackId": 279,
+        "trackName": "Grafton",
+        "countryId": 13
+      },
+      "betRace": {
+        "id": 118866,
+        "raceName": "Brushgrove Mechanical Country Boosted Mdn Plate",
+        "description": "Brushgrove Mechanical Country Boosted Mdn Plate",
+        "distance": 1107,
+        "startDate": "2025-04-13T03:30:00.000Z",
+        "raceNumber": 2
+      },
+      "betParticipant": {
+        "id": 901480,
+        "particiantId": 436584,
+        "barrierNumber": 10,
+        "runnerNumber": 1,
+        "JockeyWeight": "59.00",
+        "TrainerId": 10493,
+        "JockeyId": 1905,
+        "animal": {
+          "id": 436584,
+          "name": "Cluster's General"
+        },
+        "Jockey": {
+          "id": 1905,
+          "name": "Matthew McGuren"
+        },
+        "Trainer": {
+          "id": 10493,
+          "name": "Brett Bellamy"
+        }
+      },
       "sportIcon": "https://smartb.com.au/api/views/dark_horse.png",
-      "redirectUrl": "https://smartb.com.au/racing/horse/1/118866/279/10016?date=2025-04-14&intl=false",
+      "redirectUrl": "https://smartb.com.au/racing/horse/1/118866/279/10016?date=2025-04-15&intl=false",
       "maxOdd": "13.00",
       "BookKeeperId": 3,
       "long_logo": "uploads/1713257837935.png",
-      "allOdds": []
+      "allOdds": [
+        {
+          "intValue": 13,
+          "keeperId": 3,
+          "longLogo": "uploads/1713257837935.png"
+        },
+        {
+          "intValue": 7.6,
+          "keeperId": 13,
+          "longLogo": "uploads/1713257527175.png"
+        }
+      ]
     }
   ],
   "generateKey": "gccXPj05cM4O0w9YlOqsP16MgaNmliEITmx96Jsq9Q0="
