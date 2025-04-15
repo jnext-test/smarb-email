@@ -335,7 +335,7 @@ const SmartTippingEmail = ({
                     {/* Banner Image */}
                     <Section style={bannerSection}>
                         <Img
-                            src={`${baseUrl}/static/master-odds-banner.png`}
+                            src={mediaConfig.banners.smartOdds}
                             width="100%"
                             alt="Master Odds Banner"
                             style={bannerImage}

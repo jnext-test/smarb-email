@@ -16,6 +16,9 @@ export const mediaConfig = {
         tiktok: "https://media.staging.smartb.au.sydney.digiground.com.au/uploads/1744632582149.png",
         linkedin: "https://media.staging.smartb.au.sydney.digiground.com.au/uploads/1744632615636.png"
     },
+    banners: {
+        smartOdds: "http://media.staging.smartb.au.sydney.digiground.com.au/uploads/1744712780990.png"
+    },
     downloadLinks: {
         appStore: "https://media.staging.smartb.au.sydney.digiground.com.au/uploads/1744632816512.png",
         googlePlay: "https://media.staging.smartb.au.sydney.digiground.com.au/uploads/1744632770457.png"
