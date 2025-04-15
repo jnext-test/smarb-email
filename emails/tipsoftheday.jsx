@@ -236,7 +236,7 @@ const TipsOfTheDayEmail = () => {
                             </Column>
                             <Column>
                                 <Img
-                                    src={mediaConfig.logos.smartTippingBlack}
+                                    src={mediaConfig.logos.smartTippingWhite}
                                     width="120"
                                     alt="SmartTipping"
                                     style={{ margin: "0 auto" }}
