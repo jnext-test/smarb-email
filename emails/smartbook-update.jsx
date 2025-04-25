@@ -12,6 +12,7 @@ import {
   Row,
   Section,
   Text,
+  Font,
 } from "@react-email/components";
 import * as React from "react";
 import { mediaConfig } from "./static/constant/config";
@@ -24,10 +25,10 @@ const baseUrl = process.env.VERCEL_URL
 const FixtureRow = ({ match }) => {
   const formatTime = (dateString) => {
     const date = new Date(dateString);
-    return date.toLocaleTimeString('en-US', {
-      hour: '2-digit',
-      minute: '2-digit',
-      hour12: true
+    return date.toLocaleTimeString("en-US", {
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: true,
     });
   };
 
@@ -35,10 +36,10 @@ const FixtureRow = ({ match }) => {
     <>
       <Section style={fixtureRowContainer}>
         {/* Home Team Row */}
-        <Row style={{ marginBottom: '10px' }}>
-          <Column style={{ width: '70%' }}>
+        <Row style={{ marginBottom: "10px" }}>
+          <Column style={{ width: "calc(100% - 120px)" }}>
             <Row>
-              <Column style={{ width: '60px', verticalAlign: 'middle' }}>
+              <Column style={{ width: "60px", verticalAlign: "middle" }}>
                 <Img
                   src={match.homeFlag}
                   width="60"
@@ -47,14 +48,30 @@ const FixtureRow = ({ match }) => {
                   style={teamLogo}
                 />
               </Column>
-              <Column style={{ verticalAlign: 'middle' }}>
-                <Text style={teamName}>{match.homeTeamName}</Text>
+              <Column style={{ verticalAlign: "middle" }}>
+                <Text style={teamName}>
+                  {match.homeTeamName}{" "}
+                  <Img
+                    src={mediaConfig?.logos?.bookIcon}
+                    width="19"
+                    height="19"
+                    alt="Book Icon"
+                    style={{
+                      verticalAlign: "middle",
+                      marginLeft: "4px",
+                      display: "inline-block",
+                      marginBottom: "2px",
+                    }}
+                  />
+                </Text>
               </Column>
             </Row>
           </Column>
-          <Column style={{ width: '30%', textAlign: 'right' }}>
-            <div style={{ width: '100px', marginLeft: 'auto' }}>
-              <div style={{ ...bookmakerLabelColumn, backgroundColor: '#00854D' }}>
+          <Column style={{ width: "120px" }}>
+            <div style={{ width: "120px" }}>
+              <div
+                style={{ ...bookmakerLabelColumn, backgroundColor: "#00854D" }}
+              >
                 <Img
                   src={match.homeBookKeeperLogo}
                   width="60"
@@ -64,7 +81,9 @@ const FixtureRow = ({ match }) => {
                 />
               </div>
               <div style={bookmakerOdds}>
-                <Text style={mainOddsValueStyle}>{match.homeCurrentBestOdd}</Text>
+                <Text style={mainOddsValueStyle}>
+                  {match.homeCurrentBestOdd}
+                </Text>
               </div>
             </div>
           </Column>
@@ -72,9 +91,9 @@ const FixtureRow = ({ match }) => {
 
         {/* Away Team Row */}
         <Row>
-          <Column style={{ width: '70%' }}>
+          <Column style={{ width: "calc(100% - 120px)" }}>
             <Row>
-              <Column style={{ width: '60px', verticalAlign: 'middle' }}>
+              <Column style={{ width: "60px", verticalAlign: "middle" }}>
                 <Img
                   src={match.awayFlag}
                   width="60"
@@ -83,14 +102,16 @@ const FixtureRow = ({ match }) => {
                   style={teamLogo}
                 />
               </Column>
-              <Column style={{ verticalAlign: 'middle' }}>
+              <Column style={{ verticalAlign: "middle" }}>
                 <Text style={teamName}>{match.awayTeamName}</Text>
               </Column>
             </Row>
           </Column>
-          <Column style={{ width: '30%', textAlign: 'right' }}>
-            <div style={{ width: '100px', marginLeft: 'auto' }}>
-              <div style={{ ...bookmakerLabelColumn, backgroundColor: '#0066B2' }}>
+          <Column style={{ width: "120px" }}>
+            <div style={{ width: "120px" }}>
+              <div
+                style={{ ...bookmakerLabelColumn, backgroundColor: "#0066B2" }}
+              >
                 <Img
                   src={match.awayBookKeeperLogo}
                   width="60"
@@ -100,28 +121,31 @@ const FixtureRow = ({ match }) => {
                 />
               </div>
               <div style={bookmakerOdds}>
-                <Text style={mainOddsValueStyle}>{match.awayCurrentBestOdd}</Text>
+                <Text style={mainOddsValueStyle}>
+                  {match.awayCurrentBestOdd}
+                </Text>
               </div>
             </div>
           </Column>
         </Row>
       </Section>
-
       {/* Featured Odds Sections */}
       <Row style={oddsRowStyle}>
-        <Text style={oddsRowLabel}>{match.homeTeamName} - Featured Bookmaker Odds</Text>
+        <Text style={oddsRowLabel}>
+          {match.homeTeamName} - Featured Bookmaker Odds
+        </Text>
       </Row>
       <Row style={allOddsRow}>
         {match.homeOdds.map((odd, index) => (
-          <Column key={index} style={{ width: '25%', padding: '0 4px' }}>
-            <div style={{ ...bookmakerBox, backgroundColor: '#ffb74d' }}>
-              <Img
-                src={odd.BookKeeperLogo}
-                width="60"
-                height="20"
-                alt="Bookmaker"
-                style={bookmakerLogo}
-              />
+          <Column key={index} style={{ width: "25%", padding: "0 4px" }}>
+            <div
+              style={{
+                ...bookmakerBox,
+                backgroundColor: odd?.logo_bg,
+                color: odd?.logo_text,
+              }}
+            >
+              <Text style={bookmakerName}>{odd.BookKeeperName}</Text>
             </div>
             <div style={oddsBox}>
               <Text style={oddsValue}>{odd.odd}</Text>
@@ -129,21 +153,22 @@ const FixtureRow = ({ match }) => {
           </Column>
         ))}
       </Row>
-
       <Row style={oddsRowStyle}>
-        <Text style={oddsRowLabel}>{match.awayTeamName} - Featured Bookmaker Odds</Text>
+        <Text style={oddsRowLabel}>
+          {match.awayTeamName} - Featured Bookmaker Odds
+        </Text>
       </Row>
       <Row style={allOddsRow}>
         {match.awayOdds.map((odd, index) => (
-          <Column key={index} style={{ width: '25%', padding: '0 4px' }}>
-            <div style={{ ...bookmakerBox, backgroundColor: '#ffb74d' }}>
-              <Img
-                src={odd.BookKeeperLogo}
-                width="60"
-                height="20"
-                alt="Bookmaker"
-                style={bookmakerLogo}
-              />
+          <Column key={index} style={{ width: "25%", padding: "0 4px" }}>
+            <div
+              style={{
+                ...bookmakerBox,
+                backgroundColor: odd?.logo_bg,
+                color: odd?.logo_text,
+              }}
+            >
+              <Text style={bookmakerName}>{odd.BookKeeperName}</Text>
             </div>
             <div style={oddsBox}>
               <Text style={oddsValue}>{odd.odd}</Text>
@@ -152,9 +177,8 @@ const FixtureRow = ({ match }) => {
         ))}
       </Row>
 
-      {/* Comment Section */}
       {match.comment && (
-        <Row style={commentRow}>
+        <Row>
           <Text style={commentText}>
             <strong>Comment:</strong> {match.comment}
           </Text>
@@ -164,17 +188,27 @@ const FixtureRow = ({ match }) => {
   );
 };
 
-const SmartBookUpdateEmail = ({
-  sportData = sportsData.sportData
-}) => {
+const SmartBookUpdateEmail = ({ sportData = sportsData.sportData }) => {
   return (
     <Html>
-      <Head />
+      <Head>
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&display=swap"
+        />
+      </Head>
+
       <Preview>Your SmartBook Update for {sportData.currentDate}</Preview>
       <Body style={main}>
         <Container style={container}>
           {/* Logo */}
-          <Section style={{ textAlign: 'center', marginTop: '15px', marginBottom: '25px' }}>
+          <Section
+            style={{
+              textAlign: "center",
+              marginTop: "15px",
+              marginBottom: "25px",
+            }}
+          >
             <Img
               src={mediaConfig.logos.smartB}
               width="120"
@@ -183,68 +217,93 @@ const SmartBookUpdateEmail = ({
             />
           </Section>
 
-          {/* Greeting and Summary */}
+          {/* Greeting */}
           <Section style={section}>
-            <Text style={paragraph}>
-              Hi {sportData.name},
-            </Text>
-            <Text style={paragraph}>
-              You have {sportData.SmartBook.length} fixtures for {sportData.currentDate}
-            </Text>
-            <Text style={paragraph}>
-              Head to your SmartBook to leave comments or view your upcoming fixtures.
+            <Text style={para16}>Hi {sportData.name},</Text>
+            <Text style={para16}>
+              You have <b>{sportData.SmartBook.length} fixtures</b> for{" "}
+              <b>{sportData.currentDate}</b>. <br /> Head to your SmartBook to
+              leave comments, or view your upcoming fixtures.
             </Text>
           </Section>
 
           {/* Action Button */}
-          <Section style={buttonSection}>
-            <Button style={button} href={sportData.upcomingEventsLink}>
+          <Section style={submitSection}>
+            <Button style={submitButton} href={sportData.upcomingEventsLink}>
               Go to your Sports SmartBook
             </Button>
           </Section>
 
           {/* Match Sections */}
-          {sportData.SmartBook.map((match, index) => (
-            <Section key={index} style={sportSection}>
-              <Row style={sportHeader}>
-                <Column style={{ width: '70%' }}>
-                  <Text style={sportTitle}>{match.sportName.toUpperCase()}</Text>
-                </Column>
-                <Column style={{ width: '30%', textAlign: 'right' }}>
-                  <Text style={sportLabel}>{match.tournamentName}</Text>
-                  <Link href={`${sportData.baseUrl}${match.redirectName}`} >
-                    View event
-                  </Link>
-                </Column>
-              </Row>
-              <Text style={dateHeader}>
-                {new Date(match.startTime).toLocaleDateString('en-US', {
-                  weekday: 'long',
-                  day: 'numeric',
-                  month: 'long',
-                  year: 'numeric'
-                })} | {new Date(match.startTime).toLocaleTimeString('en-US', {
-                  hour: '2-digit',
-                  minute: '2-digit',
-                  hour12: true
-                })}
-              </Text>
-              <FixtureRow match={match} />
-            </Section>
-          ))}
+          <Section style={sportSection}>
+            {sportData.SmartBook.map((match, index) => (
+              <Section
+                key={index}
+                style={{
+                  backgroundColor: "#fff",
+                  borderRadius: "8px",
+                  border: "1px solid #E8EAEC",
+                  padding: "17px 13px",
+                  marginBottom: "20px",
+                }}
+              >
+                <Row style={sportHeader}>
+                  <Column style={{ width: "50%" }}>
+                    <Text style={sportTitle}>
+                      {match.sportName.toUpperCase()}
+                    </Text>
+                  </Column>
+                  <Column style={{ width: "50%", textAlign: "right" }}>
+                    <Text style={sportTitle}>{match.tournamentName}</Text>
+                  </Column>
+                </Row>
+                <Row style={{ ...sportHeader, marginBottom: "10px" }}>
+                  <Column style={{ width: "calc(100% - 70px)" }}>
+                    <Text style={sportLabel}>
+                      {new Date(match.startTime).toLocaleDateString("en-US", {
+                        weekday: "long",
+                        day: "numeric",
+                        month: "long",
+                        year: "numeric",
+                      })}{" "}
+                      |{" "}
+                      {new Date(match.startTime).toLocaleTimeString("en-US", {
+                        hour: "2-digit",
+                        minute: "2-digit",
+                        hour12: true,
+                      })}
+                    </Text>
+                  </Column>
+                  <Column style={{ width: "70px", textAlign: "right" }}>
+                    <Link
+                      href={`${sportData.baseUrl}${match.redirectName} `}
+                      style={viewEvent}
+                    >
+                      View event
+                    </Link>
+                  </Column>
+                </Row>
 
+                <FixtureRow match={match} />
+              </Section>
+            ))}
+          </Section>
           {/* View All Button */}
-          <Section style={viewAllSection}>
-            <Button style={viewAllButton} href={sportData.upcomingEventsLink}>
+
+          <Section style={{ ...submitSection, textAlign: "center" }}>
+            <Button style={submitButton} href={sportData.upcomingEventsLink}>
               View all upcoming events
             </Button>
           </Section>
 
           {/* Responsible Gambling Banner */}
           <Section style={gamblingBanner}>
-            <Heading style={gamblingHeader}>What are you really gambling with?</Heading>
+            <Heading style={gamblingHeader}>
+              What are you really gambling with?
+            </Heading>
             <Text style={gamblingText}>
-              For free and confidential support call 1800 858 858 or visit{' '}
+              For free and confidential support call 1800 858 858 or visit{" "}
+              <br />
               <Link href="https://gamblinghelp.online" style={gamblingLink}>
                 Gambling Help Online
               </Link>
@@ -264,14 +323,16 @@ const SmartBookUpdateEmail = ({
                 <Img
                   src={mediaConfig.logos.smartPlay}
                   width="120"
+                  height="35px"
                   alt="SmartPlay"
                   style={{ margin: "0 auto" }}
                 />
               </Column>
               <Column>
                 <Img
-                  src={mediaConfig.logos.smartTippingBlack}
+                  src={mediaConfig.logos.smartTippingWhite}
                   width="120"
+                  height="35px"
                   alt="SmartTipping"
                   style={{ margin: "0 auto" }}
                 />
@@ -280,6 +341,7 @@ const SmartBookUpdateEmail = ({
                 <Img
                   src={mediaConfig.logos.smartOdds}
                   width="120"
+                  height="35px"
                   alt="SmartOdds"
                   style={{ margin: "0 auto" }}
                 />
@@ -287,15 +349,46 @@ const SmartBookUpdateEmail = ({
             </Row>
             <Row style={socialLinks}>
               {[
-                { name: 'Facebook', url: mediaConfig.social.facebook },
-                { name: 'Instagram', url: mediaConfig.social.instagram },
-                { name: 'Twitter', url: mediaConfig.social.twitter },
-                { name: 'LinkedIn', url: mediaConfig.social.linkedin },
-                { name: 'YouTube', url: mediaConfig.social.youtube },
-                { name: 'TikTok', url: mediaConfig.social.tiktok },
-                { name: 'Vemeo', url: mediaConfig.social.vemeo }
+                {
+                  name: "Facebook",
+                  icon: "fb.png",
+                  url: mediaConfig.social.facebook,
+                },
+                {
+                  name: "Instagram",
+                  icon: "ig.png",
+                  url: mediaConfig.social.instagram,
+                },
+                {
+                  name: "Twitter",
+                  icon: "twitter.png",
+                  url: mediaConfig.social.twitter,
+                },
+                {
+                  name: "LinkedIn",
+                  icon: "linkedin.png",
+                  url: mediaConfig.social.linkedin,
+                },
+                {
+                  name: "YouTube",
+                  icon: "youtube.png",
+                  url: mediaConfig.social.youtube,
+                },
+                {
+                  name: "TikTok",
+                  icon: "tiktok.png",
+                  url: mediaConfig.social.tiktok,
+                },
+                {
+                  name: "Vemeo",
+                  icon: "vemeo.png",
+                  url: mediaConfig.social.vemeo,
+                },
               ].map((platform, i) => (
-                <Column key={i} style={socialIconColumn}>
+                <Column
+                  key={i}
+                  style={{ ...socialIconColumn, padding: "0 10px" }}
+                >
                   <Link href={platform.url} style={socialLink}>
                     <Img
                       src={platform.url}
@@ -308,28 +401,46 @@ const SmartBookUpdateEmail = ({
               ))}
             </Row>
             <Text style={footerText}>
-              Suite 302, Level 3/2 Elizabeth Plaza, North Sydney, NSW 2060
+              SmartB Head Office
               <br />
-              E: info@smartb.com.au
+              Suite 302, Level 3/2 Elizabeth Plaza, North Sydney, NSW 2060
+            </Text>
+            <Text style={footerText}>
+              Send an Email To
+              <br />
+              <Link
+                href="mailto:info@smartb.com.au"
+                style={{
+                  ...footerLink,
+                  color: "#FFFFFF",
+                  textDecoration: "none",
+                }}
+              >
+                E: info@smartb.com.au
+              </Link>
             </Text>
             <Text style={footerDisclaimer}>
-              Don't want to get notifications? <Link href="#" style={footerLink}>Unsubscribe here</Link>
+              Don't want to get notifications?{" "}
+              <Link href="#" style={footerLink}>
+                Unsubscribe here
+              </Link>
               <br />
-              View our updated <Link href="#" style={footerLink}>Privacy Policy</Link>
+              View our updated{" "}
+              <Link href="#" style={footerLink}>
+                Privacy Policy
+              </Link>
             </Text>
-            <Text style={copyright}>
-              Copyright © SmartB Pty Ltd | All rights reserved
-            </Text>
+            <Text style={copyright}>Copyright © SmartB Pty Ltd 2022</Text>
             <Row style={appStoreSection}>
-              <Column style={{ textAlign: 'center' }}>
-                <Link href={mediaConfig.downloadLinks.appStore} style={appStoreButton}>
+              <Column style={{ textAlign: "center" }}>
+                <Link href="https://apps.apple.com" style={appStoreButton}>
                   <Img
                     src={mediaConfig.downloadLinks.appStore}
                     width="120"
                     alt="Download on App Store"
                   />
                 </Link>
-                <Link href={mediaConfig.downloadLinks.googlePlay} style={appStoreButton}>
+                <Link href="https://play.google.com" style={appStoreButton}>
                   <Img
                     src={mediaConfig.downloadLinks.googlePlay}
                     width="120"
@@ -348,14 +459,13 @@ const SmartBookUpdateEmail = ({
 // Styles
 const main = {
   backgroundColor: "#f5f8fa",
-  fontFamily: '-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif',
+  fontFamily: "Roboto, Arial, sans-serif",
 };
 
 const container = {
-  margin: "0 auto",
-  padding: "0",
+  margin: "0px auto",
+  padding: "0px",
   maxWidth: "600px",
-  backgroundColor: "#ffffff",
 };
 
 const logo = {
@@ -363,63 +473,78 @@ const logo = {
 };
 
 const section = {
-  padding: "0 15px",
+  padding: "0 12px",
   margin: "15px 0",
+};
+
+const para16 = {
+  fontSize: "16px",
+  lineHeight: "22.4px",
+  margin: "0 0 15px",
+  color: "#191919",
+};
+
+const para14 = {
+  fontSize: "14px",
+  lineHeight: "16px",
+  margin: "0 0 15px",
+  color: "#191919",
 };
 
 const paragraph = {
   fontSize: "14px",
   lineHeight: "20px",
   margin: "0 0 15px",
-  color: "#333",
+  color: "#191919",
 };
 
-const buttonSection = {
-  textAlign: "center",
+const submitSection = {
+  textAlign: "left",
   margin: "25px 0",
+  padding: "0 12px",
 };
 
-const button = {
+const submitButton = {
   backgroundColor: "#4455C7",
   color: "#ffffff",
-  padding: "12px 24px",
-  borderRadius: "4px",
+  padding: "10px 20px",
+  borderRadius: "8px",
   textDecoration: "none",
-  fontWeight: "600",
-  fontSize: "14px",
+  fontWeight: "400",
+  fontSize: "16px",
+  lineHeight: "19px",
 };
 
 const sportSection = {
-  padding: "15px",
+  padding: "0px 12px",
   margin: "15px 0",
-  border: "1px solid #E8EAEC",
-  borderRadius: "4px",
 };
 
 const sportHeader = {
-  marginBottom: "10px",
+  marginBottom: "20px",
 };
 
 const sportTitle = {
   fontSize: "16px",
+  lineHeight: "22.4px",
   fontWeight: "600",
-  color: "#333",
+  color: "#191919",
   margin: "0",
 };
 
 const sportLabel = {
   fontSize: "14px",
-  color: "#666",
+  lineHeight: "20px",
+  color: "#5D5D5D",
   margin: "0",
 };
 
-const dateHeader = {
+const viewEvent = {
   fontSize: "14px",
-  color: "#666",
-  margin: "0 0 12px",
-  fontWeight: "500",
-  borderBottom: "1px solid #E8EAEC",
-  paddingBottom: "10px",
+  lineHeight: "20px",
+  color: "#4455C7",
+  margin: "0",
+  textDecoration: "underline",
 };
 
 const fixtureRowContainer = {
@@ -435,11 +560,19 @@ const teamLogo = {
 };
 
 const teamName = {
-  fontSize: "14px",
+  fontSize: "16px",
+  lineHeight: "22.4px",
   margin: "0",
-  color: "#333",
+  color: "#191919",
   fontWeight: "500",
   paddingLeft: "10px",
+};
+const bookmakerName = {
+  color: "#ffffff",
+  fontSize: "12px",
+  fontWeight: "700",
+  margin: "0",
+  textTransform: "uppercase",
 };
 
 const oddsBox = {
@@ -451,7 +584,7 @@ const oddsBox = {
 };
 
 const oddsValue = {
-  color: "#333",
+  color: "#191919",
   fontSize: "14px",
   fontWeight: "600",
   margin: "0",
@@ -473,39 +606,41 @@ const viewAllButton = {
 };
 
 const gamblingBanner = {
-  backgroundColor: "#f9f9f9",
+  backgroundColor: "#FFFFFF",
   padding: "15px",
-  margin: "20px 0",
+
   borderRadius: "0",
-  color: "#333",
+  color: "#191919",
   textAlign: "center",
-  borderTop: "1px solid #e0e0e0",
-  borderBottom: "1px solid #e0e0e0",
 };
 
 const gamblingHeader = {
-  fontSize: "16px",
+  fontSize: "18px",
+  lineHeight: "25.2px",
   fontWeight: "600",
   margin: "0 0 5px",
-  color: "#333",
+  color: "#191919",
+  fontFamily: "Arial, sans-serif",
 };
 
 const gamblingText = {
-  fontSize: "14px",
+  fontSize: "18px",
+  lineHeight: "25.2px",
   margin: "0",
+  color: "#191919",
+  fontFamily: "Arial, sans-serif",
 };
 
 const gamblingLink = {
-  color: "#2196f3",
+  color: "#4455C7",
   textDecoration: "underline",
 };
 
 const footer = {
   backgroundColor: "#003764",
-  padding: "20px 15px",
+  padding: "20px 12px",
   textAlign: "center",
   color: "#ffffff",
-  marginTop: "20px",
 };
 
 const footerLogo = {
@@ -575,76 +710,79 @@ const appStoreButton = {
 };
 
 const bookmakerLabelColumn = {
-  borderRadius: '4px 4px 0 0',
-  padding: '2px 8px',
-  width: '100px',
-  textAlign: 'center',
+  borderRadius: "4px",
+  padding: "2px 8px",
+  width: "100px",
+  textAlign: "center",
+  marginBottom: "4px",
 };
 
 const bookmakerLabelText = {
-  color: '#ffffff',
-  fontSize: '10px',
-  fontWeight: '600',
-  margin: '0',
+  color: "#ffffff",
+  fontSize: "10px",
+  fontWeight: "600",
+  margin: "0",
 };
 
 const bookmakerOdds = {
-  backgroundColor: '#E8EAEC',
-  borderRadius: '0 0 4px 4px',
-  padding: '4px 8px',
-  width: '100px',
-  textAlign: 'center',
+  backgroundColor: "#E8EAEC",
+  borderRadius: "4px",
+  padding: "4px 8px",
+  width: "100px",
+  textAlign: "center",
 };
 
 const mainOddsValueStyle = {
-  fontSize: '14px',
-  fontWeight: '600',
-  color: '#333',
-  margin: '0',
+  fontSize: "14px",
+  fontWeight: "600",
+  color: "#191919",
+  margin: "0",
 };
 
 const oddsRowStyle = {
-  marginTop: '4px',
-  marginBottom: '6px',
-  padding: '0 12px',
+  marginTop: "4px",
+  marginBottom: "6px",
+  padding: "0 12px",
 };
 
 const oddsRowLabel = {
-  fontSize: '12px',
-  color: '#666',
-  margin: '0',
+  fontSize: "16px",
+  lineHeight: "22.4px",
+  color: "#191919",
+  fontWeight: "500",
+  margin: "0",
 };
 
 const allOddsRow = {
-  width: '100%',
-  padding: '0 12px',
-  marginBottom: '16px',
+  width: "100%",
+  padding: "0 12px",
+  marginBottom: "16px",
 };
 
 const bookmakerBox = {
-  borderRadius: '4px',
-  padding: '4px',
-  textAlign: 'center',
-  marginBottom: '4px',
+  borderRadius: "4px",
+  padding: "4px",
+  textAlign: "center",
+  marginBottom: "4px",
 };
 
 const bookmakerLogo = {
-  margin: '0 auto',
-  display: 'block',
+  margin: "0 auto",
+  display: "block",
 };
 
 const commentRow = {
-  padding: '10px 12px',
-  backgroundColor: '#f5f5f5',
-  borderRadius: '4px',
-  marginTop: '10px',
+  padding: "10px 12px",
+  backgroundColor: "#f5f5f5",
+  borderRadius: "4px",
+  marginTop: "10px",
 };
 
 const commentText = {
-  fontSize: '14px',
-  color: '#333',
-  margin: '0',
-  lineHeight: '1.4',
+  fontSize: "16px",
+  lineHeight: "22.4px",
+  color: "#191919",
+  margin: "0",
 };
 
 export default SmartBookUpdateEmail;

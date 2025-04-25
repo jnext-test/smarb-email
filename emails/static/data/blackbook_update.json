@@ -31,11 +31,15 @@
       "RaceOdds": [
         {
           "bookmaker": "BET365",
-          "value": "2.50"
+          "value": "2.50",
+          "logo_bg": "#ffb80c",
+          "logo_text": "#1d1b17"
         },
         {
           "bookmaker": "SPORTSBET",
-          "value": "2.60"
+          "value": "2.60",
+          "logo_bg": "#197cbd",
+          "logo_text": "#ffffff"
         }
       ],
       "MaxIntValue": {
@@ -72,11 +76,15 @@
       "RaceOdds": [
         {
           "bookmaker": "BET365",
-          "value": "2.50"
+          "value": "2.50",
+          "logo_bg": "#ffb80c",
+          "logo_text": "#1d1b17"
         },
         {
           "bookmaker": "SPORTSBET",
-          "value": "2.60"
+          "value": "2.60",
+          "logo_bg": "#197cbd",
+          "logo_text": "#ffffff"
         }
       ],
       "MaxIntValue": {

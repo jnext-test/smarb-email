@@ -32,6 +32,7 @@
         "JockeyName": "Wayne Davis",
         "maxOdd": "2.70",
         "BookKeeperId": 10,
+        "bookmaker": "SPORTSBET",
         "oddHolder": "Win",
         "long_logo": "uploads/1713257437371.png",
         "shortDate": "Saturday 12th, Apr"
@@ -108,14 +109,43 @@
         "JockeyWeight": "57.00",
         "TrainerId": 12774,
         "JockeyId": 1093,
-        "animal": {},
-        "Jockey": {},
-        "Trainer": {}
+        "animal": {
+          "id": 694727,
+          "name": "Honkytonkhillbilly"
+        },
+        "Jockey": {
+          "id": 907,
+          "name": "Adin Thompson"
+        },
+        "Trainer": {
+          "id": 2290,
+          "name": "Steven Hardy"
+        }
       },
       "sportIcon": "https://smartb.com.au/api/views/dark_horse.png",
       "redirectUrl": "https://smartb.com.au/racing/horse/",
       "maxOdd": "0.00",
-      "oddHolder": "place"
+      "oddHolder": "place",
+      "BookKeeperId": 3,
+      "long_logo": "uploads/1713257837935.png",
+      "allOdds": [
+        {
+          "intValue": 151,
+          "keeperId": 3,
+          "bookmaker": "SPORTSBET",
+          "longLogo": "uploads/1713257837935.png",
+          "logo_bg": "#ffb80c",
+          "logo_text": "#1d1b17"
+        },
+        {
+          "intValue": 6.2,
+          "keeperId": 13,
+          "bookmaker": "BET365",
+          "longLogo": "uploads/1713257527175.png",
+          "logo_bg": "#ffb80c",
+          "logo_text": "#1d1b17"
+        }
+      ]
     }
   },
   "baseUrl": "https://smartb.com.au/",

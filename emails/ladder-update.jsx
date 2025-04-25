@@ -12,80 +12,86 @@ import {
   Row,
   Section,
   Text,
+  Font,
 } from "@react-email/components";
 import * as React from "react";
 import { mediaConfig } from "./static/constant/config";
 
-const RaceRow = ({
-  raceName,
-  raceNumber,
-  barrierNumber,
-  runner,
-  odds,
-  venue,
-  redirectUrl,
-}) => (
-  <>
-    <Section style={raceRowContainer}>
-      {/* Runner Details */}
-      {/* mapping this row for each runner */}
-      {[1, 2, 3, 4]?.map((item, index) => (
-        /* Runner Info Row */
-        <Row
-          style={
-            index === [1, 2, 3, 4].length - 1
-              ? runnerDetailsContainerLast
-              : runnerDetailsContainer
-          }
-          key={index}
-        >
-          <Column style={{ width: "70%" }}>
-            <Row>
-              <Column style={{ verticalAlign: "middle", textAlign: "left" }}>
-                <Text style={raceNumberText}>
-                  {raceNumber}. {raceName} ({barrierNumber}){" "}
-                </Text>
+const baseUrl = process.env.VERCEL_URL
+  ? `https://${process.env.VERCEL_URL}`
+  : "http://localhost:3000";
 
-                <Row style={{ verticalAlign: "baseline" }}>
-                  <Column style={{ width: "50%", textAlign: "left" }}>
-                    <Text style={runnerDetails}>
-                      <b>J: </b>
-                      {runner.jockey}
-                    </Text>
-                  </Column>
-                  <Column style={{ width: "50%", textAlign: "left" }}>
-                    <Text style={runnerDetails}>
-                      <b>W:</b> {runner.weight}
-                    </Text>
-                  </Column>
-                </Row>
-                <Text style={runnerDetails}>
-                  <b>T:</b> {runner.trainer}
-                </Text>
-              </Column>
-            </Row>
-          </Column>
-          <Column style={{ width: "30%", textAlign: "right" }}>
-            <div style={{ width: "100px", marginLeft: "auto" }}>
-              <div style={bookmakerLabelColumn}>
-                <Text style={bookmakerLabelText}>{"BOOKMAKER"}</Text>
-              </div>
-              <div style={bookmakerOdds}>
-                <Text style={mainOddsValueStyle}>{"5.00"}</Text>
-              </div>
-            </div>
-          </Column>
-        </Row>
-      ))}
-    </Section>
-  </>
+const UserStatsCard = ({ userName, tipsEntered, roundRank, overallRank }) => (
+  <Section style={statsCardContainer}>
+    <Text style={userNameStyle}>
+      {userName} - Round {roundRank}
+    </Text>
+    <Row style={statsRow}>
+      <Column style={{ width: "33%", textAlign: "center" }}>
+        <Text style={statsLabel}>Tips entered</Text>
+        <Text style={statsValue}>{tipsEntered}</Text>
+      </Column>
+      <Column style={{ width: "33%", textAlign: "center" }}>
+        <Text style={statsLabel}>Round Rank</Text>
+        <Text style={statsValue}>{roundRank}/100</Text>
+      </Column>
+      <Column style={{ width: "33%", textAlign: "center" }}>
+        <Text style={statsLabel}>Overall Rank</Text>
+        <Text style={statsValue}>{overallRank}/100</Text>
+      </Column>
+    </Row>
+  </Section>
 );
 
-const RaceAlertEmail = ({
+const LadderRow = ({
+  position,
+  userName,
+  roundPoints,
+  roundMargin,
+  overallPoints,
+}) => (
+  <Row style={ladderRowStyle}>
+    <Column style={{ width: "10%", textAlign: "center" }}>
+      <Text style={positionText}>{position}</Text>
+    </Column>
+    <Column style={{ width: "40%" }}>
+      <Row>
+        <Column style={{ width: "30px" }}>
+          <div style={userAvatarStyle}>
+            <Img
+              src={
+                "http://media.staging.smartb.au.sydney.digiground.com.au/uploads/1745408351814.png"
+              }
+              width="34"
+              height="34"
+              alt="SmartB"
+            />
+          </div>
+        </Column>
+        <Column>
+          <Text style={userNameText}>{userName}</Text>
+        </Column>
+      </Row>
+    </Column>
+    <Column style={{ width: "16%", textAlign: "center" }}>
+      <Text style={pointsText}>{roundPoints}</Text>
+    </Column>
+    <Column style={{ width: "16%", textAlign: "center" }}>
+      <Text style={pointsText}>{roundMargin}</Text>
+    </Column>
+    <Column style={{ width: "18%", textAlign: "center" }}>
+      <Text style={pointsText}>{overallPoints}</Text>
+    </Column>
+  </Row>
+);
+
+const LadderUpdateEmail = ({
   name = "Name",
-  raceName = "CANTERBURY R2",
-  location = "Australia / New South Wales / Canterbury",
-  startTime = "2 minutes",
+  roundNumber = "3",
+  userName = "[User_name]",
+  tipsEntered = "9/9",
+  roundRank = "3",
+  overallRank = "14",
 }) => {
   return (
     <Html>
@@ -95,7 +101,10 @@ const RaceAlertEmail = ({
           href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&display=swap"
         />
       </Head>
-      <Preview>Your selected race is about to begin in {startTime}!</Preview>
+      <Preview>
+        The Round {roundNumber} tipping results are in! Check out where you
+        stand in the competition.
+      </Preview>
       <Body style={main}>
         <Container style={container}>
           {/* Logo */}
@@ -107,9 +116,10 @@ const RaceAlertEmail = ({
             }}
           >
             <Img
-              src={mediaConfig.logos.smartB}
-              width="120"
-              alt="SmartB"
+              src={mediaConfig.logos.smartTippingBlack}
+              width="150"
+              height="30"
+              alt="SmartTipping"
               style={logo}
             />
           </Section>
@@ -118,51 +128,136 @@ const RaceAlertEmail = ({
           <Section style={section}>
             <Text style={para16}>Hi {name},</Text>
             <Text style={para16}>
-              Your selected race is about to begin in {startTime}!
+              The Round {roundNumber} tipping results are in! Check out where
+              you stand in the competition.
             </Text>
-            <Text style={para16}>Here are the details:</Text>
           </Section>
 
-          {/* Race Title */}
-          <Section style={raceTitleSection}>
-            <Heading style={raceTitle}>{raceName}</Heading>
-            <Text style={locationText}>{location}</Text>
-          </Section>
-
-          {/* Race Details */}
-          <RaceRow
-            raceName="Race 2"
-            raceNumber="1"
-            barrierNumber="1"
-            runner={{
-              jockey: "Peta Edwards",
-              trainer: "B P Newnham",
-              weight: "58.00Kg",
-            }}
-            odds={{
-              bet365: "6.00",
-              betfair: "6.00",
-              tab: "6.00",
-              boombet: "6.00",
-              ladbrokes: "6.00",
-            }}
-            venue="Canterbury"
-            redirectUrl="#"
+          {/* User Stats Card */}
+          <UserStatsCard
+            userName={userName}
+            tipsEntered={tipsEntered}
+            roundRank={roundRank}
+            overallRank={overallRank}
           />
 
-          {/* Action Button */}
+          {/* Ladder Section */}
+          <Section style={ladderSection}>
+            <Heading style={ladderTitle}>ROUND {roundNumber} - LADDER</Heading>
+            <section style={ladderContainer}>
+              {/* Ladder Header */}
+              <Row style={ladderHeaderStyle}>
+                <Column style={{ width: "10%", textAlign: "center" }}>
+                  <Text style={headerText}>#Pos</Text>
+                </Column>
+                <Column style={{ width: "40%" }}>
+                  <Text style={headerText}>Tipster</Text>
+                </Column>
+                <Column style={{ width: "16%", textAlign: "center" }}>
+                  <Text style={headerText}>Round Pts</Text>
+                </Column>
+                <Column style={{ width: "16%", textAlign: "center" }}>
+                  <Text style={headerText}>Round Margin</Text>
+                </Column>
+                <Column style={{ width: "18%", textAlign: "center" }}>
+                  <Text style={headerText}>Overall Pts</Text>
+                </Column>
+              </Row>
+
+              {/* Ladder Rows */}
+              <LadderRow
+                position="3"
+                userName={userName}
+                roundPoints="[X]"
+                roundMargin="[X]"
+                overallPoints="[X]"
+              />
+              <LadderRow
+                position="1"
+                userName="[Your name]"
+                roundPoints="[X]"
+                roundMargin="[X]"
+                overallPoints="[X]"
+              />
+              <LadderRow
+                position="2"
+                userName="[Your name]"
+                roundPoints="[X]"
+                roundMargin="[X]"
+                overallPoints="[X]"
+              />
+              <LadderRow
+                position="3"
+                userName="[Your name]"
+                roundPoints="[X]"
+                roundMargin="[X]"
+                overallPoints="[X]"
+              />
+              <LadderRow
+                position="4"
+                userName="[Your name]"
+                roundPoints="[X]"
+                roundMargin="[X]"
+                overallPoints="[X]"
+              />
+              <LadderRow
+                position="5"
+                userName="[Your name]"
+                roundPoints="[X]"
+                roundMargin="[X]"
+                overallPoints="[X]"
+              />
+              <LadderRow
+                position="6"
+                userName="[Your name]"
+                roundPoints="[X]"
+                roundMargin="[X]"
+                overallPoints="[X]"
+              />
+              <LadderRow
+                position="7"
+                userName="[Your name]"
+                roundPoints="[X]"
+                roundMargin="[X]"
+                overallPoints="[X]"
+              />
+              <LadderRow
+                position="8"
+                userName="[Your name]"
+                roundPoints="[X]"
+                roundMargin="[X]"
+                overallPoints="[X]"
+              />
+              <LadderRow
+                position="9"
+                userName="[Your name]"
+                roundPoints="[X]"
+                roundMargin="[X]"
+                overallPoints="[X]"
+              />
+              <LadderRow
+                position="10"
+                userName="[Your name]"
+                roundPoints="[X]"
+                roundMargin="[X]"
+                overallPoints="[X]"
+              />
+            </section>
+          </Section>
+
+          {/* View Complete Ladder Button */}
           <Section style={submitSection}>
-            <Button style={submitButton} href={"#"}>
-              Compare Odds at Smart Odds Comparison
+            <Button style={submitButton} href="#">
+              Click here to see the complete ladder
             </Button>
           </Section>
 
-          {/* Banner */}
+          {/* Banner Image */}
           <Section style={bannerSection}>
             <Img
               src={mediaConfig.banners.smartOdds}
               width="100%"
-              alt="Master the Odds"
+              alt="Master Odds Banner"
               style={bannerImage}
             />
           </Section>
@@ -335,12 +430,13 @@ const main = {
 
 const container = {
   margin: "0 auto",
-  padding: "20px 0",
+  padding: "0px 12px",
   maxWidth: "600px",
 };
 
 const logoSection = {
   textAlign: "center",
+  marginTop: "15px",
   marginBottom: "25px",
 };
 
@@ -349,7 +445,7 @@ const logo = {
 };
 
 const section = {
-  padding: "0 12px",
+  padding: "0 15px",
   margin: "15px 0",
 };
 
@@ -374,137 +470,121 @@ const paragraph = {
   color: "#333",
 };
 
-const raceTitleSection = {
-  padding: "0 12px",
-  marginBottom: "20px",
-};
-
-const raceTitle = {
-  fontSize: "22.4px",
-  lineHeight: "31.36px",
-  fontWeight: "700",
-  color: "#4455C7",
-  margin: "0 0 9px",
-  textDecoration: "underline",
-};
-
-const locationText = {
-  fontSize: "12px",
-  lineHeight: "14px",
-  color: "#5D5D5D",
-  fontWeight: "400",
-  margin: "0",
-  borderBottom: "1px solid #D4D6D8",
-  paddingBottom: "8px",
-};
-
-const raceRowContainer = {
+// Stats Card Styles
+const statsCardContainer = {
   backgroundColor: "#ffffff",
-  padding: "15px",
+  padding: "15px 0px",
+  margin: "0px 0px 20px",
+  border: "1px solid #E7E9EC",
   borderRadius: "8px",
-  border: "1px solid #E8EAEC",
 };
 
-const raceNumberText = {
+const userNameStyle = {
   fontSize: "16px",
-  lineHeight: "22.4px",
+  lineHeight: "21px",
   fontWeight: "600",
   color: "#191919",
-  margin: "0px 0px 9px",
+  margin: "0 0 15px",
+  textAlign: "center",
 };
 
-const runnerDetailsContainer = {
-  marginBottom: "10px",
-  paddingBottom: "19px",
+const statsRow = {
+  borderTop: "1px solid #E7E9EC",
+  paddingTop: "15px",
+};
+
+const statsLabel = {
+  fontSize: "16px",
+  lineHeight: "19px",
+  color: "#191919",
+  fontWeight: "400",
+  margin: "0 0 5px",
+};
+
+const statsValue = {
+  fontSize: "22.4px",
+  lineHeight: "28.8px",
+  fontWeight: "700",
+  color: "#191919",
+  margin: "0",
+};
+
+// Ladder Styles
+const ladderSection = {
+  margin: "20px 0",
+};
+
+const ladderTitle = {
+  fontSize: "22.4px",
+  lineHeight: "22.4px",
+  fontWeight: "700",
+  color: "#191919",
+  margin: "0 0 20px",
+  textAlign: "left",
+  padding: "0 12px 8px",
+  borderBottom: "1px solid #D4D6D8",
+};
+
+const ladderContainer = {
+  backgroundColor: "#FFFFFF",
+};
+
+const ladderHeaderStyle = {
+  backgroundColor: "#FFFFFF",
+  padding: "10px",
+  borderBottom: "1px solid #D4D6D8",
+};
+
+const headerText = {
+  fontSize: "14px",
+  lineHeight: "19px",
+  color: "#003764",
+  margin: "0",
+  fontWeight: "700",
+};
+
+const ladderRowStyle = {
+  padding: "10px",
   borderBottom: "1px solid #E8EAEC",
 };
 
-const runnerDetailsContainerLast = {
-  marginBottom: "0px",
-  paddingBottom: "0px",
-  borderBottom: "none",
-};
-
-const runnerDetails = {
-  fontSize: "14px",
-  lineHeight: "20px",
-  color: "#191919",
-  margin: "0 0 3px",
-};
-
-const oddsContainer = {
-  width: "100px",
-  marginLeft: "auto",
-};
-
-const bookmakerLabel = {
-  backgroundColor: "#2f6e35",
-  borderRadius: "4px 4px 0 0",
-  padding: "2px 8px",
-  textAlign: "center",
-};
-
-const bookmakerLabelColumn = {
-  backgroundColor: "#2f6e35",
-  borderRadius: "4px",
-  padding: "2px 8px",
-  minWidth: "80px",
-  textAlign: "center",
-  marginBottom: "4px",
-};
-
-const bookmakerLabelText = {
-  color: "#ffffff",
-  fontSize: "12px",
-  fontWeight: "600",
-  margin: "0",
-};
-
-const bookmakerOdds = {
-  backgroundColor: "#D6D9F3",
-  borderRadius: "4px",
-  padding: "4px 8px",
-  minWidth: "80px",
-  textAlign: "center",
-};
-
-const mainOddsValueStyle = {
-  fontSize: "14px",
-  fontWeight: "600",
+const positionText = {
+  fontSize: "16px",
+  lineHeight: "19px",
+  fontWeight: "400",
   color: "#191919",
   margin: "0",
 };
 
-const compareButtonSection = {
-  textAlign: "center",
-  marginTop: "15px",
+const userAvatarStyle = {
+  width: "34px",
+  height: "34px",
+  borderRadius: "50%",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
 };
 
-const compareButton = {
-  backgroundColor: "#4455C7",
-  color: "#ffffff",
-  padding: "12px 24px",
-  borderRadius: "4px",
-  textDecoration: "none",
-  fontSize: "14px",
-  fontWeight: "600",
-  display: "inline-block",
+const userNameText = {
+  fontSize: "16px",
+  lineHeight: "19px",
+  color: "#191919",
+  margin: "0",
+  paddingLeft: "10px",
 };
 
-const bannerSection = {
-  margin: "20px 0px",
+const pointsText = {
+  fontSize: "16px",
+  lineHeight: "19px",
+  color: "#191919",
+  margin: "0",
 };
 
-const bannerImage = {
-  width: "100%",
-  display: "block",
-  borderRadius: "4px",
-};
-
+// Reuse existing styles from smart-tipping.jsx
 const submitSection = {
   textAlign: "center",
-  margin: "30px 0px 0px",
-  padding: "0px",
+  margin: "25px 0",
+  padding: "0 15px",
 };
 
 const submitButton = {
@@ -516,6 +596,15 @@ const submitButton = {
   fontWeight: "400",
   fontSize: "16px",
   lineHeight: "19px",
+};
+
+const bannerSection = {
+  margin: "20px 0",
+};
+
+const bannerImage = {
+  width: "100%",
+  display: "block",
 };
 
 const gamblingBanner = {
@@ -616,4 +705,4 @@ const appStoreButton = {
   margin: "0 5px",
 };
 
-export default RaceAlertEmail;
+export default LadderUpdateEmail;

@@ -16,76 +16,93 @@ import {
 import * as React from "react";
 import { mediaConfig } from "./static/constant/config";
 
-const RaceRow = ({
-  raceName,
-  raceNumber,
-  barrierNumber,
-  runner,
-  odds,
-  venue,
-  redirectUrl,
+const RunnerRow = ({
+  runnerName,
+  number,
+  jockey,
+  trainer,
+  weight,
+  bookmaker = "BET365",
+  triggerPrice,
+  currentPrice,
 }) => (
-  <>
-    <Section style={raceRowContainer}>
-      {/* Runner Details */}
-      {/* mapping this row for each runner */}
-      {[1, 2, 3, 4]?.map((item, index) => (
-        /* Runner Info Row */
-        <Row
-          style={
-            index === [1, 2, 3, 4].length - 1
-              ? runnerDetailsContainerLast
-              : runnerDetailsContainer
-          }
-          key={index}
-        >
-          <Column style={{ width: "70%" }}>
-            <Row>
-              <Column style={{ verticalAlign: "middle", textAlign: "left" }}>
-                <Text style={raceNumberText}>
-                  {raceNumber}. {raceName} ({barrierNumber}){" "}
-                </Text>
-
-                <Row style={{ verticalAlign: "baseline" }}>
-                  <Column style={{ width: "50%", textAlign: "left" }}>
-                    <Text style={runnerDetails}>
-                      <b>J: </b>
-                      {runner.jockey}
-                    </Text>
-                  </Column>
-                  <Column style={{ width: "50%", textAlign: "left" }}>
-                    <Text style={runnerDetails}>
-                      <b>W:</b> {runner.weight}
-                    </Text>
-                  </Column>
-                </Row>
-                <Text style={runnerDetails}>
-                  <b>T:</b> {runner.trainer}
-                </Text>
-              </Column>
-            </Row>
+  <Section>
+    {[1].map((item, index) => (
+      <Row
+        style={
+          index === [1].length - 1
+            ? runnerDetailsContainerLast
+            : runnerDetailsContainer
+        }
+      >
+        {/* Runner Info */}
+        <Text style={runnerNumberText}>
+          {number}. {runnerName} ({number})
+        </Text>
+        <Row style={{ marginBottom: "8px" }}>
+          <Column style={{ width: "50%", textAlign: "left" }}>
+            <Text style={runnerDetails}>
+              <b>J:</b> {jockey}
+            </Text>
           </Column>
-          <Column style={{ width: "30%", textAlign: "right" }}>
-            <div style={{ width: "100px", marginLeft: "auto" }}>
-              <div style={bookmakerLabelColumn}>
-                <Text style={bookmakerLabelText}>{"BOOKMAKER"}</Text>
-              </div>
-              <div style={bookmakerOdds}>
-                <Text style={mainOddsValueStyle}>{"5.00"}</Text>
-              </div>
+          <Column style={{ width: "50%", textAlign: "left" }}>
+            <Text style={runnerDetails}>
+              <b>W:</b> {weight}
+            </Text>
+          </Column>
+        </Row>
+        <Text style={runnerDetails}>
+          <b>T:</b> {trainer}
+        </Text>
+
+        <Row style={{ marginTop: "12px", marginBottom: "12px" }}>
+          <Column style={bookmakerColumn}>
+            <div style={bookmakerLabelColumn}>
+              <Text style={bookmakerLabelText}>{bookmaker}</Text>
+            </div>
+            <Text style={fixedPStyle}>Fixed P</Text>
+          </Column>
+          <Column style={priceItemColumn}>
+            <div style={priceBox}>
+              <Text style={priceText}>{currentPrice}</Text>
             </div>
           </Column>
         </Row>
-      ))}
-    </Section>
-  </>
+        <Row style={{ marginTop: "12px", marginBottom: "12px" }}>
+          <Column style={bookmakerColumn}>
+            <div style={bookmakerLabelColumn}>
+              <Text style={bookmakerLabelText}>{bookmaker}</Text>
+            </div>
+            <Text style={fixedPStyle}>Fixed P</Text>
+          </Column>
+          <Column style={priceItemColumn}>
+            <div style={priceBox}>
+              <Text style={priceText}>{currentPrice}</Text>
+            </div>
+          </Column>
+        </Row>
+        <Row style={{ marginTop: "12px", marginBottom: "12px" }}>
+          <Column style={bookmakerColumn}>
+            <div style={bookmakerLabelColumn}>
+              <Text style={bookmakerLabelText}>{bookmaker}</Text>
+            </div>
+            <Text style={fixedPStyle}>Fixed P</Text>
+          </Column>
+          <Column style={priceItemColumn}>
+            <div style={priceBox}>
+              <Text style={priceText}>{currentPrice}</Text>
+            </div>
+          </Column>
+        </Row>
+      </Row>
+    ))}
+  </Section>
 );
 
-const RaceAlertEmail = ({
-  name = "Name",
+const PriceAlertEmail = ({
+  name = "[Name]",
   raceName = "CANTERBURY R2",
   location = "Australia / New South Wales / Canterbury",
-  startTime = "2 minutes",
 }) => {
   return (
     <Html>
@@ -95,7 +112,9 @@ const RaceAlertEmail = ({
           href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&display=swap"
         />
       </Head>
-      <Preview>Your selected race is about to begin in {startTime}!</Preview>
+      <Preview>
+        There is a price alert for the upcoming event from your watchlist.
+      </Preview>
       <Body style={main}>
         <Container style={container}>
           {/* Logo */}
@@ -107,9 +126,9 @@ const RaceAlertEmail = ({
             }}
           >
             <Img
-              src={mediaConfig.logos.smartB}
+              src={mediaConfig.logos.smartOdds}
               width="120"
-              alt="SmartB"
+              alt="SmartOdds"
               style={logo}
             />
           </Section>
@@ -118,7 +137,7 @@ const RaceAlertEmail = ({
           <Section style={section}>
             <Text style={para16}>Hi {name},</Text>
             <Text style={para16}>
-              Your selected race is about to begin in {startTime}!
+              There is a price alert for the upcoming event from your watchlist.
             </Text>
             <Text style={para16}>Here are the details:</Text>
           </Section>
@@ -129,30 +148,23 @@ const RaceAlertEmail = ({
             <Text style={locationText}>{location}</Text>
           </Section>
 
-          {/* Race Details */}
-          <RaceRow
-            raceName="Race 2"
-            raceNumber="1"
-            barrierNumber="1"
-            runner={{
-              jockey: "Peta Edwards",
-              trainer: "B P Newnham",
-              weight: "58.00Kg",
-            }}
-            odds={{
-              bet365: "6.00",
-              betfair: "6.00",
-              tab: "6.00",
-              boombet: "6.00",
-              ladbrokes: "6.00",
-            }}
-            venue="Canterbury"
-            redirectUrl="#"
-          />
+          {/* Runner Details */}
+          <Section style={runnerRowContainer}>
+            <RunnerRow
+              runnerName="Incredible Pinto"
+              number="1"
+              jockey="Peta Edwards"
+              trainer="B P Newnham"
+              weight="58.00Kg"
+              bookmaker="BET365"
+              triggerPrice="2.00"
+              currentPrice="1.30"
+            />
+          </Section>
 
           {/* Action Button */}
           <Section style={submitSection}>
-            <Button style={submitButton} href={"#"}>
+            <Button style={submitButton} href="#">
               Compare Odds at Smart Odds Comparison
             </Button>
           </Section>
@@ -174,7 +186,6 @@ const RaceAlertEmail = ({
             </Heading>
             <Text style={gamblingText}>
               For free and confidential support call 1800 858 858 or visit{" "}
-              <br />
               <Link href="https://gamblinghelp.online" style={gamblingLink}>
                 Gambling Help Online
               </Link>
@@ -194,7 +205,7 @@ const RaceAlertEmail = ({
                 <Img
                   src={mediaConfig.logos.smartPlay}
                   width="120"
-                  height="35px"
+                  height="35"
                   alt="SmartPlay"
                   style={{ margin: "0 auto" }}
                 />
@@ -203,7 +214,7 @@ const RaceAlertEmail = ({
                 <Img
                   src={mediaConfig.logos.smartTippingWhite}
                   width="120"
-                  height="35px"
+                  height="35"
                   alt="SmartTipping"
                   style={{ margin: "0 auto" }}
                 />
@@ -212,65 +223,39 @@ const RaceAlertEmail = ({
                 <Img
                   src={mediaConfig.logos.smartOdds}
                   width="120"
-                  height="35px"
+                  height="35"
                   alt="SmartOdds"
                   style={{ margin: "0 auto" }}
                 />
               </Column>
             </Row>
+
+            {/* Social Links */}
             <Row style={socialLinks}>
               {[
-                {
-                  name: "Facebook",
-                  icon: "fb.png",
-                  url: mediaConfig.social.facebook,
-                },
-                {
-                  name: "Instagram",
-                  icon: "ig.png",
-                  url: mediaConfig.social.instagram,
-                },
-                {
-                  name: "Twitter",
-                  icon: "twitter.png",
-                  url: mediaConfig.social.twitter,
-                },
-                {
-                  name: "LinkedIn",
-                  icon: "linkedin.png",
-                  url: mediaConfig.social.linkedin,
-                },
-                {
-                  name: "YouTube",
-                  icon: "youtube.png",
-                  url: mediaConfig.social.youtube,
-                },
-                {
-                  name: "TikTok",
-                  icon: "tiktok.png",
-                  url: mediaConfig.social.tiktok,
-                },
-                {
-                  name: "Vemeo",
-                  icon: "vemeo.png",
-                  url: mediaConfig.social.vemeo,
-                },
-              ].map((platform, i) => (
-                <Column
-                  key={i}
-                  style={{ ...socialIconColumn, padding: "0 10px" }}
-                >
-                  <Link href={platform.url} style={socialLink}>
+                "facebook",
+                "instagram",
+                "tiktok",
+                "twitter",
+                "linkedin",
+                "snapchat",
+                "youtube",
+                "vimeo",
+              ].map((platform) => (
+                <Column key={platform} style={socialIconColumn}>
+                  <Link href="#" style={socialLink}>
                     <Img
-                      src={platform.url}
+                      src={`${mediaConfig.social[platform]}`}
                       width="24"
-                      alt={platform.name}
+                      height="24"
+                      alt={platform}
                       style={socialIcon}
                     />
                   </Link>
                 </Column>
               ))}
             </Row>
+
             <Text style={footerText}>
               SmartB Head Office
               <br />
@@ -279,15 +264,8 @@ const RaceAlertEmail = ({
             <Text style={footerText}>
               Send an Email To
               <br />
-              <Link
-                href="mailto:info@smartb.com.au"
-                style={{
-                  ...footerLink,
-                  color: "#FFFFFF",
-                  textDecoration: "none",
-                }}
-              >
-                E: info@smartb.com.au
+              <Link href="mailto:info@smartb.com.au" style={footerLink}>
+                info@smartb.com.au
               </Link>
             </Text>
             <Text style={footerDisclaimer}>
@@ -302,16 +280,18 @@ const RaceAlertEmail = ({
               </Link>
             </Text>
             <Text style={copyright}>Copyright © SmartB Pty Ltd 2022</Text>
+
+            {/* App Store Links */}
             <Row style={appStoreSection}>
               <Column style={{ textAlign: "center" }}>
-                <Link href="https://apps.apple.com" style={appStoreButton}>
+                <Link href="#" style={appStoreButton}>
                   <Img
                     src={mediaConfig.downloadLinks.appStore}
                     width="120"
                     alt="Download on App Store"
                   />
                 </Link>
-                <Link href="https://play.google.com" style={appStoreButton}>
+                <Link href="#" style={appStoreButton}>
                   <Img
                     src={mediaConfig.downloadLinks.googlePlay}
                     width="120"
@@ -360,20 +340,6 @@ const para16 = {
   color: "#191919",
 };
 
-const para14 = {
-  fontSize: "14px",
-  lineHeight: "16px",
-  margin: "0 0 15px",
-  color: "#191919",
-};
-
-const paragraph = {
-  fontSize: "14px",
-  lineHeight: "20px",
-  margin: "0 0 15px",
-  color: "#333",
-};
-
 const raceTitleSection = {
   padding: "0 12px",
   marginBottom: "20px",
@@ -398,31 +364,32 @@ const locationText = {
   paddingBottom: "8px",
 };
 
-const raceRowContainer = {
+const runnerRowContainer = {
   backgroundColor: "#ffffff",
   padding: "15px",
   borderRadius: "8px",
   border: "1px solid #E8EAEC",
+  marginBottom: "10px",
 };
 
-const raceNumberText = {
+const runnerDetailsContainer = {
+  borderBottom: "1px solid #E8EAEC",
+  paddingBottom: "15px",
+  marginBottom: "15px",
+};
+
+const runnerDetailsContainerLast = {
+  borderBottom: "none",
+  paddingBottom: "0",
+  marginBottom: "0",
+};
+
+const runnerNumberText = {
   fontSize: "16px",
   lineHeight: "22.4px",
   fontWeight: "600",
   color: "#191919",
-  margin: "0px 0px 9px",
-};
-
-const runnerDetailsContainer = {
-  marginBottom: "10px",
-  paddingBottom: "19px",
-  borderBottom: "1px solid #E8EAEC",
-};
-
-const runnerDetailsContainerLast = {
-  marginBottom: "0px",
-  paddingBottom: "0px",
-  borderBottom: "none",
+  margin: "0 0 12px",
 };
 
 const runnerDetails = {
@@ -432,79 +399,63 @@ const runnerDetails = {
   margin: "0 0 3px",
 };
 
-const oddsContainer = {
-  width: "100px",
-  marginLeft: "auto",
+const priceContainer = {
+  marginTop: "15px",
 };
 
-const bookmakerLabel = {
-  backgroundColor: "#2f6e35",
-  borderRadius: "4px 4px 0 0",
-  padding: "2px 8px",
-  textAlign: "center",
+const bookmakerColumn = {
+  width: "calc(100% - 120px)",
 };
 
 const bookmakerLabelColumn = {
-  backgroundColor: "#2f6e35",
+  backgroundColor: "#027B5B",
   borderRadius: "4px",
-  padding: "2px 8px",
-  minWidth: "80px",
+  padding: "8px 36px",
   textAlign: "center",
-  marginBottom: "4px",
+  display: "inline-block",
+  marginRight: "12px",
 };
 
 const bookmakerLabelText = {
   color: "#ffffff",
-  fontSize: "12px",
-  fontWeight: "600",
+  fontSize: "14px",
+  lineHeight: "16px ",
+  fontWeight: "400",
   margin: "0",
 };
 
-const bookmakerOdds = {
-  backgroundColor: "#D6D9F3",
-  borderRadius: "4px",
-  padding: "4px 8px",
-  minWidth: "80px",
+const fixedPStyle = {
+  fontSize: "16px",
+  lineHeight: "19px",
+  color: "#191919",
+  margin: "4px 0 0",
+  display: "inline-block",
+};
+
+const priceItemColumn = {
+  width: "120px",
   textAlign: "center",
 };
 
-const mainOddsValueStyle = {
-  fontSize: "14px",
+const priceBox = {
+  backgroundColor: "#E7E9EC",
+  borderRadius: "5px",
+  padding: "8px",
+  textAlign: "center",
+};
+
+const priceText = {
+  fontSize: "16px",
+  lineHeight: "19px",
   fontWeight: "600",
   color: "#191919",
   margin: "0",
 };
 
-const compareButtonSection = {
-  textAlign: "center",
-  marginTop: "15px",
-};
-
-const compareButton = {
-  backgroundColor: "#4455C7",
-  color: "#ffffff",
-  padding: "12px 24px",
-  borderRadius: "4px",
-  textDecoration: "none",
-  fontSize: "14px",
-  fontWeight: "600",
-  display: "inline-block",
-};
-
-const bannerSection = {
-  margin: "20px 0px",
-};
-
-const bannerImage = {
-  width: "100%",
-  display: "block",
-  borderRadius: "4px",
-};
-
 const submitSection = {
   textAlign: "center",
-  margin: "30px 0px 0px",
-  padding: "0px",
+  margin: "30px 0 0",
+  padding: "0",
 };
 
 const submitButton = {
@@ -518,10 +469,19 @@ const submitButton = {
   lineHeight: "19px",
 };
 
+const bannerSection = {
+  margin: "20px 0",
+};
+
+const bannerImage = {
+  width: "100%",
+  display: "block",
+  borderRadius: "4px",
+};
+
 const gamblingBanner = {
   backgroundColor: "#FFFFFF",
   padding: "15px",
-
   borderRadius: "0",
   color: "#191919",
   textAlign: "center",
@@ -533,7 +493,6 @@ const gamblingHeader = {
   fontWeight: "600",
   margin: "0 0 5px",
   color: "#191919",
-  fontFamily: "Arial, sans-serif",
 };
 
 const gamblingText = {
@@ -541,7 +500,6 @@ const gamblingText = {
   lineHeight: "25.2px",
   margin: "0",
   color: "#191919",
-  fontFamily: "Arial, sans-serif",
 };
 
 const gamblingLink = {
@@ -587,17 +545,18 @@ const footerText = {
   fontSize: "12px",
   margin: "10px 0",
   lineHeight: "1.5",
+  color: "#ffffff",
+};
+
+const footerLink = {
+  color: "#ffffff",
+  textDecoration: "underline",
 };
 
 const footerDisclaimer = {
   fontSize: "11px",
   color: "#cccccc",
   margin: "10px 0",
-};
-
-const footerLink = {
-  color: "#cccccc",
-  textDecoration: "underline",
 };
 
 const copyright = {
@@ -616,4 +575,4 @@ const appStoreButton = {
   margin: "0 5px",
 };
 
-export default RaceAlertEmail;
+export default PriceAlertEmail;
