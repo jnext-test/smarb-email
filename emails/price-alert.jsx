@@ -199,62 +199,128 @@ const PriceAlertEmail = ({
               alt="SmartB"
               style={footerLogo}
             />
-            <Row style={footerBrands}>
-              <Column>
+            <Row
+              style={{
+                ...footerBrands,
+              }}
+            >
+              <Column
+                style={{
+                  padding: "0 5px",
+                }}
+              >
                 <Img
                   src={mediaConfig.logos.smartPlay}
                   width="120"
-                  height="35"
+                  height="35px"
                   alt="SmartPlay"
-                  style={{ margin: "0 auto" }}
+                  style={{
+                    display: "block",
+                    outline: "none",
+                    border: "none",
+                    textDecoration: "none",
+                    margin: "0 auto",
+                    maxWidth: "100%",
+                    height: "30px",
+                  }}
                 />
               </Column>
-              <Column>
+              <Column
+                style={{
+                  padding: "0 5px",
+                }}
+              >
                 <Img
                   src={mediaConfig.logos.smartTippingWhite}
                   width="120"
-                  height="35"
+                  height="35px"
                   alt="SmartTipping"
-                  style={{ margin: "0 auto" }}
+                  style={{
+                    display: "block",
+                    outline: "none",
+                    border: "none",
+                    textDecoration: "none",
+                    margin: "0 auto",
+                    maxWidth: "100%",
+                    height: "30px",
+                  }}
                 />
               </Column>
-              <Column>
+              <Column
+                style={{
+                  padding: "0 5px",
+                }}
+              >
                 <Img
                   src={mediaConfig.logos.smartOdds}
                   width="120"
-                  height="35"
+                  height="35px"
                   alt="SmartOdds"
-                  style={{ margin: "0 auto" }}
+                  style={{
+                    display: "block",
+                    outline: "none",
+                    border: "none",
+                    textDecoration: "none",
+                    margin: "0 auto",
+                    maxWidth: "100%",
+                    height: "30px",
+                  }}
                 />
               </Column>
             </Row>
-
-            {/* Social Links */}
             <Row style={socialLinks}>
               {[
-                "facebook",
-                "instagram",
-                "tiktok",
-                "twitter",
-                "linkedin",
-                "snapchat",
-                "youtube",
-                "vimeo",
-              ].map((platform) => (
-                <Column key={platform} style={socialIconColumn}>
-                  <Link href="#" style={socialLink}>
+                {
+                  name: "Facebook",
+                  icon: "fb.png",
+                  url: mediaConfig.social.facebook,
+                },
+                {
+                  name: "Instagram",
+                  icon: "ig.png",
+                  url: mediaConfig.social.instagram,
+                },
+                {
+                  name: "Twitter",
+                  icon: "twitter.png",
+                  url: mediaConfig.social.twitter,
+                },
+                {
+                  name: "LinkedIn",
+                  icon: "linkedin.png",
+                  url: mediaConfig.social.linkedin,
+                },
+                {
+                  name: "YouTube",
+                  icon: "youtube.png",
+                  url: mediaConfig.social.youtube,
+                },
+                {
+                  name: "TikTok",
+                  icon: "tiktok.png",
+                  url: mediaConfig.social.tiktok,
+                },
+                {
+                  name: "Vemeo",
+                  icon: "vemeo.png",
+                  url: mediaConfig.social.vemeo,
+                },
+              ].map((platform, i) => (
+                <Column
+                  key={i}
+                  style={{ ...socialIconColumn, padding: "0 10px" }}
+                >
+                  <Link href={platform.url} style={socialLink}>
                     <Img
-                      src={`${mediaConfig.social[platform]}`}
+                      src={platform.url}
                       width="24"
-                      height="24"
-                      alt={platform}
+                      alt={platform.name}
                       style={socialIcon}
                     />
                   </Link>
                 </Column>
               ))}
             </Row>
-
             <Text style={footerText}>
               SmartB Head Office
               <br />
@@ -263,8 +329,15 @@ const PriceAlertEmail = ({
             <Text style={footerText}>
               Send an Email To
               <br />
-              <Link href="mailto:info@smartb.com.au" style={footerLink}>
-                info@smartb.com.au
+              <Link
+                href="mailto:info@smartb.com.au"
+                style={{
+                  ...footerLink,
+                  color: "#FFFFFF",
+                  textDecoration: "none",
+                }}
+              >
+                E: info@smartb.com.au
               </Link>
             </Text>
             <Text style={footerDisclaimer}>
@@ -279,18 +352,16 @@ const PriceAlertEmail = ({
               </Link>
             </Text>
             <Text style={copyright}>Copyright © SmartB Pty Ltd 2022</Text>
-
-            {/* App Store Links */}
             <Row style={appStoreSection}>
               <Column style={{ textAlign: "center" }}>
-                <Link href="#" style={appStoreButton}>
+                <Link href="https://apps.apple.com" style={appStoreButton}>
                   <Img
                     src={mediaConfig.downloadLinks.appStore}
                     width="120"
                     alt="Download on App Store"
                   />
                 </Link>
-                <Link href="#" style={appStoreButton}>
+                <Link href="https://play.google.com" style={appStoreButton}>
                   <Img
                     src={mediaConfig.downloadLinks.googlePlay}
                     width="120"

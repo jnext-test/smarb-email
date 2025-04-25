@@ -318,32 +318,72 @@ const SmartBookUpdateEmail = ({ sportData = sportsData.sportData }) => {
               alt="SmartB"
               style={footerLogo}
             />
-            <Row style={footerBrands}>
-              <Column>
+            <Row
+              style={{
+                ...footerBrands,
+              }}
+            >
+              <Column
+                style={{
+                  padding: "0 5px",
+                }}
+              >
                 <Img
                   src={mediaConfig.logos.smartPlay}
                   width="120"
                   height="35px"
                   alt="SmartPlay"
-                  style={{ margin: "0 auto" }}
+                  style={{
+                    display: "block",
+                    outline: "none",
+                    border: "none",
+                    textDecoration: "none",
+                    margin: "0 auto",
+                    maxWidth: "100%",
+                    height: "30px",
+                  }}
                 />
               </Column>
-              <Column>
+              <Column
+                style={{
+                  padding: "0 5px",
+                }}
+              >
                 <Img
                   src={mediaConfig.logos.smartTippingWhite}
                   width="120"
                   height="35px"
                   alt="SmartTipping"
-                  style={{ margin: "0 auto" }}
+                  style={{
+                    display: "block",
+                    outline: "none",
+                    border: "none",
+                    textDecoration: "none",
+                    margin: "0 auto",
+                    maxWidth: "100%",
+                    height: "30px",
+                  }}
                 />
               </Column>
-              <Column>
+              <Column
+                style={{
+                  padding: "0 5px",
+                }}
+              >
                 <Img
                   src={mediaConfig.logos.smartOdds}
                   width="120"
                   height="35px"
                   alt="SmartOdds"
-                  style={{ margin: "0 auto" }}
+                  style={{
+                    display: "block",
+                    outline: "none",
+                    border: "none",
+                    textDecoration: "none",
+                    margin: "0 auto",
+                    maxWidth: "100%",
+                    height: "30px",
+                  }}
                 />
               </Column>
             </Row>

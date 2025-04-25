@@ -475,48 +475,125 @@ const DailySportsUpdateEmail = ({
           {/* Footer */}
           <Section style={footer}>
             <Img
-              src={`${baseUrl}/static/smartb-footer-logo.png`}
+              src={mediaConfig.logos.smartBWhite}
               width="120"
               alt="SmartB"
               style={footerLogo}
             />
-            <Row style={footerBrands}>
-              <Column>
+            <Row
+              style={{
+                ...footerBrands,
+              }}
+            >
+              <Column
+                style={{
+                  padding: "0 5px",
+                }}
+              >
                 <Img
-                  src={`${baseUrl}/static/smart-play-footer-logo.png`}
+                  src={mediaConfig.logos.smartPlay}
                   width="120"
+                  height="35px"
                   alt="SmartPlay"
+                  style={{
+                    display: "block",
+                    outline: "none",
+                    border: "none",
+                    textDecoration: "none",
+                    margin: "0 auto",
+                    maxWidth: "100%",
+                    height: "30px",
+                  }}
                 />
               </Column>
-              <Column>
+              <Column
+                style={{
+                  padding: "0 5px",
+                }}
+              >
                 <Img
-                  src={`${baseUrl}/static/smart-tipping-logo.png`}
+                  src={mediaConfig.logos.smartTippingWhite}
                   width="120"
+                  height="35px"
                   alt="SmartTipping"
+                  style={{
+                    display: "block",
+                    outline: "none",
+                    border: "none",
+                    textDecoration: "none",
+                    margin: "0 auto",
+                    maxWidth: "100%",
+                    height: "30px",
+                  }}
                 />
               </Column>
-              <Column>
+              <Column
+                style={{
+                  padding: "0 5px",
+                }}
+              >
                 <Img
-                  src={`${baseUrl}/static/smartodds-logo.png`}
+                  src={mediaConfig.logos.smartOdds}
                   width="120"
+                  height="35px"
                   alt="SmartOdds"
+                  style={{
+                    display: "block",
+                    outline: "none",
+                    border: "none",
+                    textDecoration: "none",
+                    margin: "0 auto",
+                    maxWidth: "100%",
+                    height: "30px",
+                  }}
                 />
               </Column>
             </Row>
             <Row style={socialLinks}>
               {[
-                { name: "Facebook", icon: "fb.png" },
-                { name: "Instagram", icon: "ig.png" },
-                { name: "Twitter", icon: "twitter.png" },
-                { name: "LinkedIn", icon: "linkedin.png" },
-                { name: "YouTube", icon: "youtube.png" },
-                { name: "TikTok", icon: "tiktok.png" },
-                { name: "Vemeo", icon: "vemeo.png" },
+                {
+                  name: "Facebook",
+                  icon: "fb.png",
+                  url: mediaConfig.social.facebook,
+                },
+                {
+                  name: "Instagram",
+                  icon: "ig.png",
+                  url: mediaConfig.social.instagram,
+                },
+                {
+                  name: "Twitter",
+                  icon: "twitter.png",
+                  url: mediaConfig.social.twitter,
+                },
+                {
+                  name: "LinkedIn",
+                  icon: "linkedin.png",
+                  url: mediaConfig.social.linkedin,
+                },
+                {
+                  name: "YouTube",
+                  icon: "youtube.png",
+                  url: mediaConfig.social.youtube,
+                },
+                {
+                  name: "TikTok",
+                  icon: "tiktok.png",
+                  url: mediaConfig.social.tiktok,
+                },
+                {
+                  name: "Vemeo",
+                  icon: "vemeo.png",
+                  url: mediaConfig.social.vemeo,
+                },
               ].map((platform, i) => (
-                <Column key={i} style={socialIconColumn}>
-                  <Link href="#" style={socialLink}>
+                <Column
+                  key={i}
+                  style={{ ...socialIconColumn, padding: "0 10px" }}
+                >
+                  <Link href={platform.url} style={socialLink}>
                     <Img
-                      src={`${baseUrl}/static/icons/${platform.icon}`}
+                      src={platform.url}
                       width="24"
                       alt={platform.name}
                       style={socialIcon}
@@ -526,9 +603,23 @@ const DailySportsUpdateEmail = ({
               ))}
             </Row>
             <Text style={footerText}>
-              Suite 302, Level 3/2 Elizabeth Plaza, North Sydney, NSW 2060
+              SmartB Head Office
               <br />
-              E: info@smartb.com.au
+              Suite 302, Level 3/2 Elizabeth Plaza, North Sydney, NSW 2060
+            </Text>
+            <Text style={footerText}>
+              Send an Email To
+              <br />
+              <Link
+                href="mailto:info@smartb.com.au"
+                style={{
+                  ...footerLink,
+                  color: "#FFFFFF",
+                  textDecoration: "none",
+                }}
+              >
+                E: info@smartb.com.au
+              </Link>
             </Text>
             <Text style={footerDisclaimer}>
               Don't want to get notifications?{" "}
@@ -546,14 +637,14 @@ const DailySportsUpdateEmail = ({
               <Column style={{ textAlign: "center" }}>
                 <Link href="https://apps.apple.com" style={appStoreButton}>
                   <Img
-                    src={`${baseUrl}/static/app-store.png`}
+                    src={mediaConfig.downloadLinks.appStore}
                     width="120"
                     alt="Download on App Store"
                   />
                 </Link>
                 <Link href="https://play.google.com" style={appStoreButton}>
                   <Img
-                    src={`${baseUrl}/static/play-store.png`}
+                    src={mediaConfig.downloadLinks.googlePlay}
                     width="120"
                     alt="Get it on Google Play"
                   />
