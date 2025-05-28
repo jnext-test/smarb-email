@@ -12,102 +12,86 @@ import {
   Row,
   Section,
   Text,
+  Hr,
 } from "@react-email/components";
+import racepriceData from "./static/data/raceAlert_price.json";
 import * as React from "react";
-import { mediaConfig } from "./static/constant/config";
 
-const RunnerRow = ({
-  runnerName,
-  number,
-  jockey,
-  trainer,
-  weight,
-  bookmaker = "BET365",
-  triggerPrice,
-  currentPrice,
-}) => (
-  <Section>
-    {[1].map((item, index) => (
-      <Row
-        style={
-          index === [1].length - 1
-            ? runnerDetailsContainerLast
-            : runnerDetailsContainer
-        }
-      >
-        {/* Runner Info */}
-        <Text style={runnerNumberText}>
-          {number}. {runnerName} ({number})
-        </Text>
-        <Row style={{ marginBottom: "8px" }}>
-          <Column style={{ width: "50%", textAlign: "left" }}>
-            <Text style={runnerDetails}>
-              <b>J:</b> {jockey}
-            </Text>
-          </Column>
-          <Column style={{ width: "50%", textAlign: "left" }}>
-            <Text style={runnerDetails}>
-              <b>W:</b> {weight}
-            </Text>
-          </Column>
-        </Row>
-        <Text style={runnerDetails}>
-          <b>T:</b> {trainer}
-        </Text>
+const RunnerRow = ({ runner }) => {
+  // console.log("runner", runner),
+  return (
+    <Section style={runnerRowContainer}>
+      {runner.map((item, index) => (
+        <>
+          <Row key={index}>
+            <Column style={{ verticalAlign: "middle", textAlign: "left" }}>
+              <Text style={runnerNumberText}>
+                {item.runnerNumber}. {item.animal.name} ({item.barrierNumber})
+              </Text>
 
-        <Row style={{ marginTop: "12px", marginBottom: "12px" }}>
-          <Column style={bookmakerColumn}>
-            <div style={bookmakerLabelColumn}>
-              <Text style={bookmakerLabelText}>{bookmaker}</Text>
-            </div>
-            <Text style={fixedPStyle}>Fixed P</Text>
-          </Column>
-          <Column style={priceItemColumn}>
-            <div style={priceBox}>
-              <Text style={priceText}>{currentPrice}</Text>
-            </div>
-          </Column>
-        </Row>
-        <Row style={{ marginTop: "12px", marginBottom: "12px" }}>
-          <Column style={bookmakerColumn}>
-            <div style={bookmakerLabelColumn}>
-              <Text style={bookmakerLabelText}>{bookmaker}</Text>
-            </div>
-            <Text style={fixedPStyle}>Fixed P</Text>
-          </Column>
-          <Column style={priceItemColumn}>
-            <div style={priceBox}>
-              <Text style={priceText}>{currentPrice}</Text>
-            </div>
-          </Column>
-        </Row>
-        <Row style={{ marginTop: "12px", marginBottom: "12px" }}>
-          <Column style={bookmakerColumn}>
-            <div style={bookmakerLabelColumn}>
-              <Text style={bookmakerLabelText}>{bookmaker}</Text>
-            </div>
-            <Text style={fixedPStyle}>Fixed P</Text>
-          </Column>
-          <Column style={priceItemColumn}>
-            <div style={priceBox}>
-              <Text style={priceText}>{currentPrice}</Text>
-            </div>
-          </Column>
-        </Row>
-      </Row>
-    ))}
-  </Section>
-);
+              <Row style={{ verticalAlign: "baseline" , marginBottom:"8px" }}>
+                {item?.Jockey && (
+                  <Column style={{ width: "50%", textAlign: "left" }}>
+                    <Text style={runnerDetails}>
+                      <b>J: </b>
+                      {item?.Jockey?.name}
+                    </Text>
+                  </Column>
+                )}
+                {item?.JockeyWeight && (
+                  <Column style={{ width: "50%", textAlign: "left" }}>
+                    <Text style={runnerDetails}>
+                      <b>W:</b> {item?.JockeyWeight + "kg"}
+                    </Text>
+                  </Column>
+                )}
+              </Row>
+              {item?.Trainer && (
+                <Text style={runnerDetails}>
+                  <b>T:</b> {item?.Trainer?.name}
+                </Text>
+              )}
+            </Column>
+          </Row>
 
-const PriceAlertEmail = ({
-  name = "[Name]",
-  raceName = "CANTERBURY R2",
-  location = "Australia / New South Wales / Canterbury",
-}) => {
+          {item.bookmakerMarkets?.map((bookmaker, index) => (
+            <Row
+              key={index}
+              style={{ marginTop: "12px", marginBottom: "12px" }}
+            >
+              <Column style={bookmakerColumn}>
+                <div
+                  style={{
+                    ...bookmakerLabelColumn,
+                    backgroundColor: bookmaker.logo_bg,
+                  }}
+                >
+                  <Text style={bookmakerLabelText}>{bookmaker.bookmaker}</Text>
+                </div>
+                <Text style={fixedPStyle}>{bookmaker.oddType}</Text>
+              </Column>
+              <Column style={priceItemColumn}>
+                <div style={priceBox}>
+                  <Text style={priceText}>{bookmaker.odd ?? "N/A"}</Text>
+                </div>
+              </Column>
+            </Row>
+          ))}
+          {index !== runner.length - 1 && <Hr style={{ margin: "18px 0" }} />}
+        </>
+      ))}
+    </Section>
+  );
+};
+
+const PriceAlertEmail = () => {
+  const data = racepriceData;
+  const race = data.raceDetails.race;
+  const runner = data.raceDetails.runners;
   return (
     <Html>
       <Head>
-        <link
+        <a
           rel="stylesheet"
           href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&display=swap"
         />
@@ -126,7 +110,7 @@ const PriceAlertEmail = ({
             }}
           >
             <Img
-              src={mediaConfig.logos.smartOdds}
+              src={data.base_url + "api/views/smart_odd_bl.png"}
               width="120"
               alt="SmartOdds"
               style={logo}
@@ -135,7 +119,7 @@ const PriceAlertEmail = ({
 
           {/* Greeting */}
           <Section style={section}>
-            <Text style={para16}>Hi {name},</Text>
+            <Text style={para16}>Hi {data.name},</Text>
             <Text style={para16}>
               There is a price alert for the upcoming event from your watchlist.
             </Text>
@@ -144,27 +128,30 @@ const PriceAlertEmail = ({
 
           {/* Race Title */}
           <Section style={raceTitleSection}>
-            <Heading style={raceTitle}>{raceName}</Heading>
-            <Text style={locationText}>{location}</Text>
+            <a href={`${data.base_url}${data.raceURL}`}>
+              <Heading style={raceTitle}>
+                {data.trackName + " R" + race.raceNumber}
+              </Heading>
+            </a>
+            <Text style={locationText}>
+              {race?.track?.Country?.country || ""}
+              {race?.track?.State?.state ? ` / ${race.track.State.state}` : ""}
+              {race?.track?.City?.cityName
+                ? ` / ${race.track.City.cityName}`
+                : ""}
+            </Text>
           </Section>
 
           {/* Runner Details */}
-          <Section style={runnerRowContainer}>
-            <RunnerRow
-              runnerName="Incredible Pinto"
-              number="1"
-              jockey="Peta Edwards"
-              trainer="B P Newnham"
-              weight="58.00Kg"
-              bookmaker="BET365"
-              triggerPrice="2.00"
-              currentPrice="1.30"
-            />
-          </Section>
+
+          <RunnerRow runner={runner} />
 
           {/* Action Button */}
           <Section style={submitSection}>
-            <Button style={submitButton} href="#">
+            <Button
+              style={submitButton}
+              href={`${data.base_url}odds-comparison`}
+            >
               Compare Odds at Smart Odds Comparison
             </Button>
           </Section>
@@ -172,7 +159,7 @@ const PriceAlertEmail = ({
           {/* Banner */}
           <Section style={bannerSection}>
             <Img
-              src={mediaConfig.banners.smartOdds}
+              src={data.base_url + "api/views/master_soc_ad.png"}
               width="100%"
               alt="Master the Odds"
               style={bannerImage}
@@ -186,16 +173,19 @@ const PriceAlertEmail = ({
             </Heading>
             <Text style={gamblingText}>
               For free and confidential support call 1800 858 858 or visit{" "}
-              <Link href="https://gamblinghelp.online" style={gamblingLink}>
+              <a
+                href="https://www.gamblinghelponline.org.au"
+                style={gamblingLink}
+              >
                 Gambling Help Online
-              </Link>
+              </a>
             </Text>
           </Section>
 
           {/* Footer */}
           <Section style={footer}>
             <Img
-              src={mediaConfig.logos.smartBWhite}
+              src={data.base_url + "api/views/smartBLogoImage_lg.png"}
               width="120"
               alt="SmartB"
               style={footerLogo}
@@ -211,7 +201,7 @@ const PriceAlertEmail = ({
                 }}
               >
                 <Img
-                  src={mediaConfig.logos.smartPlay}
+                  src={data.base_url + "api/views/sportsleague_logo.png"}
                   width="120"
                   height="35px"
                   alt="SmartPlay"
@@ -232,7 +222,7 @@ const PriceAlertEmail = ({
                 }}
               >
                 <Img
-                  src={mediaConfig.logos.smartTippingWhite}
+                  src={data.base_url + "api/views/Tipping_wt.png"}
                   width="120"
                   height="35px"
                   alt="SmartTipping"
@@ -253,7 +243,7 @@ const PriceAlertEmail = ({
                 }}
               >
                 <Img
-                  src={mediaConfig.logos.smartOdds}
+                  src={data.base_url + "api/views/smart_odds.png"}
                   width="120"
                   height="35px"
                   alt="SmartOdds"
@@ -274,51 +264,51 @@ const PriceAlertEmail = ({
                 {
                   name: "Facebook",
                   icon: "fb.png",
-                  url: mediaConfig.social.facebook,
+                  url: data.base_url + "api/views/fb_wt.png",
                 },
                 {
                   name: "Instagram",
                   icon: "ig.png",
-                  url: mediaConfig.social.instagram,
+                  url: data.base_url + "api/views/insta_wt.png",
                 },
                 {
                   name: "Twitter",
                   icon: "twitter.png",
-                  url: mediaConfig.social.twitter,
+                  url: data.base_url + "api/views/x_wt.png",
                 },
                 {
                   name: "LinkedIn",
                   icon: "linkedin.png",
-                  url: mediaConfig.social.linkedin,
+                  url: data.base_url + "api/views/linkdein_wt.png",
                 },
                 {
                   name: "YouTube",
                   icon: "youtube.png",
-                  url: mediaConfig.social.youtube,
+                  url: data.base_url + "api/views/yt_wt.png",
                 },
                 {
                   name: "TikTok",
                   icon: "tiktok.png",
-                  url: mediaConfig.social.tiktok,
+                  url: data.base_url + "api/views/tiktok_wt.png",
                 },
                 {
                   name: "Vemeo",
                   icon: "vemeo.png",
-                  url: mediaConfig.social.vemeo,
+                  url: data.base_url + "api/views/vimeo_wt.png",
                 },
               ].map((platform, i) => (
                 <Column
                   key={i}
                   style={{ ...socialIconColumn, padding: "0 10px" }}
                 >
-                  <Link href={platform.url} style={socialLink}>
+                  <a href={platform.url} style={socialLink}>
                     <Img
                       src={platform.url}
                       width="24"
                       alt={platform.name}
                       style={socialIcon}
                     />
-                  </Link>
+                  </a>
                 </Column>
               ))}
             </Row>
@@ -330,7 +320,7 @@ const PriceAlertEmail = ({
             <Text style={footerText}>
               Send an Email To
               <br />
-              <Link
+              <a
                 href="mailto:info@smartb.com.au"
                 style={{
                   ...footerLink,
@@ -338,37 +328,46 @@ const PriceAlertEmail = ({
                   textDecoration: "none",
                 }}
               >
-                E: info@smartb.com.au
-              </Link>
+                info@smartb.com.au
+              </a>
             </Text>
             <Text style={footerDisclaimer}>
-              Don't want to get notifications?{" "}
-              <Link href="#" style={footerLink}>
-                Unsubscribe here
-              </Link>
+              To manage your email notifications and/or{" "}
+              <a
+                href={`${data.base_url}manage-email-subscription?cartkey=${data.generateKey}`}
+                style={footerLink}
+              >
+                unsubscribe,
+              </a>
+              <br />
+              or{" "}
+              <a href={`${data.base_url}profile`} style={footerLink}>
+                login
+              </a>{" "}
+              to your SmartB account and go to your Profile
               <br />
               View our updated{" "}
-              <Link href="#" style={footerLink}>
+              <a href={`${data.base_url}privacy-policy`} style={footerLink}>
                 Privacy Policy
-              </Link>
+              </a>
             </Text>
-            <Text style={copyright}>Copyright © SmartB Pty Ltd 2022</Text>
+            <Text style={copyright}>Copyright © SmartB Pty Ltd 2025</Text>
             <Row style={appStoreSection}>
               <Column style={{ textAlign: "center" }}>
-                <Link href="https://apps.apple.com" style={appStoreButton}>
+                <a href="https://apps.apple.com" style={appStoreButton}>
                   <Img
-                    src={mediaConfig.downloadLinks.appStore}
+                    src={data.base_url + "api/views/appplay_store.png"}
                     width="120"
                     alt="Download on App Store"
                   />
-                </Link>
-                <Link href="https://play.google.com" style={appStoreButton}>
+                </a>
+                <a href="https://play.google.com" style={appStoreButton}>
                   <Img
-                    src={mediaConfig.downloadLinks.googlePlay}
+                    src={data.base_url + "api/views/googleplay_store_lg.png"}
                     width="120"
                     alt="Get it on Google Play"
                   />
-                </Link>
+                </a>
               </Column>
             </Row>
           </Section>
@@ -441,12 +440,14 @@ const runnerRowContainer = {
   borderRadius: "8px",
   border: "1px solid #E8EAEC",
   marginBottom: "10px",
+  margin: "10px",
+  width: "calc(100% - 20px)",
 };
 
 const runnerDetailsContainer = {
   borderBottom: "1px solid #E8EAEC",
-  paddingBottom: "15px",
   marginBottom: "15px",
+  padding: "15px",
 };
 
 const runnerDetailsContainerLast = {
